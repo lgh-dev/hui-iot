@@ -1,0 +1,34 @@
+# Define the device model of car.
+## K is key. 唯一标识。
+## P is fixed attribute. 固定属性。
+## R is read. 只读属性。
+## C is config. 配置属性。
+## F is function. 功能函数。
+
+k-id: # id of car. 汽车唯一标识。一般是车架号。
+
+p-model: ## model. 型号。
+p-brand: ## Brand. 品牌。
+p-lp: ## License plate. 车牌。
+p-eid: ## id of Engine. 发动机ID。
+p-tc: ## Tank capacity. 油箱容量。
+  data_type: int # Tank capacity. 油箱容量。
+  unit: L # unit
+
+r-dsd: ## Driving speed. 车辆行驶速度。
+  data_type: int # dataType
+  unit: km/h # unit
+r-rbl: ## Remaining battery life. 剩余续航里程。
+  data_type: int # dataType
+  unit: km # unit
+r-dvs: ## Driving state. 行驶状态。
+  data_type: bool # dataType
+
+c-lks: ## Lock state [0,1]. 锁状态。
+  data_type: bool # dataType
+c-mtm: ## Monitoring mode [0,1]. 监控模式。
+  data_type: bool # dataType
+
+f-automatic_reversing: ## Automatic reversing. 自动倒车。
+f-turn_on_the_headlights: ## Turn on the headlights。开启车头灯。
+f-turn_off_the_headlights: ## Turn off the headlights 关闭车头灯。
