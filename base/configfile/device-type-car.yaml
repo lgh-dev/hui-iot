@@ -11,7 +11,7 @@ p-model: ## model. 型号。
 p-brand: ## Brand. 品牌。
 p-lp: ## License plate. 车牌。
 p-eid: ## id of Engine. 发动机ID。
-p-tc: ## Tank capacity. 油箱容量。
+p-tc: # Tank capacity. 油箱容量。
   data_type: int # Tank capacity. 油箱容量。
   unit: L # unit
 
@@ -23,6 +23,7 @@ r-rbl: ## Remaining battery life. 剩余续航里程。
   unit: km # unit
 r-dvs: ## Driving state. 行驶状态。
   data_type: bool # dataType
+  default_value: 0 # 0:close,1:driving
 
 c-lks: ## Lock state [0,1]. 锁状态。
   data_type: bool # dataType
