@@ -33,10 +33,14 @@ var DeviceTypeMap = make(map[string]DeviceType)
 
 // device
 type Device struct {
-	ID         string                 //唯一标识
-	R          map[string]interface{} //只读属性
-	C          map[string]interface{} //配置属性
-	DeviceType DeviceType             //设备类型
+	ID           string                 //系统唯一标识
+	UID          string                 `json:uid`  //可识别唯一标识
+	Name         string                 `json:name` //可识别唯一标识
+	P            map[string]interface{} //固定属性
+	R            map[string]interface{} //只读属性
+	C            map[string]interface{} //配置属性
+	F            map[string]interface{} //功能函数
+	DeviceTypeID string                 `json:deviceTypeID` //设备类型ID
 }
 
 // DeviceType
