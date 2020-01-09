@@ -19,10 +19,10 @@ const (
 	PATH_DEVICE_F_EXEC   = utils.PATH_IOT_DEVICE_BATCH + PATH_DEVICE_F + utils.PATH_EXEC
 )
 
-func DeviceFuncExec(c *gin.Context) {
+func DeviceFExec(c *gin.Context) {
 	c.JSON(http.StatusOK, BuildSucc(&ResultDTO{}))
 }
 
-func DeviceFuncUpdate(c *gin.Context) {
+func DeviceFUpdate(c *gin.Context) {
 	c.JSON(http.StatusOK, BuildSucc(&ResultDTO{}))
 }

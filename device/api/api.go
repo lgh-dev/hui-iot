@@ -29,8 +29,8 @@ func StartServer() {
 	r.POST(single.PATH_DEVICE_C_QUERY, single.DeviceCQuery)
 	r.POST(single.PATH_DEVICE_C_UPDATE, single.DeviceCUpdate)
 
-	r.POST(single.PATH_DEVICE_F_UPDATE, single.DeviceFuncUpdate)
-	r.POST(single.PATH_DEVICE_F_EXEC, single.DeviceFuncExec)
+	r.POST(single.PATH_DEVICE_F_UPDATE, single.DeviceFUpdate)
+	r.POST(single.PATH_DEVICE_F_EXEC, single.DeviceFExec)
 
 	// batch interface
 	r.POST(batch.PATH_DEVICE_ADD, batch.DeviceAdd)
@@ -46,8 +46,8 @@ func StartServer() {
 
 	r.POST(batch.PATH_DEVICE_C_QUERY, batch.DeviceConfigQuery)
 
-	r.POST(batch.PATH_DEVICE_F_UPDATE, batch.DeviceFuncUpdate)
-	r.POST(batch.PATH_DEVICE_F_EXEC, batch.DeviceFuncExec)
+	r.POST(batch.PATH_DEVICE_F_UPDATE, batch.DeviceFUpdate)
+	r.POST(batch.PATH_DEVICE_F_EXEC, batch.DeviceFExec)
 
 	r.Run(":9000")
 }
