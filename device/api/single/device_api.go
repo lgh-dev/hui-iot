@@ -1,5 +1,11 @@
 package single
 
+/**
+ * @Author: lgh-dev
+ * @Author: lgh-inter@163.com
+ * @Date: 2020/1/9 21:39
+ * @Desc:
+ */
 import (
 	"github.com/gin-gonic/gin"
 	. "light-iot/base/domain"
@@ -9,10 +15,10 @@ import (
 
 const (
 	PATH_DEVICE_INFO   = "/device"
-	PATH_DEVICE_ADD    = utils.PATH_IOT_DEVICE_BATCH + PATH_DEVICE_INFO + utils.PATH_ADD
-	PATH_DEVICE_DELETE = utils.PATH_IOT_DEVICE_BATCH + PATH_DEVICE_INFO + utils.PATH_DELETE
-	PATH_DEVICE_UPDATE = utils.PATH_IOT_DEVICE_BATCH + PATH_DEVICE_INFO + utils.PATH_UPDATE
-	PATH_DEVICE_QUERY  = utils.PATH_IOT_DEVICE_BATCH + PATH_DEVICE_INFO + utils.PATH_QUERY
+	PATH_DEVICE_ADD    = utils.PATH_IOT_DEVICE_SINGLE + PATH_DEVICE_INFO + utils.PATH_ADD
+	PATH_DEVICE_DELETE = utils.PATH_IOT_DEVICE_SINGLE + PATH_DEVICE_INFO + utils.PATH_DELETE
+	PATH_DEVICE_UPDATE = utils.PATH_IOT_DEVICE_SINGLE + PATH_DEVICE_INFO + utils.PATH_UPDATE
+	PATH_DEVICE_QUERY  = utils.PATH_IOT_DEVICE_SINGLE + PATH_DEVICE_INFO + utils.PATH_QUERY
 )
 
 //基本信息添加
