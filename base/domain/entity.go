@@ -36,8 +36,8 @@ var DeviceTypeMap = make(map[string]DeviceType)
 // base entity
 type BaseEntity struct {
 	ID         int64 //系统唯一标识
-	createTime time.Time
-	updateTime time.Time
+	CreateTime time.Time
+	UpdateTime time.Time
 }
 
 var idUtil *wuid.WUID
@@ -45,7 +45,7 @@ var idUtil *wuid.WUID
 const id_tag = "iot"
 
 //init base entity info
-func init() {
+func initIdUitl() {
 	wuid.WithSection(1)
 	idUtil = wuid.NewWUID(id_tag, nil)
 }
@@ -53,15 +53,15 @@ func init() {
 //init base info
 func (be *BaseEntity) InitBaseInfo() {
 	be.ID = idUtil.Next()
-	be.createTime = time.Now()
-	be.updateTime = time.Now()
+	be.CreateTime = time.Now()
+	be.UpdateTime = time.Now()
 }
 
 // device
 type Device struct {
 	BaseEntity
 	UID          string                 `json:uid`  //可识别唯一标识
-	Name         string                 `json:name` //可识别唯一标识
+	Name         string                 `json:name` //设备名称
 	P            map[string]interface{} //固定属性
 	R            map[string]interface{} //只读属性
 	C            map[string]interface{} //配置属性
@@ -110,6 +110,7 @@ func BuildError(result *ResultDTO) *ResultDTO {
 
 //初始化配置文件
 func init() {
+	initIdUitl()
 	//读取配置文件目录。
 	yamlFiles, err := ioutil.ReadDir(configPath)
 	if err != nil {

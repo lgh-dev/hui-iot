@@ -11,5 +11,7 @@ import (
 )
 
 func main() {
-	api.StartServer()
+	r := api.StartServer()
+	r.Run(":9000")
+
 }

@@ -9,45 +9,46 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	batch "light-iot/device/api/batch"
-	"light-iot/device/api/single"
+	single "light-iot/device/api/single"
 )
 
-func StartServer() {
+func StartServer() *gin.Engine {
 	r := gin.Default()
 	//single interface
-	r.POST(single.PATH_DEVICE_ADD, single.DeviceAdd)
-	r.POST(single.PATH_DEVICE_UPDATE, single.DeviceUpdate)
-	r.POST(single.PATH_DEVICE_DELETE, single.DeviceDelete)
-	r.POST(single.PATH_DEVICE_QUERY, single.DeviceQuery)
+	r.POST(PATH_DEVICETYPE_SINGLE_QUERY, single.DeviceTypeQuery)
 
-	r.POST(single.PATH_DEVICE_P_QUERY, single.DevicePQuery)
-	r.POST(single.PATH_DEVICE_P_UPDATE, single.DevicePUpdate)
+	r.POST(PATH_DEVICE_SINGLE_ADD, single.DeviceAdd)
+	r.POST(PATH_DEVICE_SINGLE_UPDATE, single.DeviceUpdate)
+	r.POST(PATH_DEVICE_SINGLE_DELETE, single.DeviceDelete)
+	r.POST(PATH_DEVICE_SINGLE_QUERY, single.DeviceQuery)
 
-	r.POST(single.PATH_DEVICE_R_QUERY, single.DeviceRQuery)
-	r.POST(single.PATH_DEVICE_R_UPDATE, single.DeviceRUpdate)
+	r.POST(PATH_DEVICE_SINGLE_P_QUERY, single.DevicePQuery)
+	r.POST(PATH_DEVICE_SINGLE_P_UPDATE, single.DevicePUpdate)
 
-	r.POST(single.PATH_DEVICE_C_QUERY, single.DeviceCQuery)
-	r.POST(single.PATH_DEVICE_C_UPDATE, single.DeviceCUpdate)
+	r.POST(PATH_DEVICE_SINGLE_R_QUERY, single.DeviceRQuery)
+	r.POST(PATH_DEVICE_SINGLE_R_UPDATE, single.DeviceRUpdate)
 
-	r.POST(single.PATH_DEVICE_F_UPDATE, single.DeviceFUpdate)
-	r.POST(single.PATH_DEVICE_F_EXEC, single.DeviceFExec)
+	r.POST(PATH_DEVICE_SINGLE_C_QUERY, single.DeviceCQuery)
+	r.POST(PATH_DEVICE_SINGLE_C_UPDATE, single.DeviceCUpdate)
+
+	r.POST(PATH_DEVICE_SINGLE_F_UPDATE, single.DeviceFUpdate)
+	r.POST(PATH_DEVICE_SINGLE_F_EXEC, single.DeviceFExec)
 
 	// batch interface
-	r.POST(batch.PATH_DEVICE_ADD, batch.DeviceAdd)
-	r.POST(batch.PATH_DEVICE_UPDATE, batch.DeviceUpdate)
-	r.POST(batch.PATH_DEVICE_DELETE, batch.DeviceDelete)
-	r.POST(batch.PATH_DEVICE_QUERY, batch.DeviceQuery)
+	r.POST(PATH_DEVICE_BATCH_ADD, batch.DeviceAdd)
+	r.POST(PATH_DEVICE_BATCH_UPDATE, batch.DeviceUpdate)
+	r.POST(PATH_DEVICE_BATCH_DELETE, batch.DeviceDelete)
+	r.POST(PATH_DEVICE_BATCH_QUERY, batch.DeviceQuery)
 
-	r.POST(batch.PATH_DEVICE_P_QUERY, batch.DevicePQuery)
-	r.POST(batch.PATH_DEVICE_P_UPDATE, batch.DevicePUpdate)
+	r.POST(PATH_DEVICE_BATCH_P_QUERY, batch.DevicePQuery)
+	r.POST(PATH_DEVICE_BATCH_P_UPDATE, batch.DevicePUpdate)
 
-	r.POST(batch.PATH_DEVICE_R_QUERY, batch.DeviceRQuery)
-	r.POST(batch.PATH_DEVICE_R_UPDATE, batch.DeviceRUpdate)
+	r.POST(PATH_DEVICE_BATCH_R_QUERY, batch.DeviceRQuery)
+	r.POST(PATH_DEVICE_BATCH_R_UPDATE, batch.DeviceRUpdate)
 
-	r.POST(batch.PATH_DEVICE_C_QUERY, batch.DeviceConfigQuery)
+	r.POST(PATH_DEVICE_BATCH_C_QUERY, batch.DeviceConfigQuery)
 
-	r.POST(batch.PATH_DEVICE_F_UPDATE, batch.DeviceFUpdate)
-	r.POST(batch.PATH_DEVICE_F_EXEC, batch.DeviceFExec)
-
-	r.Run(":9000")
+	r.POST(PATH_DEVICE_BATCH_F_UPDATE, batch.DeviceFUpdate)
+	r.POST(PATH_DEVICE_BATCH_F_EXEC, batch.DeviceFExec)
+	return r
 }

@@ -9,14 +9,7 @@ package single
 import (
 	"github.com/gin-gonic/gin"
 	. "light-iot/base/domain"
-	"light-iot/base/utils"
 	"net/http"
-)
-
-const (
-	PATH_DEVICE_C        = "/device/c"
-	PATH_DEVICE_C_QUERY  = utils.PATH_IOT_DEVICE_SINGLE + PATH_DEVICE_C + utils.PATH_QUERY
-	PATH_DEVICE_C_UPDATE = utils.PATH_IOT_DEVICE_SINGLE + PATH_DEVICE_C + utils.PATH_UPDATE
 )
 
 func DeviceCUpdate(c *gin.Context) {
