@@ -2,10 +2,12 @@ package domain
 
 import (
 	"errors"
+	"github.com/edwingeng/wuid/callback/wuid"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	. "light-iot/base/utils"
 	"strings"
+	"time"
 )
 
 // config file path
@@ -30,9 +32,34 @@ const (
 
 // save device type info
 var DeviceTypeMap = make(map[string]DeviceType)
+// base entity
+type BaseEntity struct {
+	ID         int64 //系统唯一标识
+	CreateTime time.Time
+	UpdateTime time.Time
+}
+
+var idUtil *wuid.WUID
+
+const id_tag = "iot"
+
+//init base entity info
+func initIdUitl() {
+	wuid.WithSection(1)
+	idUtil = wuid.NewWUID(id_tag, nil)
+}
+
+//init base info
+func (be *BaseEntity) InitBaseInfo() {
+	be.ID = idUtil.Next()
+	be.CreateTime = time.Now()
+	be.UpdateTime = time.Now()
+}
+
 
 // device
 type Device struct {
+	BaseEntity
 	ID           string //系统唯一标识
 	UID          string `json:uid`          //可识别唯一标识
 	Name         string `json:name`         //可识别唯一标识
