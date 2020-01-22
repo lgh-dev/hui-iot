@@ -32,6 +32,7 @@ const (
 
 // save device type info
 var DeviceTypeMap = make(map[string]DeviceType)
+
 // base entity
 type BaseEntity struct {
 	ID         int64 //系统唯一标识
@@ -44,7 +45,7 @@ var idUtil *wuid.WUID
 const id_tag = "iot"
 
 //init base entity info
-func initIdUitl() {
+func initIdUtil() {
 	wuid.WithSection(1)
 	idUtil = wuid.NewWUID(id_tag, nil)
 }
@@ -55,7 +56,6 @@ func (be *BaseEntity) InitBaseInfo() {
 	be.CreateTime = time.Now()
 	be.UpdateTime = time.Now()
 }
-
 
 // device
 type Device struct {
@@ -118,7 +118,7 @@ type AttrDefine struct {
 }
 
 type ResultDTO struct {
-	Code int         `json:"code"` //Succ or err code
+	Code int         `json:"code"` //Succ:1  or err code :<1
 	Data interface{} `json:"data"` //Result data
 	Msg  string      `json:"msg"`  //Succ or Err msg
 }
@@ -141,6 +141,11 @@ func BuildError(result *ResultDTO) *ResultDTO {
 
 //初始化配置文件
 func init() {
+	initIdUtil()      // Init Id generator.
+	initDeviceTypes() //Init device type config info.
+}
+
+func initDeviceTypes() {
 	//读取配置文件目录。
 	yamlFiles, err := ioutil.ReadDir(configPath)
 	if err != nil {
@@ -182,11 +187,11 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 		case string(PrefixkeyK):
 			//Not deal with
 		case string(PrefixkeyP):
-			p = append(p, NewAtrrDefine(k, v))
+			p = append(p, NewAttrDefine(k, v))
 		case string(PrefixkeyR):
-			r = append(r, NewAtrrDefine(k, v))
+			r = append(r, NewAttrDefine(k, v))
 		case string(PrefixkeyC):
-			c = append(c, NewAtrrDefine(k, v))
+			c = append(c, NewAttrDefine(k, v))
 		case string(PrefixkeyF):
 			f = append(f, suffix)
 		default:
@@ -213,7 +218,7 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 }
 
 //创建
-func NewAtrrDefine(key string, val interface{}) AttrDefine {
+func NewAttrDefine(key string, val interface{}) AttrDefine {
 	ad := AttrDefine{}
 	ad.Key = key
 	valMap, ok := val.(map[interface{}]interface{})
