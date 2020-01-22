@@ -33,31 +33,61 @@ var DeviceTypeMap = make(map[string]DeviceType)
 
 // device
 type Device struct {
-	ID           string                 //系统唯一标识
-	UID          string                 `json:uid`  //可识别唯一标识
-	Name         string                 `json:name` //可识别唯一标识
-	P            map[string]interface{} //固定属性
-	R            map[string]interface{} //只读属性
-	C            map[string]interface{} //配置属性
-	F            map[string]interface{} //功能函数
-	DeviceTypeID string                 `json:deviceTypeID` //设备类型ID
+	ID           string //系统唯一标识
+	UID          string `json:uid`          //可识别唯一标识
+	Name         string `json:name`         //可识别唯一标识
+	DeviceTypeID string `json:deviceTypeID` //设备类型ID
+}
+
+//动态生成表和对应的sql
+type DynamicSQL struct {
+	TableName      string //表名 ，格式：iot_[DeviceTypeID]_[PAttr|RAttr|CAttr|Func]
+	CreateTableSQL string //
+	DropTableSQL   string
+	InsertSQL      string
+	QuerySQL       string
+	UpdateSQL      string
+	DeleteSQL      string
+}
+
+type PAttr struct {
+	DeviceID string
+}
+type RAttr struct {
+	DeviceID string
+	R        map[string]interface{} //只读属性
+}
+type CAttr struct {
+	C map[string]interface{} //配置属性
+}
+type Func struct {
+	F map[string]interface{} //功能函数
 }
 
 // DeviceType
 type DeviceType struct {
-	ID string     //唯一标识
-	P  []KeyValue //固定属性
-	R  []KeyValue //只读属性
-	C  []KeyValue //配置属性
-	F  []string   //功能函数
+	ID       string       //唯一标识
+	P        []AttrDefine //固定属性
+	R        []AttrDefine //只读属性
+	C        []AttrDefine //配置属性
+	F        []string     //功能函数
+	PAttrSQL DynamicSQL   //固定属性动态sql
+	RAttrSQL DynamicSQL   //动态sql
+	CAttrSQL DynamicSQL
+	FuncSQL  DynamicSQL
 }
 
 //基本结构
 type KeyValue struct {
-	Key      string
-	Val      interface{}
-	DataType string
-	unit     string
+	Key   string      //字段名称
+	Value interface{} //值
+}
+
+//属性定义
+type AttrDefine struct {
+	KeyValue
+	DataType string // 字段类型：默认字符串
+	unit     string // 单位：默认值无
 }
 
 type ResultDTO struct {
@@ -112,10 +142,10 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 	errMsg := ""
 	deviceType := DeviceType{}
 	deviceType.ID = strings.Split(filename, ".")[0]
-	p := []KeyValue{} //fixed attr
-	r := []KeyValue{} //only read attr
-	c := []KeyValue{} //config attr
-	f := []string{}   // function
+	p := []AttrDefine{} //fixed attr
+	r := []AttrDefine{} //only read attr
+	c := []AttrDefine{} //config attr
+	f := []string{}     // function
 	configMap := make(map[string]interface{})
 	yaml.Unmarshal(bytes, configMap)
 	for k, v := range configMap {
@@ -125,11 +155,11 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 		case string(PrefixkeyK):
 			//Not deal with
 		case string(PrefixkeyP):
-			p = append(p, NewKeyValue(k, v))
+			p = append(p, NewAtrrDefine(k, v))
 		case string(PrefixkeyR):
-			r = append(r, NewKeyValue(k, v))
+			r = append(r, NewAtrrDefine(k, v))
 		case string(PrefixkeyC):
-			c = append(c, NewKeyValue(k, v))
+			c = append(c, NewAtrrDefine(k, v))
 		case string(PrefixkeyF):
 			f = append(f, suffix)
 		default:
@@ -155,27 +185,27 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 	return deviceType, errors.New(errMsg)
 }
 
-//创建基本结构
-func NewKeyValue(key string, val interface{}) KeyValue {
-	kv := KeyValue{}
-	kv.Key = key
+//创建
+func NewAtrrDefine(key string, val interface{}) AttrDefine {
+	ad := AttrDefine{}
+	ad.Key = key
 	valMap, ok := val.(map[interface{}]interface{})
 	if ok {
 		//Get default value
 		value, ok := valMap[DefaultValue]
 		if ok {
-			kv.Val = value
+			ad.Value = value
 		}
 		//Get data type
 		dataType, ok := valMap[DataType]
 		if ok {
-			kv.DataType = dataType.(string)
+			ad.DataType = dataType.(string)
 		}
 		//Get unit
 		unit, ok := valMap[unit]
 		if ok {
-			kv.unit = unit.(string)
+			ad.unit = unit.(string)
 		}
 	}
-	return kv
+	return ad
 }
