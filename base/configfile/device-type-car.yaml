@@ -9,25 +9,25 @@ k-id: # id of car. 汽车唯一标识。一般是车架号。
 
 p-model: ## model. 型号。
 p-brand: ## Brand. 品牌。
-p-lp: ## License plate. 车牌。
-p-eid: ## id of Engine. 发动机ID。
-p-tc: # Tank capacity. 油箱容量。
+p-license_plate: ## License plate. 车牌。
+p-engine_id: ## id of Engine. 发动机ID。
+p-tank_capacity: # Tank capacity. 油箱容量。
   data_type: int # Tank capacity. 油箱容量。
   unit: L # unit
 
-r-dsd: ## Driving speed. 车辆行驶速度。
+r-driving_speed: ## Driving speed. 车辆行驶速度。
   data_type: int # dataType
   unit: km/h # unit
-r-rbl: ## Remaining battery life. 剩余续航里程。
+r-remaining_battery_life: ## Remaining battery life. 剩余续航里程。
   data_type: int # dataType
   unit: km # unit
-r-dvs: ## Driving state. 行驶状态。
+r-driving_state: ## Driving state. 行驶状态。
   data_type: bool # dataType
   default_value: 0 # 0:close,1:driving
 
-c-lks: ## Lock state [0,1]. 锁状态。
+c-lock_state: ## Lock state [0,1]. 锁状态。
   data_type: bool # dataType
-c-mtm: ## Monitoring mode [0,1]. 监控模式。
+c-monitoring_mode: ## Monitoring mode [0,1]. 监控模式。
   data_type: bool # dataType
 
 f-automatic_reversing: ## Automatic reversing. 自动倒车。

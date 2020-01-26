@@ -229,7 +229,7 @@
             },
             {
               "name": "DEVICE_ID",
-              "type": "DefaultString",
+              "type": "BigInt",
               "remark": "只读属性-字段名",
               "chnname": "设备ID"
             },
@@ -650,10 +650,10 @@
               "chnname": "ID"
             },
             {
-              "name": "DEVICE_ID",
+              "name": "DEVICE_TYPE_ID",
               "type": "BigInt",
-              "remark": "设备ID-外键",
-              "chnname": "设备ID-外键"
+              "remark": "设备类型ID-外键",
+              "chnname": "设备类型ID-外键"
             },
             {
               "name": "ATTR_P_KEY",
@@ -763,10 +763,10 @@
               "chnname": "ID"
             },
             {
-              "name": "DEVICE_ID",
+              "name": "DEVICE_TYPE_ID",
               "type": "BigInt",
-              "remark": "设备ID-外键",
-              "chnname": "设备ID-外键"
+              "remark": "设备类型ID-外键",
+              "chnname": "设备类型ID-外键"
             },
             {
               "name": "ATTR_R_KEY",
@@ -835,6 +835,125 @@
             }
           ],
           "chnname": "设备类型只读属性定义表"
+        },
+        {
+          "title": "iot_device_type_dynamic_sql",
+          "fields": [
+            {
+              "name": "REVISION",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "乐观锁"
+            },
+            {
+              "name": "CREATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "创建人"
+            },
+            {
+              "name": "CREATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "UPDATED_BY",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "更新人"
+            },
+            {
+              "name": "UPDATED_TIME",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            },
+            {
+              "name": "ID",
+              "type": "BigInt",
+              "remark": "主键",
+              "chnname": "ID"
+            },
+            {
+              "name": "DEVICE_TYPE_ID",
+              "type": "BigInt",
+              "remark": "设备类型ID-外键",
+              "chnname": "设备类型ID-外键"
+            },
+            {
+              "name": "CREATE_TABLE_SQL",
+              "type": "LongText",
+              "remark": "只读属性建表的SQL",
+              "chnname": "只读属性建表的SQL"
+            },
+            {
+              "name": "DROP_TABLE_SQL",
+              "type": "LongText",
+              "remark": "数据类型",
+              "chnname": "只读属性删表的SQL"
+            },
+            {
+              "name": "INSERT_DATA_SQL",
+              "type": "LongText",
+              "remark": "插入数据SQL",
+              "chnname": "只读属性插入数据SQL"
+            },
+            {
+              "name": "QUERY_DATA_SQL",
+              "type": "LongText",
+              "remark": "只读属性查询SQL",
+              "chnname": "只读属性查询SQL"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "设备类型动态SQL表"
         }
       ],
       "graphCanvas": {
