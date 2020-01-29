@@ -861,7 +861,8 @@
               "name": "UPDATED_BY",
               "type": "IdOrKey",
               "remark": "",
-              "chnname": "更新人"
+              "chnname": "更新人",
+              "relationNoShow": false
             },
             {
               "name": "UPDATED_TIME",
@@ -879,7 +880,8 @@
               "name": "DEVICE_TYPE_ID",
               "type": "BigInt",
               "remark": "设备类型ID-外键",
-              "chnname": "设备类型ID-外键"
+              "chnname": "设备类型ID-外键",
+              "relationNoShow": false
             },
             {
               "name": "CREATE_TABLE_SQL",
