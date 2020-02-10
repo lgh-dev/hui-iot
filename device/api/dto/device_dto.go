@@ -1,7 +1,7 @@
 package dto
 
 import (
-	. "light-iot/base/domain"
+	. "hui-iot/base/domain"
 	"time"
 )
 

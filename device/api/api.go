@@ -8,8 +8,8 @@ package api
  */
 import (
 	"github.com/gin-gonic/gin"
-	batch "light-iot/device/api/batch"
-	single "light-iot/device/api/single"
+	batch "hui-iot/device/api/batch"
+	single "hui-iot/device/api/single"
 )
 
 func StartServer() *gin.Engine {

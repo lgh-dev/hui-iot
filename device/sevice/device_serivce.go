@@ -1,8 +1,8 @@
 package sevice
 
 import (
-	. "light-iot/base/domain"
-	. "light-iot/device/api/dto"
+	. "hui-iot/base/domain"
+	. "hui-iot/device/api/dto"
 )
 
 /**

@@ -3,8 +3,8 @@ package dao
 import (
 	"github.com/globalsign/mgo"
 	"github.com/globalsign/mgo/bson"
-	. "light-iot/base/domain"
-	"light-iot/device/api/dto"
+	. "hui-iot/base/domain"
+	"hui-iot/device/api/dto"
 
 	//"gopkg.in/mgo.v2"
 	//"gopkg.in/mgo.v2/bson"

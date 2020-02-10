@@ -7,7 +7,7 @@ package main
  * @Desc: Service of iot-device's run file
  */
 import (
-	"light-iot/device/api"
+	"hui-iot/device/api"
 )
 
 func main() {

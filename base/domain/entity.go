@@ -4,8 +4,8 @@ import (
 	"errors"
 	"github.com/edwingeng/wuid/callback/wuid"
 	"gopkg.in/yaml.v2"
+	. "hui-iot/base/utils"
 	"io/ioutil"
-	. "light-iot/base/utils"
 	"strings"
 	"time"
 )

@@ -8,7 +8,7 @@ package single
  */
 import (
 	"github.com/gin-gonic/gin"
-	. "light-iot/base/domain"
+	. "hui-iot/base/domain"
 	"net/http"
 )
 

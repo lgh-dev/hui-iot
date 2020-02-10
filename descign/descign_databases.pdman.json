@@ -959,7 +959,24 @@
         }
       ],
       "graphCanvas": {
-        "nodes": [],
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "iot_device",
+            "moduleName": false,
+            "x": 70,
+            "y": 80,
+            "id": "9acd2f1e"
+          },
+          {
+            "shape": "table",
+            "title": "iot_device_attr_p",
+            "moduleName": false,
+            "x": 410,
+            "y": 90,
+            "id": "4bd40f1d"
+          }
+        ],
         "edges": []
       },
       "associations": []
