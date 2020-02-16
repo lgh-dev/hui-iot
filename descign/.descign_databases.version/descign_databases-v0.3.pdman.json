@@ -1,0 +1,967 @@
+{
+  "modules": [
+    {
+      "name": "iot_device",
+      "chnname": "设备表",
+      "entities": [
+        {
+          "title": "iot_device",
+          "chnname": "物联网设备表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "主键 分布式唯一ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_uid",
+              "type": "DefaultString",
+              "chnname": "设备UID",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_name",
+              "type": "VARCHAR_1024",
+              "chnname": "设备名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_id",
+              "type": "Integer",
+              "chnname": "设备类型ID-外键 设备类型ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "online_status",
+              "type": "INT_10",
+              "chnname": "联网状态 在线（1）、离线（0）、未激活（-1）",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "iot_device_config_attr",
+          "chnname": "设备配置属性表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_id",
+              "type": "BIGINT_19",
+              "chnname": "设备ID-外键 设备ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_config_attr_id",
+              "type": "VARCHAR_32",
+              "chnname": "配置属性ID 配置属性ID",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "type": "VARCHAR_3072",
+              "chnname": "配置属性-值 配置属性-值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "iot_device_invariant_attr",
+          "chnname": "设备固定属性表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_id",
+              "type": "BIGINT_19",
+              "chnname": "设备ID-外键 设备ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_invariant_attr_id",
+              "type": "VARCHAR_32",
+              "chnname": "固定属性ID 固定属性ID",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "value",
+              "type": "VARCHAR_3072",
+              "chnname": "固定属性-值 固定属性-值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "iot_device_event",
+          "chnname": "设备事件表",
+          "fields": [
+            {
+              "name": "time",
+              "type": "BIGINT_19",
+              "chnname": "落库时间 时序数据库的主键",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_time",
+              "type": "DATETIME",
+              "chnname": "事件发送时间",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_event_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型事件定义ID-外键 设备类型事件定义ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_info_map",
+              "type": "TEXT",
+              "chnname": "事件信息 事件信息，json，{key:value}结构",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_level",
+              "type": "INT_10",
+              "chnname": "事件级别 事件级别(信息INFO、告警ALARM、故障ERROR)",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_status",
+              "type": "VARCHAR_1",
+              "chnname": "事件状态 事件状态（告警1，结束0）",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "iot_device_event_status",
+          "chnname": "设备事件状态表",
+          "fields": [
+            {
+              "name": "time",
+              "type": "BIGINT_19",
+              "chnname": "落库时间 时序数据库的主键",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_time",
+              "type": "DATETIME",
+              "chnname": "事件发生时间 事件发生时间，如果上报为空，取服务器时间。",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_event_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型事件定义ID-外键 设备类型事件定义ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_info_map",
+              "type": "TEXT",
+              "chnname": "事件信息 事件信息，json，{key:value}结构",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_level",
+              "type": "INT_10",
+              "chnname": "事件级别 事件级别(信息INFO、告警ALARM、故障ERROR)",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_status",
+              "type": "VARCHAR_1",
+              "chnname": "事件状态 事件状态（告警1，结束0）",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "iot_device_type",
+          "chnname": "物联网设备类型表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "主键 分布式唯一ID",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_uid",
+              "type": "VARCHAR_128",
+              "chnname": "设备类型UID",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_name",
+              "type": "VARCHAR_512",
+              "chnname": "设备类型名称",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ]
+        },
+        {
+          "title": "iot_device_type_invariant_attr",
+          "chnname": "设备类型固定属性定义表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型ID-外键 设备类型ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "attr_p_key",
+              "type": "VARCHAR_32",
+              "chnname": "固定属性-字段名 固定属性-字段名",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "data_type",
+              "type": "VARCHAR_32",
+              "chnname": "固定属性-数据类型 固定属性-数据类型",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "defalut_value",
+              "type": "VARCHAR_3072",
+              "chnname": "固定属性-默认值 固定属性-默认值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "unit",
+              "type": "VARCHAR_32",
+              "chnname": "固定属性-单位 固定属性-单位",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "iot_device_type_read_attr",
+          "chnname": "设备类型只读属性定义表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型ID-外键 设备类型ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "attr_p_key",
+              "type": "VARCHAR_32",
+              "chnname": "只读属性字段名 只读属性字段名",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "data_type",
+              "type": "VARCHAR_32",
+              "chnname": "只读属性-数据类型 只读属性-数据类型",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "defalut_value",
+              "type": "VARCHAR_3072",
+              "chnname": "只读属性-默认值 只读属性-默认值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "unit",
+              "type": "VARCHAR_32",
+              "chnname": "只读属性-单位 只读属性-单位",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "iot_device_type_config_attr",
+          "chnname": "设备类型配置属性定义表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型ID-外键 设备类型ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "attr_p_key",
+              "type": "VARCHAR_32",
+              "chnname": "配置属性字段名 配置属性字段名",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "data_type",
+              "type": "VARCHAR_32",
+              "chnname": "配置属性-数据类型 配置属性-数据类型",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "defalut_value",
+              "type": "VARCHAR_3072",
+              "chnname": "配置属性-默认值 配置属性-默认值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "unit",
+              "type": "VARCHAR_32",
+              "chnname": "配置属性-单位 配置属性-单位",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "max_value",
+              "type": "VARCHAR_32",
+              "chnname": "最大值 最大值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "min_value",
+              "type": "VARCHAR_32",
+              "chnname": "最小值 最小值",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "iot_device_type_func",
+          "chnname": "设备类型功能函数定义表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型ID-外键 设备类型ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "func_name",
+              "type": "VARCHAR_32",
+              "chnname": "功能名称 功能名称",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "in_para",
+              "type": "VARCHAR_3072",
+              "chnname": "输入参数信息 输入参数信息[key:value:data_type,key:value:data_type]",
+              "remark": "",
+              "pk": false,
+              "notNull": false,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        },
+        {
+          "title": "iot_device_type_event",
+          "chnname": "设备类型事件定义表",
+          "fields": [
+            {
+              "name": "id",
+              "type": "BIGINT_19",
+              "chnname": "ID 主键",
+              "remark": "",
+              "pk": true,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "device_type_id",
+              "type": "BIGINT_19",
+              "chnname": "设备类型ID-外键 设备类型ID-外键",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_name",
+              "type": "VARCHAR_32",
+              "chnname": "事件名称 事件名称",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            },
+            {
+              "name": "event_level",
+              "type": "INT_10",
+              "chnname": "事件级别 事件级别(信息INFO、告警ALARM、故障ERROR)",
+              "remark": "",
+              "pk": false,
+              "notNull": true,
+              "autoIncrement": false,
+              "defaultValue": ""
+            }
+          ]
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "iot_device",
+            "moduleName": false,
+            "x": 550,
+            "y": 380,
+            "id": "dca29a7e"
+          },
+          {
+            "shape": "table",
+            "title": "iot_device_config_attr",
+            "moduleName": false,
+            "x": 920,
+            "y": 370,
+            "id": "d783c9e5"
+          },
+          {
+            "shape": "table",
+            "title": "iot_device_invariant_attr",
+            "moduleName": false,
+            "x": 940,
+            "y": 510,
+            "id": "83575361"
+          }
+        ],
+        "edges": []
+      },
+      "associations": []
+    },
+    {
+      "name": "DB_REVERSE_MYSQL",
+      "chnname": "逆向解析_MYSQL",
+      "entities": [],
+      "graphCanvas": {
+        "edges": []
+      }
+    }
+  ],
+  "message": "3",
+  "version": "v0.3",
+  "changes": [
+    {
+      "type": "field",
+      "name": "iot_device.device_type_id.type",
+      "opt": "update",
+      "changeData": "DefaultString=>Integer"
+    }
+  ],
+  "date": "2020/2/16 11:13:46"
+}
