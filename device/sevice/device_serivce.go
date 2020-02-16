@@ -1,8 +1,8 @@
 package sevice
 
 import (
-	. "hui-iot/base/domain"
-	. "hui-iot/device/api/dto"
+	"hui-iot/device/domain"
+	. "hui-iot/device/domain/dto"
 )
 
 /**
@@ -13,13 +13,13 @@ import (
  */
 // Single service interface
 type BaseSingleAddService interface {
-	add(be BaseEntity) error
+	add(be domain.BaseEntity) error
 }
 type BaseSingleUpdateService interface {
-	update(be BaseEntity) error
+	update(be domain.BaseEntity) error
 }
 type BaseSingleQueryService interface {
-	query(id EntityID) (BaseEntity, error)
+	query(id EntityID) (domain.BaseEntity, error)
 }
 type BaseSingleDeleteService interface {
 	Delete(id EntityID) error
@@ -27,13 +27,13 @@ type BaseSingleDeleteService interface {
 
 // batch service interface
 type BaseBatchAddService interface {
-	adds(be []BaseEntity) error
+	adds(be []domain.BaseEntity) error
 }
 type BaseBatchUpdateService interface {
-	updates(be []BaseEntity) error
+	updates(be []domain.BaseEntity) error
 }
 type BaseBatchQueryService interface {
-	querys(queryDTO BaseQueryDTO) ([]BaseEntity, error)
+	querys(queryDTO BaseQueryDTO) ([]domain.BaseEntity, error)
 }
 type BaseBatchDeleteService interface {
 	Deletes(id []EntityID) error
@@ -46,7 +46,7 @@ type DeviceSingleServce interface {
 	BaseSingleDeleteService
 }
 
-type DeviceBatchServce struct {
+type DeviceBatchServce interface {
 	BaseBatchAddService
 	BaseBatchUpdateService
 	BaseBatchQueryService

@@ -12,10 +12,6 @@ import (
 	"net/http"
 )
 
-func DeviceRUpdate(c *gin.Context) {
-	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
-}
-
-func DeviceRQuery(c *gin.Context) {
+func ExecDeviceFunc(c *gin.Context) {
 	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }

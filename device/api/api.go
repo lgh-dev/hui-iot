@@ -8,31 +8,36 @@ package api
  */
 import (
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 	batch "hui-iot/device/api/batch"
 	single "hui-iot/device/api/single"
 )
 
-func StartServer() *gin.Engine {
+func GetServer() *gin.Engine {
 	r := gin.Default()
-	//single interface
-	r.POST(PATH_DEVICETYPE_SINGLE_QUERY, single.DeviceTypeQuery)
+	v1 := r.Group("/api/svc-iot-device/v1")
+	{
+		//single interface
+		v1.GET("/devicetype/:id", single.DeviceTypeQuery)
+		v1.GET("/devicetype/", single.DeviceTypeQuery)
 
-	r.POST(PATH_DEVICE_SINGLE_ADD, single.DeviceAdd)
-	r.POST(PATH_DEVICE_SINGLE_UPDATE, single.DeviceUpdate)
-	r.POST(PATH_DEVICE_SINGLE_DELETE, single.DeviceDelete)
-	r.POST(PATH_DEVICE_SINGLE_QUERY, single.DeviceQuery)
+		v1.POST("/device/:id", single.GetDevice)
+		v1.POST("/device", single.AddDevice)
+		v1.PUT("/device", single.UpdateDevice)
+		v1.DELETE("/device", single.DeleteDevice)
 
-	r.POST(PATH_DEVICE_SINGLE_P_QUERY, single.DevicePQuery)
-	r.POST(PATH_DEVICE_SINGLE_P_UPDATE, single.DevicePUpdate)
+		v1.GET("/device/:id/invariant-attr/:attrId", single.GetDeviceInvarintAttr)
+		v1.POST("/device/:id/invariant-attr/", single.UpdateDeviceInvarintAttr)
 
-	r.POST(PATH_DEVICE_SINGLE_R_QUERY, single.DeviceRQuery)
-	r.POST(PATH_DEVICE_SINGLE_R_UPDATE, single.DeviceRUpdate)
+		v1.GET("/device/:id/read-attr/:attrId", single.GetDeviceReadAttr)
+		v1.POST("/device/:id/read-attr/", single.UpdateDeviceReadAttr)
 
-	r.POST(PATH_DEVICE_SINGLE_C_QUERY, single.DeviceCQuery)
-	r.POST(PATH_DEVICE_SINGLE_C_UPDATE, single.DeviceCUpdate)
+		v1.GET("/device/:id/config-attr/:attrId", single.GetDeviceConfigAttr)
+		v1.POST("/device/:id/config-attr/", single.GetDeviceConfigAttr)
 
-	r.POST(PATH_DEVICE_SINGLE_F_UPDATE, single.DeviceFUpdate)
-	r.POST(PATH_DEVICE_SINGLE_F_EXEC, single.DeviceFExec)
+		v1.GET("/device/:id/func/:funcName", single.ExecDeviceFunc)
+	}
 
 	// batch interface
 	r.POST(PATH_DEVICE_BATCH_ADD, batch.DeviceAdd)
@@ -50,5 +55,7 @@ func StartServer() *gin.Engine {
 
 	r.POST(PATH_DEVICE_BATCH_F_UPDATE, batch.DeviceFUpdate)
 	r.POST(PATH_DEVICE_BATCH_F_EXEC, batch.DeviceFExec)
+	//swagger2.0
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r
 }

@@ -11,7 +11,7 @@ import (
 )
 
 // config file path
-const configPath = "base/configfile/"
+const configPath = "../config/devicetype/"
 
 //The config file prefix of key
 type PrefixKey string
@@ -24,7 +24,7 @@ const (
 
 const (
 	PrefixkeyK PrefixKey = "k"
-	PrefixkeyP PrefixKey = "p"
+	PrefixkeyI PrefixKey = "i"
 	PrefixkeyR PrefixKey = "r"
 	PrefixkeyC PrefixKey = "c"
 	PrefixkeyF PrefixKey = "f"
@@ -77,7 +77,7 @@ type DynamicSQL struct {
 	DeleteSQL      string
 }
 
-type PAttr struct {
+type IAttr struct {
 	DeviceID string
 }
 type RAttr struct {
@@ -94,11 +94,11 @@ type Func struct {
 // DeviceType
 type DeviceType struct {
 	ID       string       //唯一标识
-	P        []AttrDefine //固定属性
+	I        []AttrDefine //固定属性
 	R        []AttrDefine //只读属性
 	C        []AttrDefine //配置属性
 	F        []string     //功能函数
-	PAttrSQL DynamicSQL   //固定属性动态sql
+	IAttrSQL DynamicSQL   //固定属性动态sql
 	RAttrSQL DynamicSQL   //动态sql
 	CAttrSQL DynamicSQL
 	FuncSQL  DynamicSQL
@@ -149,7 +149,7 @@ func initDeviceTypes() {
 	//读取配置文件目录。
 	yamlFiles, err := ioutil.ReadDir(configPath)
 	if err != nil {
-		Log.Error("Read config path ${root}/base/configfile/ err:{}", err.Error())
+		Log.Error("Read config path ${root}/base/config/ err:{}", err.Error())
 	}
 	//cycle read config yaml files transform device type info
 	for i := 0; i < len(yamlFiles); i++ {
@@ -174,7 +174,7 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 	errMsg := ""
 	deviceType := DeviceType{}
 	deviceType.ID = strings.Split(filename, ".")[0]
-	p := []AttrDefine{} //fixed attr
+	i := []AttrDefine{} //fixed attr
 	r := []AttrDefine{} //only read attr
 	c := []AttrDefine{} //config attr
 	f := []string{}     // function
@@ -186,8 +186,8 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 		switch prefix {
 		case string(PrefixkeyK):
 			//Not deal with
-		case string(PrefixkeyP):
-			p = append(p, NewAttrDefine(k, v))
+		case string(PrefixkeyI):
+			i = append(i, NewAttrDefine(k, v))
 		case string(PrefixkeyR):
 			r = append(r, NewAttrDefine(k, v))
 		case string(PrefixkeyC):
@@ -201,11 +201,11 @@ func initDeviceType(filename string, bytes []byte) (DeviceType, error) {
 		}
 	}
 	//Err of nil
-	if len(p)+len(r)+len(c)+len(f) == 0 {
+	if len(i)+len(r)+len(c)+len(f) == 0 {
 		errMsg = "The yaml file format err,please check file [" + filename + "]"
 		Log.Panic(errMsg)
 	}
-	deviceType.P = p
+	deviceType.I = i
 	deviceType.R = r
 	deviceType.C = c
 	deviceType.F = f

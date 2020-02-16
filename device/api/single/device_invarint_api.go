@@ -12,10 +12,10 @@ import (
 	"net/http"
 )
 
-func DeviceRUpdate(c *gin.Context) {
+func UpdateDeviceInvarintAttr(c *gin.Context) {
 	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }
 
-func DeviceRQuery(c *gin.Context) {
+func GetDeviceInvarintAttr(c *gin.Context) {
 	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }

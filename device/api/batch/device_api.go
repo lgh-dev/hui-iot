@@ -8,26 +8,26 @@ package single
  */
 import (
 	"github.com/gin-gonic/gin"
-	. "hui-iot/base/domain"
+	"hui-iot/device/domain"
 	"net/http"
 )
 
 //基本信息添加
 func DeviceAdd(c *gin.Context) {
-	c.JSON(http.StatusOK, BuildSucc(&ResultDTO{}))
+	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }
 
 //基本信息添加
 func DeviceDelete(c *gin.Context) {
-	c.JSON(http.StatusOK, BuildSucc(&ResultDTO{}))
+	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }
 
 //基本信息添加
 func DeviceUpdate(c *gin.Context) {
-	c.JSON(http.StatusOK, BuildSucc(&ResultDTO{}))
+	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }
 
 //基本信息添加
 func DeviceQuery(c *gin.Context) {
-	c.JSON(http.StatusOK, BuildSucc(&ResultDTO{}))
+	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
 }

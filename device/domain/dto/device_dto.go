@@ -1,7 +1,7 @@
 package dto
 
 import (
-	. "hui-iot/base/domain"
+	"hui-iot/device/domain"
 	"time"
 )
 
@@ -18,18 +18,18 @@ type BaseQueryDTO struct {
 
 //Device Add DTO
 type DeviceAddDTO struct {
-	Device
+	domain.Device
 }
 
 //Device update DTO
 type DeviceUpdateDTO struct {
-	Device
+	domain.Device
 }
 
 //Device query DTO
 type DeviceQueryDTO struct {
 	BaseQueryDTO
-	Device
+	domain.Device
 }
 
 //Object ID , be used to findByID or deleteByID
