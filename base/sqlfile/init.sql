@@ -22,7 +22,7 @@ CREATE TABLE iot_device_config_attr(
     id BIGINT NOT NULL   COMMENT 'ID 主键' ,
     device_id BIGINT NOT NULL   COMMENT '设备ID-外键 设备ID-外键' ,
     device_type_config_attr_id VARCHAR(32) NOT NULL   COMMENT '配置属性ID 配置属性ID' ,
-    value VARCHAR(3072)    COMMENT '配置属性-值 配置属性-值' ,
+    VALUE VARCHAR(3072)    COMMENT '配置属性-值 配置属性-值' ,
     PRIMARY KEY (ID)
 ) COMMENT = '设备配置属性表 该表允许读和写。配合影子机制更新设备配置属性。';;
 
@@ -32,14 +32,14 @@ CREATE TABLE iot_device_invariant_attr(
     ID BIGINT NOT NULL   COMMENT 'ID 主键' ,
     device_id BIGINT NOT NULL   COMMENT '设备ID-外键 设备ID-外键' ,
     device_type_invariant_attr_id VARCHAR(32) NOT NULL   COMMENT '固定属性ID 固定属性ID' ,
-    value VARCHAR(3072)    COMMENT '固定属性-值 固定属性-值' ,
+    VALUE VARCHAR(3072)    COMMENT '固定属性-值 固定属性-值' ,
     PRIMARY KEY (ID)
 ) COMMENT = '设备固定属性表 该表关联iot_device_type_invariant_attr表。如果本表没有对应的值，设备取该iot_device_type_invariant_attr表默认值。';;
 
 ALTER TABLE iot_device_invariant_attr COMMENT '设备固定属性表';;
 DROP TABLE iot_device_event;;/*SkipError*/
 CREATE TABLE iot_device_event(
-    time BIGINT NOT NULL   COMMENT '落库时间 时序数据库的主键' ,
+    TIME BIGINT NOT NULL   COMMENT '落库时间 时序数据库的主键' ,
     event_time DATETIME NOT NULL   COMMENT '事件发送时间' ,
     device_type_event_id BIGINT NOT NULL   COMMENT '设备类型事件定义ID-外键 设备类型事件定义ID-外键' ,
     event_info_map TEXT NOT NULL   COMMENT '事件信息 事件信息，json，{key:value}结构' ,
@@ -77,7 +77,7 @@ CREATE TABLE iot_device_type_invariant_attr(
     attr_p_key VARCHAR(32)    COMMENT '固定属性-字段名 固定属性-字段名' ,
     data_type VARCHAR(32)    COMMENT '固定属性-数据类型 固定属性-数据类型' ,
     defalut_value VARCHAR(3072)    COMMENT '固定属性-默认值 固定属性-默认值' ,
-    unit VARCHAR(32)    COMMENT '固定属性-单位 固定属性-单位'
+    unit VARCHAR(32)    COMMENT '固定属性-单位 固定属性-单位' 
 ) COMMENT = '设备类型固定属性定义表 ';;
 
 ALTER TABLE iot_device_type_invariant_attr COMMENT '设备类型固定属性定义表';;
@@ -88,7 +88,7 @@ CREATE TABLE iot_device_type_read_attr(
     attr_p_key VARCHAR(32) NOT NULL   COMMENT '只读属性字段名 只读属性字段名' ,
     data_type VARCHAR(32) NOT NULL   COMMENT '只读属性-数据类型 只读属性-数据类型' ,
     defalut_value VARCHAR(3072)    COMMENT '只读属性-默认值 只读属性-默认值' ,
-    unit VARCHAR(32)    COMMENT '只读属性-单位 只读属性-单位'
+    unit VARCHAR(32)    COMMENT '只读属性-单位 只读属性-单位' 
 ) COMMENT = '设备类型只读属性定义表 ';;
 
 ALTER TABLE iot_device_type_read_attr COMMENT '设备类型只读属性定义表';;
@@ -100,8 +100,8 @@ CREATE TABLE iot_device_type_config_attr(
     data_type VARCHAR(32) NOT NULL   COMMENT '配置属性-数据类型 配置属性-数据类型' ,
     defalut_value VARCHAR(3072)    COMMENT '配置属性-默认值 配置属性-默认值' ,
     unit VARCHAR(32)    COMMENT '配置属性-单位 配置属性-单位' ,
-    max_value VARCHAR(32)    COMMENT '最大值 最大值' ,
-    min_value VARCHAR(32)    COMMENT '最小值 最小值'
+    MAX_VALUE VARCHAR(32)    COMMENT '最大值 最大值' ,
+    min_value VARCHAR(32)    COMMENT '最小值 最小值' 
 ) COMMENT = '设备类型配置属性定义表 ';;
 
 ALTER TABLE iot_device_type_config_attr COMMENT '设备类型配置属性定义表';;
@@ -110,7 +110,7 @@ CREATE TABLE iot_device_type_func(
     id BIGINT    COMMENT 'ID 主键' ,
     device_type_id BIGINT    COMMENT '设备类型ID-外键 设备类型ID-外键' ,
     func_name VARCHAR(32) NOT NULL   COMMENT '功能名称 功能名称' ,
-    in_para VARCHAR(3072)    COMMENT '输入参数信息 输入参数信息[key:value:data_type,key:value:data_type]'
+    in_para VARCHAR(3072)    COMMENT '输入参数信息 输入参数信息[key:value:data_type,key:value:data_type]' 
 ) COMMENT = '设备类型功能函数定义表 ';;
 
 ALTER TABLE iot_device_type_func COMMENT '设备类型功能函数定义表';;

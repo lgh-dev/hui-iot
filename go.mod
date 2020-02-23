@@ -4,7 +4,6 @@ go 1.13
 
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
-	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/edwingeng/wuid v0.0.0-20191129013112-1bf3d98c028d
 	github.com/gin-gonic/gin v1.5.0
@@ -21,6 +20,7 @@ require (
 	github.com/sirupsen/logrus v1.4.2
 	github.com/spf13/viper v1.6.2
 	github.com/stretchr/testify v1.4.0
+	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.5
 	golang.org/x/net v0.0.0-20200202094626-16171245cfb2 // indirect

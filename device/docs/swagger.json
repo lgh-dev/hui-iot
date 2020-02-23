@@ -1,25 +1,34 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server Petstore server.",
-        "title": "Go-site Example API",
+        "description": "给予gin web框架搭建的业务骨架",
+        "title": "gin 框架",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
-            "name": "API Support",
-            "url": "http://www.swagger.io/support",
-            "email": "support@swagger.io"
+            "name": "jinchunguang",
+            "email": "jin-chunguang@foxmail.com"
         },
-        "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        },
+        "license": {},
         "version": "1.0"
     },
-    "host": "127.0.0.1",
-    "basePath": "\"\"",
+    "host": "localhost:10010\"",
     "paths": {
-        "/user/update": {
-            "post": {}
+        "/user/{id}": {
+            "get": {
+                "description": "通过id获取用户",
+                "consumes": [
+                    "application/x-json-stream"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ]
+            }
         }
     }
 }

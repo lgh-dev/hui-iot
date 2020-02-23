@@ -1,18 +1,23 @@
-basePath: '""'
-host: 127.0.0.1
+host: localhost:10010"
 info:
   contact:
-    email: support@swagger.io
-    name: API Support
-    url: http://www.swagger.io/support
-  description: This is a sample server Petstore server.
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    email: jin-chunguang@foxmail.com
+    name: jinchunguang
+  description: 给予gin web框架搭建的业务骨架
+  license: {}
   termsOfService: http://swagger.io/terms/
-  title: Go-site Example API
+  title: gin 框架
   version: "1.0"
 paths:
-  /user/update:
-    post: {}
+  /user/{id}:
+    get:
+      consumes:
+      - application/x-json-stream
+      description: 通过id获取用户
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
 swagger: "2.0"
