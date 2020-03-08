@@ -16,7 +16,7 @@ import (
 // @param id path int true "id"
 // @router /api/svc-iot-device/v1/devicetype/:id [get]
 //func DeviceTypeQuery(c *gin.Context) {
-//	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{Data: domain.DeviceTypeMap}))
+//	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{Data: common.DeviceTypeMap}))
 //}
 
 // @description 通过id获取用户

@@ -1,5 +1,5 @@
 ## 本配置文件定义了车辆的各方面的属性和功能函数。
-ID: device-type-car
+ID: car
 # 固定属性
 invariant-attr:
   -

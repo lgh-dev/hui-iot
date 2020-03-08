@@ -1,8 +1,8 @@
-package mqtt
+package data
 
 import (
 	"fmt"
-	"hui-iot/base/config"
+	"hui-iot/base/common"
 	"sync"
 	"time"
 
@@ -12,7 +12,7 @@ import (
 
 var (
 	mqttServerAddress = "tcp://192.168.20.101:1883"
-	topic             = config.MatchingAll(config.TOPIC_READ_ATTR_POST)
+	topic             = common.MatchingAll(common.TOPIC_READ_ATTR_POST)
 	clientId          = []byte("svc-hui-iot-data")
 )
 

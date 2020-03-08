@@ -8,14 +8,14 @@ package single
  */
 import (
 	"github.com/gin-gonic/gin"
-	"hui-iot/device/domain"
+	domain2 "hui-iot/base/common"
 	"net/http"
 )
 
 func DeviceFExec(c *gin.Context) {
-	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
+	c.JSON(http.StatusOK, domain2.BuildSucc(&domain2.ResultDTO{}))
 }
 
 func DeviceFUpdate(c *gin.Context) {
-	c.JSON(http.StatusOK, domain.BuildSucc(&domain.ResultDTO{}))
+	c.JSON(http.StatusOK, domain2.BuildSucc(&domain2.ResultDTO{}))
 }
