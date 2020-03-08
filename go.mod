@@ -15,6 +15,7 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
+	github.com/magiconair/properties v1.8.1
 	github.com/mailru/easyjson v0.7.0 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/sirupsen/logrus v1.4.2
@@ -23,6 +24,8 @@ require (
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.5
+	github.com/taosdata/TDengine v0.0.0-20200307092426-0e9a8c0b3153
+	github.com/tidwall/gjson v1.6.0
 	golang.org/x/net v0.0.0-20200202094626-16171245cfb2 // indirect
 	golang.org/x/sys v0.0.0-20200212091648-12a6c2dcc1e4 // indirect
 	golang.org/x/tools v0.0.0-20200214225126-5916a50871fb // indirect

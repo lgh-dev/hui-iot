@@ -22,7 +22,7 @@ const (
 )
 
 const (
-	PATH_DEVICETYPE_SINGLE       = "/devicetype"
+	PATH_DEVICETYPE_SINGLE       = "/deviceType"
 	PATH_DEVICETYPE_SINGLE_QUERY = PATH_IOT_DEVICE_SINGLE + PATH_DEVICETYPE_SINGLE + PATH_QUERY
 )
 const (
@@ -59,7 +59,7 @@ const (
 //batch api
 
 const (
-	PATH_DEVICETYPE_BATCH       = "/devicetype"
+	PATH_DEVICETYPE_BATCH       = "/deviceType"
 	PATH_DEVICETYPE_BATCH_QUERY = PATH_IOT_DEVICE_BATCH + PATH_DEVICETYPE_BATCH + PATH_QUERY
 )
 

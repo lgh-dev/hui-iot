@@ -30,19 +30,19 @@
 
 设备上报固定属性
 ```
-请求Topic：/sys/{productKey}/{deviceName}/thing/deviceinfo/update
-响应Topic：/sys/{productKey}/{deviceName}/thing/deviceinfo/update_reply
+请求Topic：/sys/{deviceTypeID}/{deviceID}/thing/deviceinfo/update
+响应Topic：/sys/{deviceTypeID}/{deviceID}/thing/deviceinfo/update_reply
 ```
 设备上报只读属性
 ```
 上行（透传）
-请求Topic：/sys/{productKey}/{deviceName}/thing/model/up_raw
-响应Topic：/sys/{productKey}/{deviceName}/thing/model/up_raw_reply
+请求Topic：/sys/{deviceTypeID}/{deviceID}/thing/model/up_raw
+响应Topic：/sys/{deviceTypeID}/{deviceID}/thing/model/up_raw_reply
 
 上行（Alink JSON）
 
-请求Topic： /sys/{productKey}/{deviceName}/thing/event/property/post
-响应Topic： /sys/{productKey}/{deviceName}/thing/event/property/post_reply
+请求Topic： /sys/{deviceTypeID}/{deviceID}/thing/event/property/post
+响应Topic： /sys/{deviceTypeID}/{deviceID}/thing/event/property/post_reply
 上报格式
 {
   "id": "123",
@@ -63,12 +63,12 @@
 设置设备配置属性
 ```
 下行（透传）
-请求Topic：/sys/{productKey}/{deviceName}/thing/model/down_raw
-响应Topic：/sys/{productKey}/{deviceName}/thing/model/down_raw_reply
+请求Topic：/sys/{deviceTypeID}/{deviceID}/thing/model/down_raw
+响应Topic：/sys/{deviceTypeID}/{deviceID}/thing/model/down_raw_reply
 
 下行（Alink JSON）
-请求Topic：/sys/{productKey}/{deviceName}/thing/service/property/set
-响应Topic：/sys/{productKey}/{deviceName}/thing/service/property/set_reply
+请求Topic：/sys/{deviceTypeID}/{deviceID}/thing/service/property/set
+响应Topic：/sys/{deviceTypeID}/{deviceID}/thing/service/property/set_reply
 数据格式
 {
   "id": "123",
@@ -83,13 +83,13 @@
 ```
 上行（透传）
 
-请求Topic：/sys/{productKey}/{deviceName}/thing/model/up_raw
-响应Topic：/sys/{productKey}/{deviceName}/thing/model/up_raw_reply
+请求Topic：/sys/{deviceTypeID}/{deviceID}/thing/model/up_raw
+响应Topic：/sys/{deviceTypeID}/{deviceID}/thing/model/up_raw_reply
 
 上行（Alink JSON）
 
-请求Topic：/sys/{productKey}/{deviceName}/thing/event/{tsl.event.identifier}/post
-响应Topic：/sys/{productKey}/{deviceName}/thing/event/{tsl.event.identifier}/post_reply
+请求Topic：/sys/{deviceTypeID}/{deviceID}/thing/event/{tsl.event.identifier}/post
+响应Topic：/sys/{deviceTypeID}/{deviceID}/thing/event/{tsl.event.identifier}/post_reply
 ```
 
 

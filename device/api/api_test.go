@@ -31,7 +31,7 @@ func performRequest(r http.Handler, method, path string) *httptest.ResponseRecor
 //单元测试
 func TestDeviceTypeQuery(t *testing.T) {
 	var router = GetServer()
-	w := performRequest(router, "GET", "/api/svc-iot-device/v1/devicetype/")
+	w := performRequest(router, "GET", "/api/svc-iot-device/v1/deviceType/")
 
 	assert.Equal(t, http.StatusOK, w.Code)
 	// 将 JSON 响应转换为 map
@@ -47,7 +47,7 @@ func BenchmarkDeviceTypeQuery(b *testing.B) {
 	b.ReportAllocs()
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			performRequest(router, "GET", "/api/svc-iot-device/v1/devicetype/")
+			performRequest(router, "GET", "/api/svc-iot-device/v1/deviceType/")
 		}
 	})
 	//for i:=0;i <b.N ;i++  {
