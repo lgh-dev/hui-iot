@@ -3,7 +3,7 @@ package domain
 import (
 	"fmt"
 	"github.com/stretchr/testify/assert"
-	"hui-iot/device/config"
+	"hui-iot/iot-server/config"
 	"testing"
 
 	"github.com/jinzhu/gorm"

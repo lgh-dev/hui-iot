@@ -4,11 +4,11 @@ package main
  * @Author: lgh-dev
  * @Author: lgh-inter@163.com
  * @Date: 2020/1/9 21:39
- * @Desc: Service of iot-device's run file
+ * @Desc: Service of iot-iot-server's run file
  */
 import (
-	"hui-iot/device/api"
-	_ "hui-iot/device/docs"
+	"hui-iot/iot-server/api"
+	_ "hui-iot/iot-server/docs"
 )
 
 // @title gin 框架

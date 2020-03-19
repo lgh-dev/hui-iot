@@ -14,7 +14,7 @@ import (
 // @version 1.0
 // @accept application/x-www-form-urlencoded
 // @param id path int true "id"
-// @router /api/svc-iot-device/v1/devicetype/:id [get]
+// @router /api/svc-iot-iot-server/v1/devicetype/:id [get]
 //func DeviceTypeQuery(c *gin.Context) {
 //	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{Data: common.DeviceTypeMap}))
 //}

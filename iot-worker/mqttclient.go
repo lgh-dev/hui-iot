@@ -1,4 +1,4 @@
-package data
+package iot_worker
 
 import (
 	"fmt"
@@ -13,13 +13,12 @@ import (
 var (
 	mqttServerAddress = "tcp://192.168.20.101:1883"
 	topic             = common.MatchingAll(common.TOPIC_READ_ATTR_POST)
-	clientId          = []byte("svc-hui-iot-data")
+	clientId          = []byte("svc-hui-iot-iot-worker")
 )
 
 //define a function for the default message handler
-var f mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
-	fmt.Printf("TOPIC: %s\n", msg.Topic())
-	fmt.Printf("MSG: %s\n", msg.Payload())
+var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
+	ReceiveEvent(msg)
 }
 
 /***
@@ -52,7 +51,7 @@ func SubMsg() {
 		time.Sleep(time.Duration(3) * time.Second)
 		//fmt.Printf("start publish msg to mqtt broker, taskId: %d, count: %d \n", taskId, i)
 		//发布消息
-		token := client.Subscribe(topic, 0, f)
+		token := client.Subscribe(topic, 0, messageHandler)
 		token.Wait()
 	}
 

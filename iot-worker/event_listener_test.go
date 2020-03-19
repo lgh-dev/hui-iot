@@ -1,4 +1,4 @@
-package data
+package iot_worker
 
 import (
 	"github.com/stretchr/testify/assert"

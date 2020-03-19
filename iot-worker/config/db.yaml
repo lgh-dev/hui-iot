@@ -1,0 +1,6 @@
+## 数据库配置
+ip: 192.168.20.101
+port: 6020
+username: root
+password: taosdata
+dbname: iot

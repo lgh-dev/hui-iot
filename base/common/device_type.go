@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 )
 
-// save device types info
+// save iot-server types info
 var DeviceTypeMap = make(map[string]DeviceType)
 
 //动态生成表和对应的sql
@@ -66,7 +66,7 @@ func GetDeviceTypes(configPath string) bool {
 		Log.Error("Read config path ${root}/base/config/ err:{}", err.Error())
 		return false
 	}
-	//cycle read config yaml files transform device type info
+	//cycle read config yaml files transform iot-server type info
 	for i := 0; i < len(yamlFiles); i++ {
 		file := yamlFiles[i]
 		if !file.IsDir() {
@@ -87,7 +87,7 @@ func getDeviceType(filename string, bytes []byte) DeviceType {
 	deviceType := DeviceType{}
 	err := yaml.Unmarshal(bytes, &deviceType)
 	if err != nil {
-		panic("Read config file of device-type err: " + filename + "" + err.Error())
+		panic("Read config file of iot-server-type err: " + filename + "" + err.Error())
 	}
 	//初始化SQL
 	readDynamicSQL := DynamicSQL{}

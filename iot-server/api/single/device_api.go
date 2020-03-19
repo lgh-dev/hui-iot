@@ -9,14 +9,11 @@ package single
 import (
 	"github.com/gin-gonic/gin"
 	domain2 "hui-iot/base/common"
-	"hui-iot/device/domain"
 	"net/http"
 )
 
 //基本信息添加
 func AddDevice(c *gin.Context) {
-	device := domain.Device{}
-	c.BindJSON(device)
 	c.JSON(http.StatusOK, domain2.BuildSucc(&domain2.ResultDTO{}))
 }
 

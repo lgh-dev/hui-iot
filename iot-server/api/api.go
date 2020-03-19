@@ -10,33 +10,33 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"hui-iot/device/api/single"
+	"hui-iot/iot-server/api/single"
 )
 
 func GetServer() *gin.Engine {
 	r := gin.Default()
-	//v1 := r.Group("/api/svc-iot-device/v1")
+	//v1 := r.Group("/api/svc-iot-iot-server/v1")
 	//{
 	//single interface
 	//v1.GET("/devicetype/:id", single.UserGet)
 	//v1.GET("/devicetype/:id", single.DeviceTypeQuery)
 	//v1.GET("/devicetype/", single.DeviceTypeQuery)
 
-	//v1.POST("/device/:id", single.GetDevice)
-	//v1.POST("/device", single.AddDevice)
-	//v1.PUT("/device", single.UpdateDevice)
-	//v1.DELETE("/device", single.DeleteDevice)
+	//v1.POST("/iot-server/:id", single.GetDevice)
+	//v1.POST("/iot-server", single.AddDevice)
+	//v1.PUT("/iot-server", single.UpdateDevice)
+	//v1.DELETE("/iot-server", single.DeleteDevice)
 	//
-	//v1.GET("/device/:id/invariant-attr/:attrId", single.GetDeviceInvarintAttr)
-	//v1.POST("/device/:id/invariant-attr/", single.UpdateDeviceInvarintAttr)
+	//v1.GET("/iot-server/:id/invariant-attr/:attrId", single.GetDeviceInvarintAttr)
+	//v1.POST("/iot-server/:id/invariant-attr/", single.UpdateDeviceInvarintAttr)
 	//
-	//v1.GET("/device/:id/read-attr/:attrId", single.GetDeviceReadAttr)
-	//v1.POST("/device/:id/read-attr/", single.UpdateDeviceReadAttr)
+	//v1.GET("/iot-server/:id/read-attr/:attrId", single.GetDeviceReadAttr)
+	//v1.POST("/iot-server/:id/read-attr/", single.UpdateDeviceReadAttr)
 	//
-	//v1.GET("/device/:id/config-attr/:attrId", single.GetDeviceConfigAttr)
-	//v1.POST("/device/:id/config-attr/", single.GetDeviceConfigAttr)
+	//v1.GET("/iot-server/:id/config-attr/:attrId", single.GetDeviceConfigAttr)
+	//v1.POST("/iot-server/:id/config-attr/", single.GetDeviceConfigAttr)
 	//
-	//v1.GET("/device/:id/func/:funcName", single.ExecDeviceFunc)
+	//v1.GET("/iot-server/:id/func/:funcName", single.ExecDeviceFunc)
 	//}
 	r.GET("/devicetype/", single.UserGet)
 
