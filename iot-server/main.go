@@ -11,15 +11,6 @@ import (
 	_ "hui-iot/iot-server/docs"
 )
 
-// @title gin 框架
-// @version 1.0
-// @description 给予gin web框架搭建的业务骨架
-// @termsofservice http://swagger.io/terms/
-// @contact.name jinchunguang
-// @contact.email jin-chunguang@foxmail.com
-// @host localhost:10010"
 func main() {
-	r := api.GetServer()
-	r.Run(":9000")
-
+	api.GetServer().Run(":9000")
 }
