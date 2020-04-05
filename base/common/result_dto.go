@@ -1,9 +1,9 @@
 package common
 
 type ResultDTO struct {
-	Code int         `json:"code"`       //Succ:1  or err code :<1
-	Data interface{} `json:"iot-worker"` //Result iot-worker
-	Msg  string      `json:"msg"`        //Succ or Err msg
+	Code int         `json:"code"` //Succ:1  or err code :<1
+	Data interface{} `json:"data"` //Result data
+	Msg  string      `json:"msg"`  //Succ or Err msg
 }
 
 func BuildSucc(result *ResultDTO) *ResultDTO {

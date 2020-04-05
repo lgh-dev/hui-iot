@@ -1,5 +1,8 @@
 ## 本配置文件定义了车辆的各方面的属性和功能函数。
 ID: car
+version: 0.0.1
+auth: admin
+desc: 智能汽车
 # 固定属性
 invariant-attr:
   -

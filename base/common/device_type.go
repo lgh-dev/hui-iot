@@ -23,6 +23,8 @@ type DynamicSQL struct {
 // DeviceType
 type DeviceType struct {
 	ID               string        `yaml:"ID"`            //唯一标识
+	Version          string        `yaml:"version"`       //版本
+	Auth             string        `yaml:"auth"`          //作者
 	InvariantDefine  []AttrDefine  `yaml:"invarant-attr"` //固定属性
 	ReadDefine       []AttrDefine  `yaml:"read-attr"`     //只读属性
 	ConfigDefine     []AttrDefine  `yaml:"config-attr"`   //配置属性
