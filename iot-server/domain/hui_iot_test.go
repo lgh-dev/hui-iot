@@ -31,7 +31,7 @@ func TestFuncGetAndCreateAndDelete(t *testing.T) {
 	db := GetGorm(conf.GetString("mysql.dbInfo"))
 	defer db.Close()
 
-	iotDevice := IotDevice{ID: 1, DeviceUId: "001", DeviceName: "test001", DeviceTypeID: 1}
+	iotDevice := IotDevice{ID: 1, DeviceUId: "001", DeviceName: "test001", DeviceModelID: 1}
 	iotDeviceMgr := IotDeviceMgr(db.Where("id = ?", 1))
 	iotDeviceMgr.SingularTable(true)    //表名不加复数。
 	iotDeviceMgr.Create(&iotDevice)     // 插入新的。

@@ -5,7 +5,7 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/sirupsen/logrus"
 	"github.com/tidwall/gjson"
-	"hui-iot/base/common"
+	common2 "hui-iot/iot-server/common"
 	//"database/sql"
 	//_ "github.com/taosdata/TDengine/src/connector/go/src/taosSql"
 )
@@ -26,8 +26,8 @@ func Handler(topic string, payload []byte) bool {
 		return false
 	}
 	//获取型号ID和设备ID。
-	deviceModeID, deviceID := common.GetDeviceTypeIDAndDeviceIDForTopic(topic)
-	fmt.Printf("deviceTypeID:%s,deviceID:%s\n", deviceModeID, deviceID)
+	deviceModeID, deviceID := common2.GetDeviceModelIDAndDeviceIDForTopic(topic)
+	fmt.Printf("deviceModelID:%s,deviceID:%s\n", deviceModeID, deviceID)
 
 	//获取消息内容。
 	params := gjson.GetBytes(payload, "params")

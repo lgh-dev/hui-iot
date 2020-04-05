@@ -3,14 +3,12 @@ package common
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"strings"
 )
-
-// save iot-server types info
-var DeviceTypeMap = make(map[string]DeviceType)
 
 //动态生成表和对应的sql
 type DynamicSQL struct {
-	TableName      string //表名 ，格式：iot_[DeviceTypeID]_[PAttr|RAttr|CAttr|Func]
+	TableName      string //表名 ，格式：iot_[DeviceModelID]_[PAttr|RAttr|CAttr|Func]
 	dbType         string //数据库类型 ，格式：[mysql,TDengine]
 	CreateTableSQL string // 建表语句
 	DropTableSQL   string // 删表语句
@@ -20,8 +18,8 @@ type DynamicSQL struct {
 	DeleteSQL      string // 删除语句
 }
 
-// DeviceType
-type DeviceType struct {
+// DeviceModel
+type DeviceModel struct {
 	ID               string        `yaml:"ID"`            //唯一标识
 	Version          string        `yaml:"version"`       //版本
 	Auth             string        `yaml:"auth"`          //作者
@@ -61,40 +59,43 @@ type EventDefine struct {
 	OutParamsDefine []AttrDefine `yaml:"out-params"`
 }
 
-func GetDeviceTypes(configPath string) bool {
+func GetDeviceModels(configPath string) (bool, map[string]DeviceModel) {
+	// save iot-server types info
+	var DeviceModelMap = make(map[string]DeviceModel)
+
 	//读取配置文件目录。
 	yamlFiles, err := ioutil.ReadDir(configPath)
 	if err != nil {
 		Log.Error("Read config path ${root}/base/config/ err:{}", err.Error())
-		return false
+		return false, nil
 	}
 	//cycle read config yaml files transform iot-server type info
 	for i := 0; i < len(yamlFiles); i++ {
 		file := yamlFiles[i]
-		if !file.IsDir() {
+		if !file.IsDir() && strings.Contains(file.Name(), "dm-") {
 			yamlFile, err := ioutil.ReadFile(configPath + file.Name())
 			if err != nil {
 				Log.Error("read yaml file err:{}", err.Error())
-				return false
+				return false, nil
 			}
-			deviceType := getDeviceType(file.Name(), yamlFile)
-			DeviceTypeMap[deviceType.ID] = deviceType
+			deviceModel := getDeviceModel(file.Name(), yamlFile)
+			DeviceModelMap[deviceModel.ID] = deviceModel
 		}
 	}
-	return true
+	return true, DeviceModelMap
 }
 
 //初始化设备类型
-func getDeviceType(filename string, bytes []byte) DeviceType {
-	deviceType := DeviceType{}
-	err := yaml.Unmarshal(bytes, &deviceType)
+func getDeviceModel(filename string, bytes []byte) DeviceModel {
+	deviceModel := DeviceModel{}
+	err := yaml.Unmarshal(bytes, &deviceModel)
 	if err != nil {
 		panic("Read config file of iot-server-type err: " + filename + "" + err.Error())
 	}
 	//初始化SQL
 	readDynamicSQL := DynamicSQL{}
-	readDynamicSQL.TableName = "read_attr_" + deviceType.ID
+	readDynamicSQL.TableName = "read_attr_" + deviceModel.ID
 	readDynamicSQL.CreateTableSQL = ""
 	//TODO 拼sql
-	return deviceType
+	return deviceModel
 }

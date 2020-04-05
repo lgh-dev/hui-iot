@@ -48,9 +48,9 @@ func (obj *_IotDeviceInvariantAttrMgr) WithDeviceID(DeviceID int64) Option {
 	return optionFunc(func(o *options) { o.query["device_id"] = DeviceID })
 }
 
-// WithDeviceTypeInvariantAttrID device_type_invariant_attr_id获取 固定属性ID 固定属性ID
-func (obj *_IotDeviceInvariantAttrMgr) WithDeviceTypeInvariantAttrID(DeviceTypeInvariantAttrID string) Option {
-	return optionFunc(func(o *options) { o.query["device_type_invariant_attr_id"] = DeviceTypeInvariantAttrID })
+// WithDeviceModelInvariantAttrID device_type_invariant_attr_id获取 固定属性ID 固定属性ID
+func (obj *_IotDeviceInvariantAttrMgr) WithDeviceModelInvariantAttrID(DeviceModelInvariantAttrID string) Option {
+	return optionFunc(func(o *options) { o.query["device_type_invariant_attr_id"] = DeviceModelInvariantAttrID })
 }
 
 // WithValue value获取 固定属性-值 固定属性-值
@@ -116,16 +116,16 @@ func (obj *_IotDeviceInvariantAttrMgr) GetBatchFromDeviceID(DeviceIDs []int64) (
 	return
 }
 
-// GetFromDeviceTypeInvariantAttrID 通过device_type_invariant_attr_id获取内容 固定属性ID 固定属性ID
-func (obj *_IotDeviceInvariantAttrMgr) GetFromDeviceTypeInvariantAttrID(DeviceTypeInvariantAttrID string) (results []*IotDeviceInvariantAttr, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_invariant_attr_id = ?", DeviceTypeInvariantAttrID).Find(&results).Error
+// GetFromDeviceModelInvariantAttrID 通过device_type_invariant_attr_id获取内容 固定属性ID 固定属性ID
+func (obj *_IotDeviceInvariantAttrMgr) GetFromDeviceModelInvariantAttrID(DeviceModelInvariantAttrID string) (results []*IotDeviceInvariantAttr, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_invariant_attr_id = ?", DeviceModelInvariantAttrID).Find(&results).Error
 
 	return
 }
 
-// GetBatchFromDeviceTypeInvariantAttrID 批量唯一主键查找 固定属性ID 固定属性ID
-func (obj *_IotDeviceInvariantAttrMgr) GetBatchFromDeviceTypeInvariantAttrID(DeviceTypeInvariantAttrIDs []string) (results []*IotDeviceInvariantAttr, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_invariant_attr_id IN (?)", DeviceTypeInvariantAttrIDs).Find(&results).Error
+// GetBatchFromDeviceModelInvariantAttrID 批量唯一主键查找 固定属性ID 固定属性ID
+func (obj *_IotDeviceInvariantAttrMgr) GetBatchFromDeviceModelInvariantAttrID(DeviceModelInvariantAttrIDs []string) (results []*IotDeviceInvariantAttr, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_invariant_attr_id IN (?)", DeviceModelInvariantAttrIDs).Find(&results).Error
 
 	return
 }

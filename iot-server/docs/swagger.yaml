@@ -12,7 +12,7 @@ paths:
   /user/{id}:
     get:
       consumes:
-      - application/x-json-stream
+      - app/x-json-stream
       description: 通过id获取用户
       parameters:
       - description: id

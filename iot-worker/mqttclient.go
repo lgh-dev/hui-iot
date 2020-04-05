@@ -2,7 +2,7 @@ package iot_worker
 
 import (
 	"fmt"
-	"hui-iot/base/common"
+	common2 "hui-iot/iot-server/common"
 	"sync"
 	"time"
 
@@ -12,7 +12,7 @@ import (
 
 var (
 	mqttServerAddress = "tcp://192.168.20.101:1883"
-	topic             = common.MatchingAll(common.TOPIC_READ_ATTR_POST)
+	topic             = common2.MatchingAll(common2.TopicReadAttrPost)
 	clientId          = []byte("svc-hui-iot-iot-worker")
 )
 

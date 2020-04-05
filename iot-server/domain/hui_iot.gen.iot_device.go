@@ -53,9 +53,9 @@ func (obj *_IotDeviceMgr) WithDeviceName(DeviceName string) Option {
 	return optionFunc(func(o *options) { o.query["device_name"] = DeviceName })
 }
 
-// WithDeviceTypeID device_type_id获取 设备类型ID-外键 设备类型ID-外键
-func (obj *_IotDeviceMgr) WithDeviceTypeID(DeviceTypeID int64) Option {
-	return optionFunc(func(o *options) { o.query["device_type_id"] = DeviceTypeID })
+// WithDeviceModelID device_type_id获取 设备类型ID-外键 设备类型ID-外键
+func (obj *_IotDeviceMgr) WithDeviceModelID(DeviceModelID int64) Option {
+	return optionFunc(func(o *options) { o.query["device_type_id"] = DeviceModelID })
 }
 
 // WithOnlineStatus online_status获取 联网状态 在线（1）、离线（0）、未激活（-1）
@@ -135,16 +135,16 @@ func (obj *_IotDeviceMgr) GetBatchFromDeviceName(DeviceNames []string) (results 
 	return
 }
 
-// GetFromDeviceTypeID 通过device_type_id获取内容 设备类型ID-外键 设备类型ID-外键
-func (obj *_IotDeviceMgr) GetFromDeviceTypeID(DeviceTypeID int64) (results []*IotDevice, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_id = ?", DeviceTypeID).Find(&results).Error
+// GetFromDeviceModelID 通过device_type_id获取内容 设备类型ID-外键 设备类型ID-外键
+func (obj *_IotDeviceMgr) GetFromDeviceModelID(DeviceModelID int64) (results []*IotDevice, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_id = ?", DeviceModelID).Find(&results).Error
 
 	return
 }
 
-// GetBatchFromDeviceTypeID 批量唯一主键查找 设备类型ID-外键 设备类型ID-外键
-func (obj *_IotDeviceMgr) GetBatchFromDeviceTypeID(DeviceTypeIDs []int64) (results []*IotDevice, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_id IN (?)", DeviceTypeIDs).Find(&results).Error
+// GetBatchFromDeviceModelID 批量唯一主键查找 设备类型ID-外键 设备类型ID-外键
+func (obj *_IotDeviceMgr) GetBatchFromDeviceModelID(DeviceModelIDs []int64) (results []*IotDevice, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_id IN (?)", DeviceModelIDs).Find(&results).Error
 
 	return
 }

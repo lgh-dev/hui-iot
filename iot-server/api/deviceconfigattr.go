@@ -1,4 +1,4 @@
-package single
+package api
 
 /**
  * @Author: lgh-dev
@@ -8,14 +8,14 @@ package single
  */
 import (
 	"github.com/gin-gonic/gin"
-	domain2 "hui-iot/base/common"
+	"hui-iot/iot-server/common"
 	"net/http"
 )
 
 func UpdateDeviceConfigAttr(c *gin.Context) {
-	c.JSON(http.StatusOK, domain2.BuildSucc(&domain2.ResultDTO{}))
+	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{}))
 }
 
 func GetDeviceConfigAttr(c *gin.Context) {
-	c.JSON(http.StatusOK, domain2.BuildSucc(&domain2.ResultDTO{}))
+	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{}))
 }

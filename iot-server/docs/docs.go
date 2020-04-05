@@ -34,7 +34,7 @@ var doc = `{
             "get": {
                 "description": "通过id获取用户",
                 "consumes": [
-                    "application/x-json-stream"
+                    "app/x-json-stream"
                 ],
                 "parameters": [
                     {

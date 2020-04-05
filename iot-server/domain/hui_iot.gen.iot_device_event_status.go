@@ -49,9 +49,9 @@ func (obj *_IotDeviceEventStatusMgr) WithEventTime(EventTime time.Time) Option {
 	return optionFunc(func(o *options) { o.query["event_time"] = EventTime })
 }
 
-// WithDeviceTypeEventID device_type_event_id获取 设备类型事件定义ID-外键 设备类型事件定义ID-外键
-func (obj *_IotDeviceEventStatusMgr) WithDeviceTypeEventID(DeviceTypeEventID int64) Option {
-	return optionFunc(func(o *options) { o.query["device_type_event_id"] = DeviceTypeEventID })
+// WithDeviceModelEventID device_type_event_id获取 设备类型事件定义ID-外键 设备类型事件定义ID-外键
+func (obj *_IotDeviceEventStatusMgr) WithDeviceModelEventID(DeviceModelEventID int64) Option {
+	return optionFunc(func(o *options) { o.query["device_type_event_id"] = DeviceModelEventID })
 }
 
 // WithEventInfoMap event_info_map获取 事件信息 事件信息，json，{key:value}结构
@@ -127,16 +127,16 @@ func (obj *_IotDeviceEventStatusMgr) GetBatchFromEventTime(EventTimes []time.Tim
 	return
 }
 
-// GetFromDeviceTypeEventID 通过device_type_event_id获取内容 设备类型事件定义ID-外键 设备类型事件定义ID-外键
-func (obj *_IotDeviceEventStatusMgr) GetFromDeviceTypeEventID(DeviceTypeEventID int64) (results []*IotDeviceEventStatus, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_event_id = ?", DeviceTypeEventID).Find(&results).Error
+// GetFromDeviceModelEventID 通过device_type_event_id获取内容 设备类型事件定义ID-外键 设备类型事件定义ID-外键
+func (obj *_IotDeviceEventStatusMgr) GetFromDeviceModelEventID(DeviceModelEventID int64) (results []*IotDeviceEventStatus, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_event_id = ?", DeviceModelEventID).Find(&results).Error
 
 	return
 }
 
-// GetBatchFromDeviceTypeEventID 批量唯一主键查找 设备类型事件定义ID-外键 设备类型事件定义ID-外键
-func (obj *_IotDeviceEventStatusMgr) GetBatchFromDeviceTypeEventID(DeviceTypeEventIDs []int64) (results []*IotDeviceEventStatus, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_event_id IN (?)", DeviceTypeEventIDs).Find(&results).Error
+// GetBatchFromDeviceModelEventID 批量唯一主键查找 设备类型事件定义ID-外键 设备类型事件定义ID-外键
+func (obj *_IotDeviceEventStatusMgr) GetBatchFromDeviceModelEventID(DeviceModelEventIDs []int64) (results []*IotDeviceEventStatus, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_event_id IN (?)", DeviceModelEventIDs).Find(&results).Error
 
 	return
 }

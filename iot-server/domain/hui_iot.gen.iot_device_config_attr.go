@@ -48,9 +48,9 @@ func (obj *_IotDeviceConfigAttrMgr) WithDeviceID(DeviceID int64) Option {
 	return optionFunc(func(o *options) { o.query["device_id"] = DeviceID })
 }
 
-// WithDeviceTypeConfigAttrID device_type_config_attr_id获取 配置属性ID 配置属性ID
-func (obj *_IotDeviceConfigAttrMgr) WithDeviceTypeConfigAttrID(DeviceTypeConfigAttrID string) Option {
-	return optionFunc(func(o *options) { o.query["device_type_config_attr_id"] = DeviceTypeConfigAttrID })
+// WithDeviceModelConfigAttrID device_type_config_attr_id获取 配置属性ID 配置属性ID
+func (obj *_IotDeviceConfigAttrMgr) WithDeviceModelConfigAttrID(DeviceModelConfigAttrID string) Option {
+	return optionFunc(func(o *options) { o.query["device_type_config_attr_id"] = DeviceModelConfigAttrID })
 }
 
 // WithValue value获取 配置属性-值 配置属性-值
@@ -116,16 +116,16 @@ func (obj *_IotDeviceConfigAttrMgr) GetBatchFromDeviceID(DeviceIDs []int64) (res
 	return
 }
 
-// GetFromDeviceTypeConfigAttrID 通过device_type_config_attr_id获取内容 配置属性ID 配置属性ID
-func (obj *_IotDeviceConfigAttrMgr) GetFromDeviceTypeConfigAttrID(DeviceTypeConfigAttrID string) (results []*IotDeviceConfigAttr, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_config_attr_id = ?", DeviceTypeConfigAttrID).Find(&results).Error
+// GetFromDeviceModelConfigAttrID 通过device_type_config_attr_id获取内容 配置属性ID 配置属性ID
+func (obj *_IotDeviceConfigAttrMgr) GetFromDeviceModelConfigAttrID(DeviceModelConfigAttrID string) (results []*IotDeviceConfigAttr, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_config_attr_id = ?", DeviceModelConfigAttrID).Find(&results).Error
 
 	return
 }
 
-// GetBatchFromDeviceTypeConfigAttrID 批量唯一主键查找 配置属性ID 配置属性ID
-func (obj *_IotDeviceConfigAttrMgr) GetBatchFromDeviceTypeConfigAttrID(DeviceTypeConfigAttrIDs []string) (results []*IotDeviceConfigAttr, err error) {
-	err = obj.DB.Table(obj.GetTableName()).Where("device_type_config_attr_id IN (?)", DeviceTypeConfigAttrIDs).Find(&results).Error
+// GetBatchFromDeviceModelConfigAttrID 批量唯一主键查找 配置属性ID 配置属性ID
+func (obj *_IotDeviceConfigAttrMgr) GetBatchFromDeviceModelConfigAttrID(DeviceModelConfigAttrIDs []string) (results []*IotDeviceConfigAttr, err error) {
+	err = obj.DB.Table(obj.GetTableName()).Where("device_type_config_attr_id IN (?)", DeviceModelConfigAttrIDs).Find(&results).Error
 
 	return
 }
