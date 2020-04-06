@@ -4,7 +4,13 @@ import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"strings"
+	"sync"
 )
+
+// save iot-server types info
+var DeviceModelMap = make(map[string]DeviceModel)
+
+var once = sync.Once{}
 
 //动态生成表和对应的sql
 type DynamicSQL struct {
@@ -59,9 +65,13 @@ type EventDefine struct {
 	OutParamsDefine []AttrDefine `yaml:"out-params"`
 }
 
+func init() {
+	once.Do(func() {
+		GetDeviceModels("../")
+	})
+}
+
 func GetDeviceModels(configPath string) (bool, map[string]DeviceModel) {
-	// save iot-server types info
-	var DeviceModelMap = make(map[string]DeviceModel)
 
 	//读取配置文件目录。
 	yamlFiles, err := ioutil.ReadDir(configPath)
