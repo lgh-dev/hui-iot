@@ -12,6 +12,13 @@ import (
 	"net/http"
 )
 
+// save iot-server types info
+var dmMap = make(map[string]DeviceModel)
+
+func init() {
+	_, dmMap = GetDeviceModels("../")
+}
+
 /**
  * @Author: lgh-dev
  * @Author: lgh-inter@163.com
@@ -19,5 +26,5 @@ import (
  * @Desc:
  */
 func FindAllDeviceModels(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, BuildSucc(&ResultDTO{Data: &DeviceModelMap}))
+	ctx.JSON(http.StatusOK, BuildSucc(&ResultDTO{Data: &dmMap}))
 }

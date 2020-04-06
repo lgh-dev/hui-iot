@@ -33,7 +33,7 @@ func TestDeviceModelQuery(t *testing.T) {
 	var router = GetServer()
 	w := performRequest(router, "GET", "/api/v1/devicemodels")
 	assert.Equal(t, http.StatusOK, w.Code)
-	assert.True(t, strings.Contains(w.Body.String(), "ID"), "查询成功!")
+	assert.True(t, strings.Contains(w.Body.String(), "ID"), "查询失败!")
 }
 
 func BenchmarkDeviceModelQuery(b *testing.B) {
