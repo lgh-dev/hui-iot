@@ -3,6 +3,9 @@ package common
 import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
+	"os"
+	"os/exec"
+	"path/filepath"
 	"strings"
 	"sync"
 )
@@ -67,7 +70,13 @@ type EventDefine struct {
 
 func init() {
 	once.Do(func() {
-		GetDeviceModels("../")
+		file, _ := exec.LookPath(os.Args[0])
+		path, _ := filepath.Abs(file)
+		index := strings.LastIndex(path, string(os.PathSeparator))
+		path = path[:index]
+		index = strings.LastIndex(path, string(os.PathSeparator))
+		path = path[:index]
+		GetDeviceModels(path + "/")
 	})
 }
 
