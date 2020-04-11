@@ -13,7 +13,7 @@ import (
 var (
 	mqttServerAddress = "tcp://192.168.20.101:1883"
 	topic             = common2.MatchingAll(common2.TopicReadAttrPost)
-	clientId          = []byte("svc-hui-iot-iot-worker")
+	clientId          = []byte("iot-worker")
 )
 
 //define a function for the default message handler
