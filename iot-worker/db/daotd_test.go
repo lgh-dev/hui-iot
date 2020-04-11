@@ -1,4 +1,4 @@
-package iot_worker
+package db
 
 //
 //func TestTDEngineDB_CheckDBExists(t *testing.T) {

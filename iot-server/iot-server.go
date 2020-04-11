@@ -7,10 +7,11 @@ package main
  * @Desc: Service of iot-iot-server's run file
  */
 import (
+	"github.com/sirupsen/logrus"
 	"hui-iot/iot-server/api"
-	_ "hui-iot/iot-server/docs"
 )
 
 func main() {
+	logrus.Info("iot-server started!")
 	api.GetServer().Run(":9000")
 }

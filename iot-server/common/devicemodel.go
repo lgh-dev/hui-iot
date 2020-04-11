@@ -4,8 +4,7 @@ import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
-	"os/exec"
-	"path/filepath"
+	"path"
 	"strings"
 	"sync"
 )
@@ -29,14 +28,14 @@ type DynamicSQL struct {
 
 // DeviceModel
 type DeviceModel struct {
-	ID               string        `yaml:"ID"`            //唯一标识
-	Version          string        `yaml:"version"`       //版本
-	Auth             string        `yaml:"auth"`          //作者
-	InvariantDefine  []AttrDefine  `yaml:"invarant-attr"` //固定属性
-	ReadDefine       []AttrDefine  `yaml:"read-attr"`     //只读属性
-	ConfigDefine     []AttrDefine  `yaml:"config-attr"`   //配置属性
-	EventDefine      []EventDefine `yaml:"event"`         //功能函数
-	Function         []Function    `yaml:"function"`      //功能函数
+	ID               string        `yaml:"id"`             //唯一标识
+	Version          string        `yaml:"version"`        //版本
+	Auth             string        `yaml:"auth"`           //作者
+	InvariantDefine  []AttrDefine  `yaml:"invariant-attr"` //固定属性
+	ReadDefine       []AttrDefine  `yaml:"read-attr"`      //只读属性
+	ConfigDefine     []AttrDefine  `yaml:"config-attr"`    //配置属性
+	EventDefine      []EventDefine `yaml:"event"`          //功能函数
+	Function         []Function    `yaml:"function"`       //功能函数
 	InvariantAttrSQL DynamicSQL    //固定属性动态sql
 	ReadAttrSQL      DynamicSQL    //动态sql
 	ConfigAttrSQL    DynamicSQL
@@ -70,19 +69,18 @@ type EventDefine struct {
 
 func init() {
 	once.Do(func() {
-		file, _ := exec.LookPath(os.Args[0])
-		path, _ := filepath.Abs(file)
-		index := strings.LastIndex(path, string(os.PathSeparator))
-		path = path[:index]
-		index = strings.LastIndex(path, string(os.PathSeparator))
-		path = path[:index]
-		GetDeviceModels(path + "/")
+		ePath, err := os.Executable()
+		if err != nil {
+			panic("Get path err when GetDeviceModels！")
+		}
+		confPath := path.Dir(ePath)
+		GetDeviceModels(confPath + "/../conf/")
 	})
 }
 
 func GetDeviceModels(configPath string) (bool, map[string]DeviceModel) {
-
-	//读取配置文件目录。
+	//
+	//	//读取配置文件目录。
 	yamlFiles, err := ioutil.ReadDir(configPath)
 	if err != nil {
 		Log.Error("Read config path ${root}/base/config/ err:{}", err.Error())

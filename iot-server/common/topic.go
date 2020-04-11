@@ -12,7 +12,7 @@ func MatchingAll(str string) string {
 	return strings.Replace(str, "/{DeviceModelID}/{deviceID}/", "/+/+/", -1)
 }
 
-//从主题中获取设备型号ID
+//从主题中获取设备模型ID
 func GetDeviceModelIDAndDeviceIDForTopic(topic string) (string, string) {
 	strs := strings.SplitN(topic, "/", 5)
 	return strs[2], strs[3]

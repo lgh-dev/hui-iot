@@ -1,4 +1,4 @@
-package iot_worker
+package db
 
 import "sync"
 
@@ -15,4 +15,4 @@ var (
 	db   DataDB
 )
 
-const configPath = "config/db.yaml"
+const configPath = "../conf/db.yaml"

@@ -7,6 +7,7 @@ import (
 
 //初始化配置文件
 func TestReadConfigFile(t *testing.T) {
-	v := ReadConfigFile("../", "app", "yaml")
+	//获取配置文件路径
+	v := ReadConfigFile("../../conf", "app", "yaml")
 	assert.NotNil(t, v.GetString("server.port"))
 }

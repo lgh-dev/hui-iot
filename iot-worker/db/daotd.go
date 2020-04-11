@@ -1,4 +1,4 @@
-package iot_worker
+package db
 
 import (
 	"database/sql"

@@ -1,4 +1,4 @@
-package iot_worker
+package listener
 
 import (
 	"fmt"
@@ -22,10 +22,9 @@ var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Messa
 }
 
 /***
-*
-* 连接任务和消息订阅方法
+* 启动消息订阅
  */
-func SubMsg() {
+func StartListener() {
 	waitGroup := sync.WaitGroup{}
 
 	defer waitGroup.Done()

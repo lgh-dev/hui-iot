@@ -14,7 +14,7 @@ var once sync.Once // 单例工具。
 func GetConf() *viper.Viper {
 	once.Do(func() {
 		if Conf == nil {
-			Conf = ReadConfigFile("../", "app", "yaml")
+			Conf = ReadConfigFile("../../conf", "app", "yaml")
 		}
 	})
 	return Conf

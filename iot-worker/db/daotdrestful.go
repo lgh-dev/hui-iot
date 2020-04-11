@@ -1,9 +1,8 @@
-package iot_worker
+package db
 
 import (
 	"encoding/base64"
 	"encoding/json"
-
 	//_ "github.com/taosdata/TDengine/src/connector/go/src/taosSql"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
