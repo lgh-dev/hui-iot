@@ -2,9 +2,8 @@ package common
 
 import (
 	"gopkg.in/yaml.v2"
+	"hui-iot/iot-server/config"
 	"io/ioutil"
-	"os"
-	"path"
 	"strings"
 	"sync"
 )
@@ -69,12 +68,7 @@ type EventDefine struct {
 
 func init() {
 	once.Do(func() {
-		ePath, err := os.Executable()
-		if err != nil {
-			panic("Get path err when GetDeviceModels！")
-		}
-		confPath := path.Dir(ePath)
-		GetDeviceModels(confPath + "/../conf/")
+		GetDeviceModels(config.GetPath() + "/conf/")
 	})
 }
 
