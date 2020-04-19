@@ -2,7 +2,8 @@
 id: car
 version: 0.0.1
 auth: admin
-desc: 智能汽车
+name: 智能汽车
+desc:
 # 固定属性
 invariant-attr:
   -
@@ -27,14 +28,14 @@ invariant-attr:
     default-value:
     unit:
   -
-    key: tank_capacity
+    key: tankCapacity
     name: 油箱容量
     data-type: int16
     required: false
     default-value: 40
     unit: L
   -
-    key: licence_plate
+    key: licencePlate
     name: 车牌号码
     data-type: string
     required: true
@@ -45,19 +46,19 @@ invariant-attr:
 
 read-attr:
   -
-    key: driving_speed
+    key: drivingSpeed
     name: 行驶速度
     data-type: int16
     default-value:
     unit: km/h
   -
-    key: remaining_battery_life
+    key: remainingBatteryLife
     name: 剩余续航里程
     data-type: int16
     default-value:
     unit: km
   -
-    key: driving_state
+    key: drivingState
     name: 行驶状态
     data-type: bool
     default-value:
@@ -81,13 +82,13 @@ read-attr:
 
 config-attr:
   -
-    key: lock_state
+    key: lockState
     name: 锁状态
     data-type: bool
     default-value:
     unit:
   -
-    key: monitoring_mode
+    key: monitoringMode
     name: 监控模式
     data-type: bool
     default-value:
@@ -98,26 +99,28 @@ config-attr:
 
 event:
   -
-    key: crash_event
+    key: crashEvent
     name: 碰撞事件
     level: 2 # [0:通知]、[1:异常]、[2:故障]
-    out-params:
+    value-type: json # Currently only json is supported
+    values: # {"time":"2009-01-02 22:22:01","latitude":23.22,"longitude":123.33}
+      - key: time
+        name: 碰撞时间
+        data-type: date
       -
         key: latitude
         name: 经度
         data-type: float64
-        default-value:
       -
         key: longitude
         name: 纬度
         data-type: float64
-        default-value:
 
 ## 功能函数
 
 function:
   -
-    key: automatic_driving
+    key: automaticDriving
     name: 自动驾驶
     in-params:
       -

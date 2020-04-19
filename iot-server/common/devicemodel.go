@@ -30,6 +30,8 @@ type DeviceModel struct {
 	ID               string        `yaml:"id"`             //唯一标识
 	Version          string        `yaml:"version"`        //版本
 	Auth             string        `yaml:"auth"`           //作者
+	Name             string        `yaml:"name"`           //名称
+	Desc             string        `yaml:"desc"`           //描述
 	InvariantDefine  []AttrDefine  `yaml:"invariant-attr"` //固定属性
 	ReadDefine       []AttrDefine  `yaml:"read-attr"`      //只读属性
 	ConfigDefine     []AttrDefine  `yaml:"config-attr"`    //配置属性
