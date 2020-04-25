@@ -3,6 +3,7 @@ package common
 import (
 	"gopkg.in/yaml.v2"
 	"hui-iot/iot-server/config"
+	. "hui-iot/iot-server/domain"
 	"io/ioutil"
 	"strings"
 	"sync"
@@ -12,61 +13,6 @@ import (
 var DeviceModelMap = make(map[string]DeviceModel)
 
 var once = sync.Once{}
-
-//动态生成表和对应的sql
-type DynamicSQL struct {
-	TableName      string //表名 ，格式：iot_[DeviceModelID]_[PAttr|RAttr|CAttr|Func]
-	dbType         string //数据库类型 ，格式：[mysql,TDengine]
-	CreateTableSQL string // 建表语句
-	DropTableSQL   string // 删表语句
-	InsertSQL      string // 插入语句
-	QuerySQL       string // 查询语句
-	UpdateSQL      string // 更新语句
-	DeleteSQL      string // 删除语句
-}
-
-// DeviceModel
-type DeviceModel struct {
-	ID               string        `yaml:"id"`             //唯一标识
-	Version          string        `yaml:"version"`        //版本
-	Auth             string        `yaml:"auth"`           //作者
-	Name             string        `yaml:"name"`           //名称
-	Desc             string        `yaml:"desc"`           //描述
-	InvariantDefine  []AttrDefine  `yaml:"invariant-attr"` //固定属性
-	ReadDefine       []AttrDefine  `yaml:"read-attr"`      //只读属性
-	ConfigDefine     []AttrDefine  `yaml:"config-attr"`    //配置属性
-	EventDefine      []EventDefine `yaml:"event"`          //功能函数
-	Function         []Function    `yaml:"function"`       //功能函数
-	InvariantAttrSQL DynamicSQL    //固定属性动态sql
-	ReadAttrSQL      DynamicSQL    //动态sql
-	ConfigAttrSQL    DynamicSQL
-	FuncSQL          DynamicSQL
-}
-
-//属性定义
-type AttrDefine struct {
-	Key          string      `yaml:"key"`
-	Name         string      `yaml:"name"`
-	Required     bool        `yaml:"required"`
-	DefaultValue interface{} `yaml:"defaultValue"`
-	DataType     string      `yaml:"date-type"` // 字段类型：默认字符串
-	Unit         string      `yaml:"unit"`      // 单位：默认值无
-}
-
-//功能函数
-type Function struct {
-	Key            string       `yaml:"key"`
-	Name           string       `yaml:"name"`
-	InParamsDefine []AttrDefine `yaml:"in-params"` //配置属性
-}
-
-//事件定义
-type EventDefine struct {
-	Key             string       `yaml:"key"`
-	Name            string       `yaml:"name"`
-	Level           string       `yaml:"level"`
-	OutParamsDefine []AttrDefine `yaml:"out-params"`
-}
 
 func init() {
 	once.Do(func() {

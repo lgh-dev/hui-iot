@@ -1,0 +1,17 @@
+# 插件应用描述
+name: admin
+version: 0.0.1
+desc: iot界面插件
+author: admin
+auth:
+  appKey: iot-admin
+  sercet: 111111
+# 业务属性 扩展设备字段。默认有deviceId外键。
+business-table:
+  name: iot_device_gateway
+  attr:
+    -
+      key: gatewayId
+      name: 网关ID
+      data-type: string
+      required: false

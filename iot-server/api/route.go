@@ -10,14 +10,14 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"hui-iot/iot-server/devicemodel/api"
+	"hui-iot/iot-server/controller"
 )
 
 func GetServer() *gin.Engine {
 	r := gin.Default()
 	v1 := r.Group("/api/v1/")
 	// device model api
-	v1.GET("devicemodels", api.FindAllDeviceModels) //find all
+	v1.GET("devicemodels", controller.FindAllDeviceModels) //find all
 	// codec api
 	v1.GET("codecs", nil)    //find all
 	v1.GET("codec/:id", nil) //find by ID

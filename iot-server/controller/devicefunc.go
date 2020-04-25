@@ -1,4 +1,4 @@
-package api
+package controller
 
 /**
  * @Author: lgh-dev
@@ -12,10 +12,6 @@ import (
 	"net/http"
 )
 
-func UpdateDeviceReadAttr(c *gin.Context) {
-	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{}))
-}
-
-func GetDeviceReadAttr(c *gin.Context) {
+func ExecDeviceFunc(c *gin.Context) {
 	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{}))
 }
