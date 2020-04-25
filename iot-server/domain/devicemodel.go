@@ -19,11 +19,11 @@ type DeviceModel struct {
 	Auth             string        `yaml:"auth"`           //作者
 	Name             string        `yaml:"name"`           //名称
 	Desc             string        `yaml:"desc"`           //描述
-	InvariantDefine  []AttrDefine  `yaml:"invariant-attr"` //固定属性
-	ReadDefine       []AttrDefine  `yaml:"read-attr"`      //只读属性
-	ConfigDefine     []AttrDefine  `yaml:"config-attr"`    //配置属性
-	EventDefine      []EventDefine `yaml:"event"`          //功能函数
-	Function         []Function    `yaml:"function"`       //功能函数
+	InvariantAttr    []AttrDefine  `yaml:"invariant-attr"` //固定属性
+	ReadAttrDef      []AttrDefine  `yaml:"read-attr"`      //只读属性
+	ConfigAttrDef    []AttrDefine  `yaml:"config-attr"`    //配置属性
+	EventDef         []EventDefine `yaml:"event"`          //事件定义
+	FunctionDef      []Function    `yaml:"function"`       //功能函数
 	InvariantAttrSQL DynamicSQL    //固定属性动态sql
 	ReadAttrSQL      DynamicSQL    //动态sql
 	ConfigAttrSQL    DynamicSQL

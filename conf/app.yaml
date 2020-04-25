@@ -4,4 +4,5 @@ server:
   env: dev # dev,test,pre,pro
 
 mysql:
-  dbInfo: "root:lgh@(192.168.20.101:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"
+#  dbInfo: "root:lgh@(192.168.20.101:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"
+  dbInfo: "root:lgh@(127.0.0.1:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"

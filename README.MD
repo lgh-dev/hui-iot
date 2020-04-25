@@ -189,5 +189,11 @@
 ## 脚步记录
 代码生成器命令。
 ```
-D:\GoProject\代码生成器\go-mygen.exe -h 192.168.20.101 -P 3306 -u root -p lgh -d hui_iot
+使用gormt
+```
+
+## 基准测试命令
+测试ID
+```
+go test -bench=BenchmarkNextId -benchmem  ./iot-server/service/
 ```

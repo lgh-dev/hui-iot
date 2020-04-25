@@ -3,7 +3,6 @@ module hui-iot
 go 1.14
 
 require (
-	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/fsnotify/fsnotify v1.4.7
 	github.com/gin-gonic/gin v1.5.0
@@ -23,8 +22,9 @@ require (
 	github.com/stretchr/testify v1.4.0
 	github.com/swaggo/files v0.0.0-20190704085106-630677cd5c14
 	github.com/swaggo/gin-swagger v1.2.0
-	github.com/swaggo/swag v1.6.5
+	github.com/swaggo/swag v1.6.5 // indirect
 	github.com/tidwall/gjson v1.6.0
+	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9
 	golang.org/x/net v0.0.0-20200202094626-16171245cfb2 // indirect
 	golang.org/x/sys v0.0.0-20200212091648-12a6c2dcc1e4 // indirect
 	golang.org/x/tools v0.0.0-20200214225126-5916a50871fb // indirect

@@ -10,7 +10,7 @@
           "fields": [
             {
               "name": "id",
-              "type": "BIGINT_19",
+              "type": "DefaultString",
               "chnname": "主键 分布式唯一ID",
               "remark": "",
               "pk": true,
@@ -39,8 +39,14 @@
               "defaultValue": ""
             },
             {
+              "name": "gateway_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "网关ID"
+            },
+            {
               "name": "device_model_id",
-              "type": "BigInt",
+              "type": "DefaultString",
               "chnname": "设备模型ID-外键 设备模型ID-外键",
               "remark": "",
               "pk": false,
@@ -108,89 +114,6 @@
           ]
         },
         {
-          "title": "device_read_attr",
-          "fields": [
-            {
-              "name": "REVISION",
-              "type": "Integer",
-              "remark": "",
-              "chnname": "乐观锁"
-            },
-            {
-              "name": "CREATED_BY",
-              "type": "IdOrKey",
-              "remark": "",
-              "chnname": "创建人"
-            },
-            {
-              "name": "CREATED_TIME",
-              "type": "DateTime",
-              "remark": "",
-              "chnname": "创建时间"
-            },
-            {
-              "name": "UPDATED_BY",
-              "type": "IdOrKey",
-              "remark": "",
-              "chnname": "更新人"
-            },
-            {
-              "name": "UPDATED_TIME",
-              "type": "DateTime",
-              "remark": "",
-              "chnname": "更新时间"
-            }
-          ],
-          "indexs": [],
-          "headers": [
-            {
-              "fieldName": "chnname",
-              "relationNoShow": false
-            },
-            {
-              "fieldName": "name",
-              "relationNoShow": false
-            },
-            {
-              "fieldName": "type",
-              "relationNoShow": false
-            },
-            {
-              "fieldName": "dataType",
-              "relationNoShow": true
-            },
-            {
-              "fieldName": "remark",
-              "relationNoShow": true
-            },
-            {
-              "fieldName": "pk",
-              "relationNoShow": false
-            },
-            {
-              "fieldName": "notNull",
-              "relationNoShow": true
-            },
-            {
-              "fieldName": "autoIncrement",
-              "relationNoShow": true
-            },
-            {
-              "fieldName": "defaultValue",
-              "relationNoShow": true
-            },
-            {
-              "fieldName": "relationNoShow",
-              "relationNoShow": true
-            },
-            {
-              "fieldName": "uiHint",
-              "relationNoShow": true
-            }
-          ],
-          "chnname": "设备只读属性表"
-        },
-        {
           "title": "device_config_attr",
           "chnname": "设备配置属性表",
           "fields": [
@@ -207,7 +130,7 @@
             {
               "name": "device_id",
               "type": "BIGINT_19",
-              "chnname": "设备ID-外键 设备ID-外键",
+              "chnname": "设备ID-外键",
               "remark": "",
               "pk": false,
               "notNull": true,
@@ -215,9 +138,9 @@
               "defaultValue": ""
             },
             {
-              "name": "device_type_config_attr_id",
+              "name": "ukey",
               "type": "VARCHAR_32",
-              "chnname": "配置属性ID 配置属性ID",
+              "chnname": "配置属性标识",
               "remark": "",
               "pk": false,
               "notNull": true,
@@ -227,7 +150,7 @@
             {
               "name": "value",
               "type": "VARCHAR_3072",
-              "chnname": "配置属性-值 配置属性-值",
+              "chnname": "配置属性-值",
               "remark": "",
               "pk": false,
               "notNull": false,
@@ -285,7 +208,7 @@
         },
         {
           "title": "device_invariant_attr",
-          "chnname": "设备只读属性表",
+          "chnname": "设备固定属性表",
           "fields": [
             {
               "name": "id",
@@ -308,9 +231,9 @@
               "defaultValue": ""
             },
             {
-              "name": "device_type_invariant_attr_id",
+              "name": "ukey",
               "type": "VARCHAR_32",
-              "chnname": "固定属性ID 固定属性ID",
+              "chnname": "固定属性标识",
               "remark": "",
               "pk": false,
               "notNull": true,
@@ -320,7 +243,7 @@
             {
               "name": "value",
               "type": "VARCHAR_3072",
-              "chnname": "固定属性-值 固定属性-值",
+              "chnname": "固定属性-值",
               "remark": "",
               "pk": false,
               "notNull": false,
@@ -401,7 +324,7 @@
               "defaultValue": ""
             },
             {
-              "name": "event_ukey",
+              "name": "ukey",
               "type": "BIGINT_19",
               "chnname": "事件定义标识",
               "remark": "",
@@ -413,7 +336,7 @@
             {
               "name": "info",
               "type": "TEXT",
-              "chnname": "事件信息 事件信息，json，{key:value}结构",
+              "chnname": "事件信息",
               "remark": "",
               "pk": false,
               "notNull": true,
@@ -422,8 +345,8 @@
             },
             {
               "name": "level",
-              "type": "INT_10",
-              "chnname": "事件级别 事件级别(信息INFO、告警ALARM、故障ERROR)",
+              "type": "DefaultString",
+              "chnname": "事件级别(信息INFO、告警ALARM、故障ERROR)",
               "remark": "",
               "pk": false,
               "notNull": true,
@@ -432,8 +355,8 @@
             },
             {
               "name": "status",
-              "type": "VARCHAR_1",
-              "chnname": "事件状态 事件状态（告警1，结束0）",
+              "type": "DefaultString",
+              "chnname": "事件状态 事件状态（告警ALARM，结束OVER）",
               "remark": "",
               "pk": false,
               "notNull": true,
@@ -490,68 +413,67 @@
           ]
         },
         {
-          "title": "iot_device_event_status",
-          "chnname": "设备事件状态表",
+          "title": "device_command",
           "fields": [
             {
-              "name": "time",
-              "type": "BIGINT_19",
-              "chnname": "落库时间 时序数据库的主键",
+              "name": "cmd_id",
+              "type": "DefaultString",
               "remark": "",
-              "pk": true,
-              "notNull": true,
-              "autoIncrement": false,
-              "defaultValue": ""
+              "chnname": "指令ID"
             },
             {
-              "name": "event_time",
-              "type": "DATETIME",
-              "chnname": "事件发生时间 事件发生时间，如果上报为空，取服务器时间。",
+              "name": "device_id",
+              "type": "DefaultString",
               "remark": "",
-              "pk": false,
-              "notNull": true,
-              "autoIncrement": false,
-              "defaultValue": ""
+              "chnname": "设备ID"
             },
             {
-              "name": "device_type_event_id",
-              "type": "BIGINT_19",
-              "chnname": "设备类型事件定义ID-外键 设备类型事件定义ID-外键",
+              "name": "send_data",
+              "type": "DefaultString",
               "remark": "",
-              "pk": false,
-              "notNull": true,
-              "autoIncrement": false,
-              "defaultValue": ""
+              "chnname": "发送数据"
             },
             {
-              "name": "event_info_map",
-              "type": "TEXT",
-              "chnname": "事件信息 事件信息，json，{key:value}结构",
+              "name": "return_data",
+              "type": "DefaultString",
               "remark": "",
-              "pk": false,
-              "notNull": true,
-              "autoIncrement": false,
-              "defaultValue": ""
+              "chnname": "响应数据（同步或异步）"
             },
             {
-              "name": "event_level",
-              "type": "INT_10",
-              "chnname": "事件级别 事件级别(信息INFO、告警ALARM、故障ERROR)",
+              "name": "status",
+              "type": "DefaultString",
               "remark": "",
-              "pk": false,
-              "notNull": true,
-              "autoIncrement": false,
-              "defaultValue": ""
+              "chnname": "指令状态(send【下发】、ack【设备已接收】、succ【执行成功】、error【异常】)"
             },
             {
-              "name": "event_status",
-              "type": "VARCHAR_1",
-              "chnname": "事件状态 事件状态（告警1，结束0）",
+              "name": "msg",
+              "type": "DefaultString",
               "remark": "",
-              "pk": false,
-              "notNull": true,
-              "autoIncrement": false,
-              "defaultValue": ""
+              "chnname": "执行信息，包括成功或失败的信息"
+            },
+            {
+              "name": "is_retry",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "是否需要重发"
+            },
+            {
+              "name": "retry_interval",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "重发间隔(s)"
+            },
+            {
+              "name": "retry_number",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "重发次数"
+            },
+            {
+              "name": "retry_completed_number",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "已重发次数"
             }
           ],
           "indexs": [],
@@ -600,7 +522,8 @@
               "fieldName": "uiHint",
               "relationNoShow": true
             }
-          ]
+          ],
+          "chnname": "指令下发表"
         }
       ],
       "graphCanvas": {
@@ -1211,7 +1134,7 @@
         "defaultDB": true,
         "properties": {
           "driver_class_name": "com.mysql.jdbc.Driver",
-          "url": "jdbc:mysql://192.168.20.101:3306/hui_iot?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=UTC",
+          "url": "jdbc:mysql://localhost:3306/hui_iot?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=UTC",
           "password": "lgh",
           "username": "root"
         }
