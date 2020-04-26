@@ -51,10 +51,5 @@ func getDeviceModel(filename string, bytes []byte) DeviceModel {
 	if err != nil {
 		panic("Read config file of iot-server-type err: " + filename + "" + err.Error())
 	}
-	//初始化SQL
-	readDynamicSQL := DynamicSQL{}
-	readDynamicSQL.TableName = "read_attr_" + deviceModel.ID
-	readDynamicSQL.CreateTableSQL = ""
-	//TODO 拼sql
 	return deviceModel
 }

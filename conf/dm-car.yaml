@@ -6,36 +6,31 @@ name: 智能汽车
 desc:
 # 固定属性
 invariant-attr:
-  -
-    key: model
+  - uKey: model
     name: 型号
     data-type: string
     required: false
     default-value:
     unit:
-  -
-    key: brand
+  - uKey: brand
     name: 品牌
     data-type: string
     required: false
     default-value:
     unit:
-  -
-    key: engine
+  - uKey: engine
     name: 发动机ID
     data-type: string
     required: true
     default-value:
     unit:
-  -
-    key: tankCapacity
+  - uKey: tankCapacity
     name: 油箱容量
     data-type: int16
     required: false
     default-value: 40
     unit: L
-  -
-    key: licencePlate
+  - uKey: licencePlate
     name: 车牌号码
     data-type: string
     required: true
@@ -45,33 +40,28 @@ invariant-attr:
 # 传感属性定义
 
 read-attr:
-  -
-    key: drivingSpeed
+  - uKey: drivingSpeed
     name: 行驶速度
     data-type: int16
     default-value:
     unit: km/h
-  -
-    key: remainingBatteryLife
+  - uKey: remainingBatteryLife
     name: 剩余续航里程
     data-type: int16
     default-value:
     unit: km
-  -
-    key: drivingState
+  - uKey: drivingState
     name: 行驶状态
     data-type: bool
     default-value:
     unit:
-  -
-    key: latitude
+  - uKey: latitude
     name: 经度
     data-type: float64
     required: true
     default-value:
     unit:
-  -
-    key: longitude
+  - uKey: longitude
     name: 纬度
     data-type: float64
     required: true
@@ -81,14 +71,12 @@ read-attr:
 # 配置属性定义
 
 config-attr:
-  -
-    key: lockState
+  - uKey: lockState
     name: 锁状态
     data-type: bool
     default-value:
     unit:
-  -
-    key: monitoringMode
+  - uKey: monitoringMode
     name: 监控模式
     data-type: bool
     default-value:
@@ -98,39 +86,33 @@ config-attr:
 ## 事件定义
 
 event:
-  -
-    key: crashEvent
+  - uKey: crashEvent
     name: 碰撞事件
     level: 2 # [0:通知]、[1:异常]、[2:故障]
     value-type: json # Currently only json is supported
     values: # {"time":"2009-01-02 22:22:01","latitude":23.22,"longitude":123.33}
-      - key: time
+      - uKey: time
         name: 碰撞时间
         data-type: date
-      -
-        key: latitude
+      - uKey: latitude
         name: 经度
         data-type: float64
-      -
-        key: longitude
+      - uKey: longitude
         name: 纬度
         data-type: float64
 
-## 功能函数
+## 指令定义
 
-function:
-  -
-    key: automaticDriving
+command:
+  - uKey: automaticDriving
     name: 自动驾驶
     in-params:
-      -
-        key: latitude
+      - uKey: latitude
         name: 经度
         data-type: float64
         required: true
         default-value:
-      -
-        key: longitude
+      - uKey: longitude
         name: 纬度
         data-type: float64
         required: true

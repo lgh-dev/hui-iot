@@ -3,6 +3,20 @@ server:
   port: 9999
   env: dev # dev,test,pre,pro
 
-mysql:
-#  dbInfo: "root:lgh@(192.168.20.101:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"
-  dbInfo: "root:lgh@(127.0.0.1:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"
+#
+db:
+  TDengine:
+    ip: 192.168.20.101
+    port: 6020
+    username: root
+    password: taosdata
+    dbname: iot
+  mongo:
+    ip: 127.0.0.1
+    port: 27017
+    username:
+    password:
+    dbname: hui_iot
+#  mysql:
+#    #  dbInfo: "root:lgh@(192.168.20.101:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"
+#    dbInfo: "root:lgh@(127.0.0.1:3306)/hui_iot?charset=utf8&parseTime=True&loc=Local&interpolateParams=True"

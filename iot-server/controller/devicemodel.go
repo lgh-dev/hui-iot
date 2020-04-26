@@ -21,3 +21,8 @@ import (
 func FindAllDeviceModels(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, &DeviceModelMap)
 }
+
+func FindDeviceModelById(ctx *gin.Context) {
+	id := ctx.Param("id")
+	ctx.JSON(http.StatusOK, DeviceModelMap[id])
+}

@@ -1,24 +1,43 @@
 package service
 
+/**
+ * @Author: lgh-dev
+ * @Author: lgh-inter@163.com
+ * @Date: 2020/1/9 21:39
+ * @Desc:
+ */
 import (
-	"github.com/jinzhu/gorm"
-	"hui-iot/iot-server/config"
+	"github.com/gin-gonic/gin"
 	. "hui-iot/iot-server/domain"
+	"sync"
 )
 
-func GetGorm() *gorm.DB {
-	db, err := gorm.Open("mysql", config.Conf.GetString("mysql.dbInfo"))
-	if err != nil {
-		panic(err)
-	}
-	db.LogMode(true)
-	return db
+var once sync.Once
+
+//基本信息添加
+func AddDevice(device Device) error {
+
+	return nil
 }
 
-func addDevice(device Device) {
-	db := GetGorm()
-	defer db.Close()
-	deviceMgr := DeviceMgr(db)
-	device.ID = IDTool.NextIdStr()
-	deviceMgr.Create(&device)
+//基本信息添加
+func DeleteDevice(ids []string) error {
+
+	return nil
+
+}
+
+//基本信息添加
+func UpdateDevice() {
+
+}
+
+//基本信息添加
+func FindDeviceById(c *gin.Context) {
+
+}
+
+//基本信息添加
+func FindDeviceByPage(c *gin.Context) {
+
 }

@@ -8,10 +8,10 @@ package controller
  */
 import (
 	"github.com/gin-gonic/gin"
-	"hui-iot/iot-server/common"
+	"hui-iot/iot-server/dto"
 	"net/http"
 )
 
 func ExecDeviceFunc(c *gin.Context) {
-	c.JSON(http.StatusOK, common.BuildSucc(&common.ResultDTO{}))
+	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }

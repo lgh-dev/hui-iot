@@ -1,4 +1,4 @@
-package common
+package dto
 
 type ResultDTO struct {
 	Code int         `json:"code"` //Succ:1  or err code :<1
