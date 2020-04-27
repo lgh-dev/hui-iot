@@ -59,7 +59,7 @@ type Device struct {
 	Name             string              `json:"name"`             // 设备名称
 	GatewayID        string              `json:"gatewayID"`        // 网关ID
 	DeviceModelID    string              `json:"deviceModelID"`    // 设备模型ID-外键 设备模型ID-外键
-	OnlineStatus     int                 `json:"OnlineStatus"`     // 联网状态 在线（1）、离线（0）、未激活（-1）
+	OnlineStatus     string              `json:"OnlineStatus"`     // 联网状态 在线ONLINE、离线OFFLINE、未激活NONACTIVE
 	InvariantAttrMap map[string]KeyValue `json:"invariantAttrMap"` //固定属性，不变的属性。
 	ConfigAttrMap    map[string]KeyValue `json:"configAttrMap"`    //配置属性，修改后动态更新到设备端的属性，如心跳间隔。
 	SensorAttrMap    map[string]KeyValue `json:"sensorAttrMap"`    //传感属性，动态上报的属性。

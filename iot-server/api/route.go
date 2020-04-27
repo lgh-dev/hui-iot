@@ -28,16 +28,16 @@ func GetServer() *gin.Engine {
 	v1.GET("apps", nil)     //find all
 
 	// device api
-	v1.GET("device", nil)                    //find by ID
-	v1.GET("devices", nil)                   //find [base attr|config attr|read attr|business attr] by Page
-	v1.POST("device", nil)                   //add [base attr & config attr & business attr]
-	v1.DELETE("device", nil)                 //delete
-	v1.PUT("device", nil)                    //update [base attr & config attr & business attr]
-	v1.POST("device/:id/command/:uKey", nil) //send cmd by ID、uKey and params use JSON to body
+	v1.POST("device", AddDevice)                     //add [base attr & config attr & business attr]
+	v1.GET("device/:id", FindDeviceById)             //find by ID
+	v1.GET("devices", FindDeviceByPage)              //find [base attr|config attr|read attr|business attr] by Page
+	v1.DELETE("device", DeleteDevice)                //delete
+	v1.PUT("device", UpdateDevice)                   //update [base attr & config attr & business attr]
+	v1.POST("device/:id/command/:uKey", SendCommand) //send cmd by ID、uKey and params use JSON to body
 	// device data api
-	v1.GET("device/:deviceId/sensors", nil)  //find by date and deviceId and data number
-	v1.GET("device/:deviceId/alarms", nil)   //find by date and deviceId and data number
-	v1.GET("device/:deviceId/commands", nil) //find by date and deviceId and data number
+	v1.GET("device/:id/sensors", nil)  //find by date and deviceId and data number
+	v1.GET("device/:id/alarms", nil)   //find by date and deviceId and data number
+	v1.GET("device/:id/commands", nil) //find by date and deviceId and data number
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return r

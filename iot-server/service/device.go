@@ -8,21 +8,28 @@ package service
  */
 import (
 	"github.com/gin-gonic/gin"
+	. "hui-iot/iot-server/dao"
 	. "hui-iot/iot-server/domain"
-	"sync"
+	"time"
 )
-
-var once sync.Once
 
 //基本信息添加
 func AddDevice(device Device) error {
-
-	return nil
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	device.ID = IDTool.NextIdStr()
+	device.CreateBy = ""
+	device.CreateTime = time.Now()
+	device.UpdateBy = ""
+	device.UpdateTime = time.Now()
+	device.IsDelete = false
+	device.OnlineStatus = NONACTIVE
+	return c.Insert(&device)
 }
 
 //基本信息添加
 func DeleteDevice(ids []string) error {
-
 	return nil
 
 }
@@ -33,8 +40,13 @@ func UpdateDevice() {
 }
 
 //基本信息添加
-func FindDeviceById(c *gin.Context) {
-
+func FindDeviceById(id string) Device {
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	device := Device{}
+	c.FindId(id).One(&device)
+	return device
 }
 
 //基本信息添加

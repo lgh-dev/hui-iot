@@ -17,6 +17,7 @@ var once sync.Once
 
 //基本信息添加
 func AddDevice(c *gin.Context) {
+
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
 
@@ -38,5 +39,10 @@ func FindDeviceById(c *gin.Context) {
 
 //基本信息添加
 func FindDeviceByPage(c *gin.Context) {
+	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
+}
+
+//基本信息添加
+func SendCommand(c *gin.Context) {
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
