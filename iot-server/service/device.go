@@ -35,8 +35,8 @@ func DeleteDevice(ids []string) error {
 }
 
 //基本信息添加
-func UpdateDevice() {
-
+func UpdateDevice(evice Device) error {
+	return nil
 }
 
 //基本信息添加
