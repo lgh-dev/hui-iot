@@ -11,10 +11,15 @@ import (
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	. "hui-iot/iot-server/controller"
+	"net/http"
 )
 
 func GetServer() *gin.Engine {
 	r := gin.Default()
+
+	//前端资源
+	r.StaticFS("iot-frontend", http.Dir("../iot-frontend"))
+
 	v1 := r.Group("/api/v1/")
 	// device model api
 	v1.GET("devicemodels", FindAllDeviceModels)    //find all

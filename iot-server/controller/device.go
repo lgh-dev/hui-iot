@@ -18,8 +18,12 @@ var once sync.Once
 
 //基本信息添加
 func AddDevice(c *gin.Context) {
-	deviceDTO := dto.DeviceDTO{}
-	c.BindJSON(&deviceDTO)
+	var deviceDTO dto.DeviceDTO
+	if err := c.ShouldBind(&deviceDTO); err != nil {
+		c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{Data: err.Error()}))
+		c.Abort()
+		return
+	}
 	service.AddDevice(deviceDTO.ToDevice())
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }

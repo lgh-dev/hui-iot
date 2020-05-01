@@ -56,14 +56,14 @@ type EventDefineDTO struct {
 // Device 物联网设备表;
 type DeviceDTO struct {
 	AbsEntityDTO
-	Uid              string                 `json:"uid"`              // 设备UID
-	Name             string                 `json:"name"`             // 设备名称
-	GatewayID        string                 `json:"gatewayID"`        // 网关ID
-	DeviceModelID    string                 `json:"deviceModelID"`    // 设备模型ID-外键 设备模型ID-外键
-	OnlineStatus     string                 `json:"OnlineStatus"`     // 联网状态 在线ONLINE、离线OFFLINE、未激活NONACTIVE
-	InvariantAttrMap map[string]KeyValueDTO `json:"invariantAttrMap"` //固定属性，不变的属性。
-	ConfigAttrMap    map[string]KeyValueDTO `json:"configAttrMap"`    //配置属性，修改后动态更新到设备端的属性，如心跳间隔。
-	SensorAttrMap    map[string]KeyValueDTO `json:"sensorAttrMap"`    //传感属性，动态上报的属性。
+	Uid              string                 `json:"uid" binding:"required"`           // 设备UID
+	Name             string                 `json:"name" binding:"required"`          // 设备名称
+	GatewayID        string                 `json:"gatewayID"`                        // 网关ID
+	DeviceModelID    string                 `json:"deviceModelID" binding:"required"` // 设备模型ID-外键 设备模型ID-外键
+	OnlineStatus     string                 `json:"OnlineStatus"`                     // 联网状态 在线ONLINE、离线OFFLINE、未激活NONACTIVE
+	InvariantAttrMap map[string]KeyValueDTO `json:"invariantAttrMap"`                 //固定属性，不变的属性。
+	ConfigAttrMap    map[string]KeyValueDTO `json:"configAttrMap"`                    //配置属性，修改后动态更新到设备端的属性，如心跳间隔。
+	SensorAttrMap    map[string]KeyValueDTO `json:"sensorAttrMap"`                    //传感属性，动态上报的属性。
 }
 
 // DeviceCommand 指令下发表
@@ -119,6 +119,7 @@ func (deviceDTO *DeviceDTO) ToDevice() domain.Device {
 	device := domain.Device{}
 	device.ID = deviceDTO.ID
 	device.Name = deviceDTO.Name
+	device.Uid = deviceDTO.Uid
 	//@TODO 待完成
 	return device
 }
