@@ -122,3 +122,20 @@ func (deviceDTO *DeviceDTO) ToDevice() domain.Device {
 	//@TODO 待完成
 	return device
 }
+
+func AsDeviceDTO(device domain.Device) *DeviceDTO {
+	deviceDTO := DeviceDTO{}
+	deviceDTO.ID = device.ID
+	deviceDTO.Uid = device.Uid
+	deviceDTO.Name = device.Name
+	deviceDTO.CreateBy = device.CreateBy
+	deviceDTO.CreateTime = device.CreateTime
+	deviceDTO.UpdateBy = device.UpdateBy
+	deviceDTO.UpdateTime = device.UpdateTime
+	//TODO
+	//deviceDTO.ConfigAttrMap=device.ConfigAttrMap
+	deviceDTO.IsDelete = device.IsDelete
+	deviceDTO.GatewayID = device.GatewayID
+	deviceDTO.DeviceModelID = device.DeviceModelID
+	return &deviceDTO
+}

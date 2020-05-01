@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	. "hui-iot/iot-server/dao"
 	. "hui-iot/iot-server/domain"
+	"hui-iot/iot-server/dto"
 	"time"
 )
 
@@ -40,13 +41,13 @@ func UpdateDevice(evice Device) error {
 }
 
 //基本信息添加
-func FindDeviceById(id string) Device {
+func FindDeviceById(id string) *dto.DeviceDTO {
 	session := CloneSession()
 	defer session.Close()
 	c := getCollection(session)
 	device := Device{}
 	c.FindId(id).One(&device)
-	return device
+	return dto.AsDeviceDTO(device)
 }
 
 //基本信息添加

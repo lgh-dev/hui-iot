@@ -42,8 +42,8 @@ func UpdateDevice(c *gin.Context) {
 //基本信息添加
 func FindDeviceById(c *gin.Context) {
 	id := c.Param("id")
-	device := service.FindDeviceById(id)
-	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{Data: &device}))
+	deviceDTO := service.FindDeviceById(id)
+	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{Data: &deviceDTO}))
 }
 
 //基本信息添加
