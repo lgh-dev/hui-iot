@@ -8,7 +8,7 @@ package controller
  */
 import (
 	"github.com/gin-gonic/gin"
-	. "hui-iot/iot-server/common"
+	"hui-iot/iot-server/config"
 	"net/http"
 )
 
@@ -19,10 +19,10 @@ import (
  * @Desc:
  */
 func FindAllDeviceModels(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, &DeviceModelMap)
+	ctx.JSON(http.StatusOK, &config.DeviceModelMap)
 }
 
 func FindDeviceModelById(ctx *gin.Context) {
 	id := ctx.Param("id")
-	ctx.JSON(http.StatusOK, DeviceModelMap[id])
+	ctx.JSON(http.StatusOK, config.DeviceModelMap[id])
 }

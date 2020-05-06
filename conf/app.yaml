@@ -3,6 +3,13 @@ server:
   port: 9999
   env: dev # dev,test,pre,pro
 
+# 应用加载
+apply:
+  - appKey: iot-admin
+    version: 0.0.1
+    secret: 111111
+    enable: true
+
 #
 db:
   TDengine:

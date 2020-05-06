@@ -7,8 +7,11 @@ package api
  * @Desc:
  */
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"github.com/stretchr/testify/assert"
+	"hui-iot/iot-server/dto"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -41,6 +44,18 @@ func TestFindDeviceModelByIds(t *testing.T) {
 	w := performRequest(router, "GET", "/api/v1/devicemodel/car")
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.True(t, strings.Contains(w.Body.String(), "ID"), "查询失败!")
+}
+
+func TestAddDevice(t *testing.T) {
+	var router = GetServer()
+	deviceDTO := dto.DeviceDTO{Uid: "1", DeviceModelID: "car", Name: "lgh"}
+	bodyBytes, _ := json.Marshal(deviceDTO)
+	req, _ := http.NewRequest("POST", "/api/v1/device", bytes.NewReader(bodyBytes))
+	req.Header.Add("Authorization", "Bearer 111")
+	req.Header.Add("Content-Type", "application/json")
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	assert.Equal(t, http.StatusOK, w.Code)
 }
 
 func BenchmarkFindAllDeviceModels(b *testing.B) {

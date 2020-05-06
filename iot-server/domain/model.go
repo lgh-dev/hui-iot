@@ -101,15 +101,19 @@ type Event struct {
 	Status      string      `json:"status"`      // 事件状态 事件状态（告警ALARM，结束OVER）
 }
 
-type Apply struct {
-	uKey    string `yaml:"uKey"`    //唯一标识
+type ApplyDefine struct {
+	AppKey  string `yaml:"appKey"`  //唯一标识
 	Version string `yaml:"version"` //版本
-	Auth    Auth   `yaml:"auth"`    //权限信息
-	author  string `yaml:"author"`  //作者
+	Author  string `yaml:"author"`  //作者
 	Desc    string `yaml:"desc"`    //描述
 }
 
-type Auth struct {
-	AppKey string `yaml:"appKey"` // 应用账号
-	Secret string `yaml:"secret"` // 应用密钥
+type AppYaml struct {
+	Apples []Apply `yaml:"apply"` // 应用账号
+}
+type Apply struct {
+	AppKey  string `yaml:"appKey"`  // 应用账号
+	Version string `yaml:"version"` //版本
+	Secret  string `yaml:"secret"`  // 应用密钥
+	Enable  bool   `yaml:"enable"`  //是否启用
 }

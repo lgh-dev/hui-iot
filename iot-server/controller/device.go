@@ -8,13 +8,14 @@ package controller
  */
 import (
 	"github.com/gin-gonic/gin"
+	"hui-iot/iot-server/domain"
 	"hui-iot/iot-server/dto"
 	"hui-iot/iot-server/service"
 	"net/http"
-	"sync"
 )
 
-var once sync.Once
+// 设备服务类
+var deviceService = service.DeviceService{}
 
 //基本信息添加
 func AddDevice(c *gin.Context) {
@@ -24,14 +25,14 @@ func AddDevice(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	service.AddDevice(deviceDTO.ToDevice())
+	deviceService.Add(deviceDTO.ToDevice())
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
 
 //基本信息添加
 func DeleteDevice(c *gin.Context) {
 	id := c.Param("id")
-	service.DeleteDevice([]string{id})
+	deviceService.Delete([]string{id})
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
 
@@ -39,14 +40,15 @@ func DeleteDevice(c *gin.Context) {
 func UpdateDevice(c *gin.Context) {
 	deviceDTO := dto.DeviceDTO{}
 	c.BindJSON(&deviceDTO)
-	service.UpdateDevice(deviceDTO.ToDevice())
+	deviceService.Update(deviceDTO.ToDevice())
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
 
 //基本信息添加
 func FindDeviceById(c *gin.Context) {
 	id := c.Param("id")
-	deviceDTO := service.FindDeviceById(id)
+	device := deviceService.FindByID(id)
+	deviceDTO := dto.AsDeviceDTO(device.(domain.Device))
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{Data: &deviceDTO}))
 }
 

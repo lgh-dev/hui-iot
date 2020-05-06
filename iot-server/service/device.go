@@ -7,15 +7,19 @@ package service
  * @Desc:
  */
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/globalsign/mgo/bson"
 	. "hui-iot/iot-server/dao"
 	. "hui-iot/iot-server/domain"
 	"hui-iot/iot-server/dto"
 	"time"
 )
 
-//基本信息添加
-func AddDevice(device Device) error {
+type DeviceService struct {
+	ICurdService
+}
+
+func (deviceService *DeviceService) Add(Entity interface{}) (string, error) {
+	device := Entity.(dto.DeviceDTO)
 	session := CloneSession()
 	defer session.Close()
 	c := getCollection(session)
@@ -26,31 +30,51 @@ func AddDevice(device Device) error {
 	device.UpdateTime = time.Now()
 	device.IsDelete = false
 	device.OnlineStatus = NONACTIVE
-	return c.Insert(&device)
+	return device.ID, c.Insert(&device)
 }
-
-//基本信息添加
-func DeleteDevice(ids []string) error {
-	return nil
-
-}
-
-//基本信息添加
-func UpdateDevice(evice Device) error {
-	return nil
-}
-
-//基本信息添加
-func FindDeviceById(id string) *dto.DeviceDTO {
+func (deviceService *DeviceService) FindByID(id string) interface{} {
 	session := CloneSession()
 	defer session.Close()
 	c := getCollection(session)
-	device := Device{}
-	c.FindId(id).One(&device)
-	return dto.AsDeviceDTO(device)
+	return c.Find(bson.M{"_id": id, "isDelete": false}).One(&Device{})
+}
+func (deviceService *DeviceService) FindByIDs(ids []string) interface{} {
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	return c.Find(bson.M{"_id": bson.M{"$in": ids}, "isDelete": false}).All(&Device{})
+}
+func (deviceService *DeviceService) FindByPage(condition interface{}, page Page) interface{} {
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	//TODO 查询条件
+	return c.Find(bson.M{}).Skip((page.PageNumber - 1) * page.PageSize).Limit(page.PageSize).All(&Device{})
+
+}
+func (deviceService *DeviceService) Update(Entity interface{}) error {
+	device := Entity.(Device)
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	_, err := c.UpsertId(device.ID, device)
+	return err
+}
+func (deviceService *DeviceService) Delete(ids []string) error {
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	return c.Remove(bson.M{"_id": bson.M{"$in": ids}})
 }
 
-//基本信息添加
-func FindDeviceByPage(c *gin.Context) {
-
+func (deviceService *DeviceService) ExistsDeviceByName(name string) bool {
+	session := CloneSession()
+	defer session.Close()
+	c := getCollection(session)
+	var device Device
+	c.Find(bson.D{{"name", name}, {"isDelete", false}}).One(&device)
+	if device.Name == "" {
+		return false
+	}
+	return true
 }

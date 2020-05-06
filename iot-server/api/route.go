@@ -8,19 +8,32 @@ package api
  */
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"gopkg.in/go-playground/validator.v9"
 	. "hui-iot/iot-server/controller"
+	"hui-iot/iot-server/middleware"
+	"hui-iot/iot-server/valid"
+	"io"
 	"net/http"
+	"os"
 )
 
 func GetServer() *gin.Engine {
-	r := gin.Default()
-
+	f, _ := os.Create("gin.log")
+	gin.DefaultWriter = io.MultiWriter(f)
+	gin.DefaultErrorWriter = io.MultiWriter(f)
+	r := gin.New()
+	r.Use(gin.Logger(), gin.Recovery(), middleware.AppAuth())
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		v.RegisterValidation("checkDeviceNameOnly", valid.CheckDeviceNameOnly, false)
+	}
 	//前端资源
 	r.StaticFS("iot-frontend", http.Dir("../iot-frontend"))
 
 	v1 := r.Group("/api/v1/")
+
 	// device model api
 	v1.GET("devicemodels", FindAllDeviceModels)    //find all
 	v1.GET("devicemodel/:id", FindDeviceModelById) //find by id
