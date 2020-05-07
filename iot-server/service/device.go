@@ -10,7 +10,6 @@ import (
 	"github.com/globalsign/mgo/bson"
 	. "hui-iot/iot-server/dao"
 	. "hui-iot/iot-server/domain"
-	"hui-iot/iot-server/dto"
 	"time"
 )
 
@@ -19,7 +18,7 @@ type DeviceService struct {
 }
 
 func (deviceService *DeviceService) Add(Entity interface{}) (string, error) {
-	device := Entity.(dto.DeviceDTO)
+	device := Entity.(Device)
 	session := CloneSession()
 	defer session.Close()
 	c := getCollection(session)

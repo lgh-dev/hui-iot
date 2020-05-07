@@ -18,11 +18,14 @@ import (
  * @Date: 2020/4/5 23:04
  * @Desc:
  */
-func FindAllDeviceModels(ctx *gin.Context) {
+type DeviceModelApi struct {
+}
+
+func (deviceModelApi DeviceModelApi) FindAll(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, &config.DeviceModelMap)
 }
 
-func FindDeviceModelById(ctx *gin.Context) {
+func (deviceModelApi DeviceModelApi) FindById(ctx *gin.Context) {
 	id := ctx.Param("id")
 	ctx.JSON(http.StatusOK, config.DeviceModelMap[id])
 }

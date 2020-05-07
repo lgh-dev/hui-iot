@@ -20,6 +20,12 @@ import (
 	"os"
 )
 
+var applicationApi ApplicationApi
+
+var deviceApi DeviceApi
+
+var deviceModelApi DeviceModelApi
+
 func GetServer() *gin.Engine {
 	f, _ := os.Create("gin.log")
 	gin.DefaultWriter = io.MultiWriter(f)
@@ -35,23 +41,23 @@ func GetServer() *gin.Engine {
 	v1 := r.Group("/api/v1/")
 
 	// device model api
-	v1.GET("devicemodels", FindAllDeviceModels)    //find all
-	v1.GET("devicemodel/:id", FindDeviceModelById) //find by id
+	v1.GET("devicemodels", deviceModelApi.FindAll)     //find all
+	v1.GET("devicemodel/:id", deviceModelApi.FindById) //find by id
 	// codec api
 	v1.GET("codecs", nil)    //find all
 	v1.GET("codec/:id", nil) //find by ID
 	v1.GET("codec", nil)     //find by deviceModelId
 	//app api
-	v1.GET("app/auth", nil) // get app token
-	v1.GET("apps", nil)     //find all
+	v1.GET("app/jwt", applicationApi.GetToken) // get app token
+	v1.GET("apps", nil)                        //find all
 
 	// device api
-	v1.POST("device", AddDevice)                     //add [base attr & config attr & business attr]
-	v1.GET("device/:id", FindDeviceById)             //find by ID
-	v1.GET("devices", FindDeviceByPage)              //find [base attr|config attr|read attr|business attr] by Page
-	v1.DELETE("device", DeleteDevice)                //delete
-	v1.PUT("device", UpdateDevice)                   //update [base attr & config attr & business attr]
-	v1.POST("device/:id/command/:uKey", SendCommand) //send cmd by ID、uKey and params use JSON to body
+	v1.POST("device", deviceApi.Add)                           //add [base attr & config attr & business attr]
+	v1.GET("device/:id", deviceApi.FindById)                   //find by ID
+	v1.GET("devices", deviceApi.FindByPage)                    //find [base attr|config attr|read attr|business attr] by Page
+	v1.DELETE("device", deviceApi.Delete)                      //delete
+	v1.PUT("device", deviceApi.Update)                         //update [base attr & config attr & business attr]
+	v1.POST("device/:id/command/:uKey", deviceApi.SendCommand) //send cmd by ID、uKey and params use JSON to body
 	// device data api
 	v1.GET("device/:id/sensors", nil)  //find by date and deviceId and data number
 	v1.GET("device/:id/alarms", nil)   //find by date and deviceId and data number

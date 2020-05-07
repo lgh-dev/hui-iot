@@ -2,28 +2,37 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
+	"hui-iot/iot-server/config"
+	"hui-iot/iot-server/service"
 	"log"
 	"strings"
+	"time"
 )
 
 func AppAuth() gin.HandlerFunc {
 
 	return func(c *gin.Context) {
 
-		acctokenAll := c.GetHeader("Authorization")
+		accessTokenAll := c.GetHeader("Authorization")
 
-		isTrue := false
-
-		if acctokenAll != "" && strings.HasPrefix(acctokenAll, "Bearer") {
-			acctoken := acctokenAll[7:]
-			isTrue = true
-			log.Printf("accessToken succ:%s\n", acctoken)
-			//TODO oauth2.0
-		}
-		if !isTrue {
-			c.JSON(401, "accessToken is illegal！")
-			c.Abort()
+		if accessTokenAll != "" && strings.HasPrefix(accessTokenAll, "Bearer") {
+			accessToken := accessTokenAll[7:]
+			log.Printf("accessToken succ:%s\n", accessToken)
+			claims, err := service.ParseToken(accessToken)
+			if err != nil || claims == nil {
+				log.Printf("accessToken parse err %s", accessToken)
+				c.JSON(401, "accessToken is illegal！")
+				c.Abort()
+				return
+			}
+			//accessToken时间未过期且启用了该应用。
+			if claims.ExpiresAt > time.Now().Unix() {
+				for _, apple := range config.AppYaml.Apples {
+					if apple.AppKey == claims.AppKey {
+						c.Header("appKey", claims.AppKey)
+					}
+				}
+			}
 		}
 	}
-
 }

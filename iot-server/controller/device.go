@@ -17,8 +17,11 @@ import (
 // 设备服务类
 var deviceService = service.DeviceService{}
 
+type DeviceApi struct {
+}
+
 //基本信息添加
-func AddDevice(c *gin.Context) {
+func (dc *DeviceApi) Add(c *gin.Context) {
 	var deviceDTO dto.DeviceDTO
 	if err := c.ShouldBind(&deviceDTO); err != nil {
 		c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{Data: err.Error()}))
@@ -30,14 +33,14 @@ func AddDevice(c *gin.Context) {
 }
 
 //基本信息添加
-func DeleteDevice(c *gin.Context) {
+func (dc *DeviceApi) Delete(c *gin.Context) {
 	id := c.Param("id")
 	deviceService.Delete([]string{id})
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
 
 //基本信息添加
-func UpdateDevice(c *gin.Context) {
+func (dc *DeviceApi) Update(c *gin.Context) {
 	deviceDTO := dto.DeviceDTO{}
 	c.BindJSON(&deviceDTO)
 	deviceService.Update(deviceDTO.ToDevice())
@@ -45,7 +48,7 @@ func UpdateDevice(c *gin.Context) {
 }
 
 //基本信息添加
-func FindDeviceById(c *gin.Context) {
+func (dc *DeviceApi) FindById(c *gin.Context) {
 	id := c.Param("id")
 	device := deviceService.FindByID(id)
 	deviceDTO := dto.AsDeviceDTO(device.(domain.Device))
@@ -53,11 +56,11 @@ func FindDeviceById(c *gin.Context) {
 }
 
 //基本信息添加
-func FindDeviceByPage(c *gin.Context) {
+func (dc *DeviceApi) FindByPage(c *gin.Context) {
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
 
 //基本信息添加
-func SendCommand(c *gin.Context) {
+func (dc *DeviceApi) SendCommand(c *gin.Context) {
 	c.JSON(http.StatusOK, dto.BuildSucc(&dto.ResultDTO{}))
 }
