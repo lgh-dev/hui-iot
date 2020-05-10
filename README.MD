@@ -15,6 +15,12 @@
 1. ui简单清晰友好。
 
 ## 架构设计：
+
+上行事件编码和下行指令编码不再考虑使用emqx的规则引擎，原因有二：
+    1. 不支持api添加动作。
+    1. 不够强大，而且不好维护相关逻辑。
+转而采用go语言自己封装基于mqtt协议的驱动编解码组件，只需要编写转码方法即可。具体代码参考：
+temp-over-event.go
 ### 业务架构：
 1. iot-server服务。
     1. 设备模型：
@@ -25,16 +31,6 @@
             1. 指令下发。
         1. 后端API:
             1. 查询。
-    1. 编解码配置：
-        1. 定义（配置文件）：
-            1. 配置类型：
-                1. emqx。
-            1. 属性上报。
-            1. 指令下发。
-            1. 下行指令。
-        1. emqx：
-            1. 编解码规则定义（配置文件）:
-                1. 
     1. 应用管理：
         1. 定义（配置文件）：
             1. 应用名称。
@@ -61,10 +57,6 @@
 参考`api.go`。
 1. iot-server服务。
     1. 设备模型：
-        1. 初始化。
-        1. 批量查询。
-        1. 单个查询。
-    1. 编解码配置：
         1. 初始化。
         1. 批量查询。
         1. 单个查询。
@@ -108,29 +100,9 @@
 设备上报只读属性
 ```
 上行（透传）
-请求Topic：/sys/{deviceModelID}/{deviceID}/thing/model/up_raw
-响应Topic：/sys/{deviceModelID}/{deviceID}/thing/model/up_raw_reply
+请求Topic：/sys/{deviceModelID}/{deviceID}/device/read_attr/up
+响应Topic：/sys/{deviceModelID}/{deviceID}/device/read_attr/up_reponse
 
-上行（Alink JSON）
-
-请求Topic： /sys/{deviceModelID}/{deviceID}/thing/event/property/post
-响应Topic： /sys/{deviceModelID}/{deviceID}/thing/event/property/post_reply
-上报格式
-{
-  "id": "123",
-  "version": "1.0",
-  "params": {
-    "Power": {
-      "value": "on",
-      "time": 1524448722000
-    },
-    "WF": {
-      "value": 23.6,
-      "time": 1524448722000
-    }
-  },
-  "method": "thing.event.property.post"
-}
 ```
 设置设备配置属性
 ```
@@ -153,15 +125,11 @@
 ```
 设备事件上报
 ```
-上行（透传）
-
-请求Topic：/sys/{deviceModelID}/{deviceID}/thing/model/up_raw
-响应Topic：/sys/{deviceModelID}/{deviceID}/thing/model/up_raw_reply
 
 上行（Alink JSON）
 
-请求Topic：/sys/{deviceModelID}/{deviceID}/thing/event/{tsl.event.identifier}/post
-响应Topic：/sys/{deviceModelID}/{deviceID}/thing/event/{tsl.event.identifier}/post_reply
+请求Topic：/sys/{deviceModelID}/{deviceID}/device/event/post
+响应Topic：/sys/{deviceModelID}/{deviceID}/device/event/post_reply
 ```
 
 

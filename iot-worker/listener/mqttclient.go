@@ -2,7 +2,7 @@ package listener
 
 import (
 	"fmt"
-	common2 "hui-iot/iot-server/common"
+	common "hui-iot/iot-server/common"
 	"sync"
 	"time"
 
@@ -11,13 +11,17 @@ import (
 )
 
 var (
-	mqttServerAddress = "tcp://192.168.20.101:1883"
-	topic             = common2.MatchingAll(common2.TopicReadAttrPost)
+	//mqttServerAddress = "tcp://192.168.20.101:1883"
+	mqttServerAddress = "tcp://127.0.0.1:1883"
+	topic             = common.MatchingAll(common.TopicReadAttrPost)
 	clientId          = []byte("iot-worker")
 )
 
 //define a function for the default message handler
-var messageHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
+var readAttrHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
+	ReceiveEvent(msg)
+}
+var eventHandler mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
 	ReceiveEvent(msg)
 }
 
@@ -49,9 +53,11 @@ func StartListener() {
 		i++
 		time.Sleep(time.Duration(3) * time.Second)
 		//fmt.Printf("start publish msg to mqtt broker, taskId: %d, count: %d \n", taskId, i)
-		//发布消息
-		token := client.Subscribe(topic, 0, messageHandler)
-		token.Wait()
+		//订阅消息
+		//readAttrToken := client.Subscribe(common.MatchingAll(common.TopicReadAttrPost), 0, readAttrHandler)
+		eventToken := client.Subscribe(common.MatchingAll(common.TopicEventPost), 0, eventHandler)
+		//readAttrToken.Wait()
+		eventToken.Wait()
 	}
 
 	client.Disconnect(250)
