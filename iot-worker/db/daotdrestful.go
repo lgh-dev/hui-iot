@@ -3,8 +3,8 @@ package db
 import (
 	"encoding/base64"
 	"encoding/json"
-	//_ "github.com/taosdata/TDengine/src/connector/go/src/taosSql"
-	"gopkg.in/yaml.v2"
+	"errors"
+
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -12,6 +12,8 @@ import (
 
 var (
 	sqlUrl = "/rest/sql"
+	td     *TDengineRestful
+	client = &http.Client{}
 )
 
 //TDengine
@@ -23,20 +25,14 @@ type TDengineRestful struct {
 	DBname   string `yaml:"dbname"`   //数据库名称
 }
 
-func NewTDengineRestful() *DataDB {
+func NewTDengineRestful() *TDengineRestful {
 	once.Do(func() {
-		//读取配置文件
-		yamlFile, err := ioutil.ReadFile(configPath)
-		if err != nil {
-			panic("read config file err,path " + configPath)
-		}
-		td := TDengineRestful{}
-		yaml.Unmarshal(yamlFile, &td)
-		if db == nil {
-			db = &td
+		if td == nil {
+			//TODO 待修改为配置文件获取。
+			td = &TDengineRestful{Ip: "127.0.0.1", Port: "6020", UserName: "root", Password: "taosdata", DBname: "hui_iot"}
 		}
 	})
-	return &db
+	return td
 }
 
 func getHTTPURI(td *TDengineRestful, uri string) string {
@@ -45,33 +41,37 @@ func getHTTPURI(td *TDengineRestful, uri string) string {
 
 func (td *TDengineRestful) CheckDBExists() bool {
 	checkDBSql := "CREATE DATABASE IF NOT EXISTS " + td.DBname
+	return execSQL(td, checkDBSql) != nil
+}
+
+func execSQL(td *TDengineRestful, sql string) error {
 	client := &http.Client{}
-	req, err := http.NewRequest("POST", getHTTPURI(td, sqlUrl), strings.NewReader(checkDBSql))
+	req, err := http.NewRequest("POST", getHTTPURI(td, sqlUrl), strings.NewReader(sql))
 	if err != nil {
-		return false
+		return err
 	}
 	req.Header.Set("Authorization", "Basic "+base64.URLEncoding.EncodeToString([]byte(td.UserName+":"+td.Password)))
 	resp, err := client.Do(req)
 	defer resp.Body.Close()
 	if err != nil {
-		return false
+		return err
 	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return false
+		return err
 	}
 	resultMap := make(map[string]string)
 	json.Unmarshal(body, &resultMap)
 	if resultMap["status"] == "succ" {
-		return true
+		return nil
 	} else {
-		return false
+		return errors.New(string(body))
 	}
-	return true
+	return err
 }
 
-func (td *TDengineRestful) Insert(sql string) bool {
-	return false
+func (td *TDengineRestful) Insert(sql string) error {
+	return execSQL(td, sql)
 }
 
 func (td *TDengineRestful) Get(sql string) interface{} {

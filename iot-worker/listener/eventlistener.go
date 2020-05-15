@@ -5,7 +5,7 @@ import (
 	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"github.com/sirupsen/logrus"
 	"github.com/tidwall/gjson"
-	common2 "hui-iot/iot-server/common"
+	"hui-iot/iot-worker/utils"
 	"log"
 	"strconv"
 	//"database/sql"
@@ -29,7 +29,7 @@ func Handler(topic string, payload []byte) bool {
 		return false
 	}
 	//获取型号ID和设备ID。
-	deviceModeID, deviceID := common2.GetDeviceModelIDAndDeviceIDForTopic(topic)
+	deviceModeID, deviceID := utils.GetDeviceModelIDAndDeviceIDForTopic(topic)
 	fmt.Printf("deviceModelID:%s,deviceID:%s\n", deviceModeID, deviceID)
 
 	//获取消息内容。

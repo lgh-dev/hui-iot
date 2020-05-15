@@ -1,4 +1,4 @@
-package common
+package utils
 
 import "strings"
 
@@ -15,7 +15,7 @@ func MatchingAll(str string) string {
 }
 
 //从主题中获取设备模型ID
-func GetDeviceModelIDAndDeviceIDForTopic(topic string) (string, string) {
-	strs := strings.SplitN(topic, "/", 5)
-	return strs[2], strs[3]
+func GetStrForTopic(topic string, n int) string {
+	strs := strings.Split(topic, "/")
+	return strs[n]
 }

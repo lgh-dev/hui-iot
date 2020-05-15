@@ -5,6 +5,7 @@
 ## 需求要点：
 1. 兼容和适配不同设备。
 1. 向应用提供统一设备交互方式。
+1. 屏蔽底层设备和协议的差异。
 1. 收集数据并存储。
 1. 把数据推送出去。
 1. 可以控制设备。
@@ -16,7 +17,7 @@
 
 ## 架构设计：
 
-上行事件编码和下行指令编码不再考虑使用emqx的规则引擎，原因有二：
+1. 上行事件编码和下行指令编码不再考虑使用emqx的规则引擎，原因有二
     1. 不支持api添加动作。
     1. 不够强大，而且不好维护相关逻辑。
 转而采用go语言自己封装基于mqtt协议的驱动编解码组件，只需要编写转码方法即可。具体代码参考：
@@ -92,53 +93,76 @@ temp-over-event.go
 
 #### 设备相关TOPIC
 
-设备上报固定属性
-```
-请求Topic：/sys/{deviceModelID}/{deviceID}/thing/deviceinfo/update
-响应Topic：/sys/{deviceModelID}/{deviceID}/thing/deviceinfo/update_reply
-```
 设备上报只读属性
 ```
-上行（透传）
-请求Topic：/sys/{deviceModelID}/{deviceID}/device/read_attr/up
-响应Topic：/sys/{deviceModelID}/{deviceID}/device/read_attr/up_reponse
-
+上行
+请求Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/r/up
+响应Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/r/up_reponse
 ```
 设置设备配置属性
 ```
-下行（透传）
-请求Topic：/sys/{deviceModelID}/{deviceID}/thing/model/down_raw
-响应Topic：/sys/{deviceModelID}/{deviceID}/thing/model/down_raw_reply
-
-下行（Alink JSON）
-请求Topic：/sys/{deviceModelID}/{deviceID}/thing/service/property/set
-响应Topic：/sys/{deviceModelID}/{deviceID}/thing/service/property/set_reply
-数据格式
-{
-  "id": "123",
-  "version": "1.0",
-  "params": {
-    "temperature": "30.5"
-  },
-  "method": "thing.service.property.set"
-}
+下行
+请求Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/c/set
+响应Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/c/set_reponse
+```
+设备上报配置属性
+```
+上行
+请求Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/c/up
+响应Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/c/up_reponse
 ```
 设备事件上报
 ```
-
-上行（Alink JSON）
-
-请求Topic：/sys/{deviceModelID}/{deviceID}/device/event/post
-响应Topic：/sys/{deviceModelID}/{deviceID}/device/event/post_reply
+上行
+请求Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/e/up
+响应Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/e/up_reponse
 ```
-
+设备指令下发
+```
+上行
+请求Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/cmd/down
+响应Topic：/hiot/sys/{deviceModelID}/{deviceID}/dv/cmd/down_reponse
+```
 
 设备影子
 ```
-/shadow/update/${YourProductKey}/${YourDeviceName}
+/hiot/shadow/update/${YourProductKey}/${YourDeviceName}
 /shadow/get/${YourProductKey}/${YourDeviceName}
 ```
-
+智能汽车设备信息例子
+```
+ {
+        "k-sc_id": "0001",
+        "k-engine_id": "111111",
+        "k-licence_plate_number": "粤AF88888",
+        "wheel": [{
+            "k-w_id": "00",
+            "p-model": "奥迪",
+            "p-size": "21寸",
+            "r-rpm": "sensor_0001_wheel_00_rpm",    
+            "r-pressure": "sensor_0001_wheel_00_pressure"
+        }, {
+            "k-w_id": "10",
+            "p-model": "米其林",
+            "p-size": "21寸",
+            "r-rpm": "sensor_0001_wheel_10_rpm",
+            "r-pressure": "sensor_0001_wheel_10_pressure"
+        },],
+        "head_light": {
+            "c-brightness":100
+        },
+        "p-model": "奥迪",
+        "p-tank_capacity": 60,
+        "r-driving_speed": "sensor_0001_driving_speed",
+        "r-remaining_voyage": "sensor_0001_remaining_voyage",
+        "r-latitude": "sensor_0001_latitude",
+        "r-longitude": "sensor_0001_longitude",
+        "c-speed_lock": 70,
+        "e-crash_event": "alarm_0001_crash_event",
+        "f-unlock": true,
+        "f-autopilot": true
+    }
+```
 
 ### 名词解释
 
@@ -153,11 +177,22 @@ temp-over-event.go
 
 ## 疑问集合
 
+### 定义一类设备的时候，以什么原则判断一个设备是否属于该类设备，如汽车、电动车，如通过集中控制器和单灯节点的路灯与nb通讯的单灯？
+答：定义一类物联网设备的时候，以网关ID为唯一标识，同一网关下的设备共同组成一个物联网模型。如果一个模型里面的子设备独立联网应当划分为另外一个物联网模型。
+正例：
+    1. 气象站模型=网关ID+气象站。
+    2. 物联网自行车模型=通讯卡唯一标识+自行车+智能胎压监测的车轮。
+    3. 智能汽车模型=通讯卡唯一标识+智能汽车。
+反例：
+    1. 一体化灯杆模型=灯杆出厂ID+摄像头+户外广告屏+广播音箱+单灯控制器。
+正确的应该是分开为：摄像头模型、户外广告屏模型、广播音箱模型、单灯控制器模型，然后在应用层组合使用。
+原因是：
+    不具有通讯唯一标识的模型，当数据上来的时候因数据包中不存在设备的唯一标识，无法映射到具体的设备上。
+    如：`topic=/read/{网关ID}  {"temp":30}`
+    
 ###　物联网设备的一些告警信息如何体现在五元组上？是只读属性么？
-答：只是设备的五元组。可以扩充事件。
+答：只是设备的五元组。可以扩充事件。  
 
-### 父子设备如何体现？
-答：通过网关ID关联。
 
 ## 脚步记录
 
@@ -165,4 +200,25 @@ temp-over-event.go
 测试ID
 ```
 go test -bench=BenchmarkNextId -benchmem  ./iot-server/service/
+```
+
+## TDengine建表语句
+
+```
+# 状态超级表
+
+CREATE TABLE iot_online_status (ts timestamp, status binary(20)) TAGS(device_model binary(20),brand binary(20),model binary(20),device_id binary(20));
+
+INSERT INTO hui_iot.status_0001_0001_onlin1e_status USING hui_iot.iot_online_status TAGS ('smart_car_camera','海康威视', 'SZ-0001','0001_1000') VALUES ('2018-01-01 00:00:00.000','online');
+
+SELECT * FROM hui_iot.iot_status_smart_car_camera ;
+
+# 传感值超级表
+CREATE TABLE iot_read_smart_car_camera (ts timestamp, value double) TAGS(device_model binary(20),device_id binary(20), read_id binary(20));
+
+# 插入值
+INSERT INTO hui_iot.read_0001_1000_temp USING hui_iot.iot_read_smart_car_camera TAGS ('smart_car_camera','0001_1000', 'temp') VALUES ('2018-01-04 00:00:00.000',95);
+INSERT INTO hui_iot.read_0001_1000_wind_direction USING hui_iot.iot_sensor_smart_car_camera TAGS ('smart_car_camera','0001_1000', 'wind_direction') VALUES ('2018-01-01 00:00:00.000',44);
+INSERT INTO hui_iot.read_0001_1000_wind_direction USING hui_iot.iot_sensor_smart_car_camera TAGS ('smart_car_camera','0001_1000', 'wind_direction') VALUES ('2018-01-02 00:00:00.000',123);
+
 ```

@@ -1,0 +1,64 @@
+# @author:lgh
+# @version:0.0.1
+smart_car: # {@name 智能汽车}
+  k-sc_id:
+    name: ID
+  k-engine_id:
+    name: 发动机ID
+  k-licence_plate_number:
+    name: 车牌号码
+  wheel: # {@name 车轮}
+    k-w_id:
+      name: 车轮ID # 00 左前，10右前，11左后，10右后
+    p-model:
+      name: 品牌 # 00 左前，10右前，11左后，10右后
+    p-size:
+      name: 尺寸
+    r-rpm:
+      name: 转速
+    r-pressure:
+    name: 胎压（kPa）
+  head_light:
+    name: 前车灯
+    c-brightness:
+      name: 亮度(%)
+      data_type: int
+      check_rule: [0,100]
+  p-model:
+    name: 品牌
+  p-brand:
+    name: 车牌号码
+  p-tank_capacity:
+    name: 油箱容量（L）
+  # 只读属性
+  r-driving_speed:
+    name: 行驶速度（km/h）
+  r-remaining_voyage:
+    name: 剩余航程（km）
+  r-latitude:
+    name: 经度
+  r-longitude:
+    name: 纬度
+  # 配置属性
+  c-speed_lock:
+    name: 车速锁
+    data_type: int
+  ## 事件定义
+  e-crash_event:
+    name: 汽车碰撞事件
+    level: 1 # [0,1,2]
+  ## 指令定义
+  f-unlock: # 开锁
+    name: 开锁
+  f-autopilot:
+    name: 自动驾驶
+    arg-latitude:
+      name: 经度
+      data_type: float64
+      required: true
+      check_rule: [-90,90]
+    arg-longitude:
+      name: 纬度
+      data_type: float64
+      required: true
+      check_rule: [-180,180]
