@@ -27,9 +27,7 @@ func init() {
 
 func InitAllConfig() {
 	confPath := GetPath() + "/conf"
-	InitConfig(confPath)       //初始化基本配置
-	InitDeviceModels(confPath) //初始化设备模型配置
-	InitAppConfigs(confPath)   // 初始化应用配置
+	InitConfig(confPath) //初始化基本配置
 	WatchConfig()
 }
 
@@ -45,7 +43,7 @@ func GetPath() string {
 func InitConfig(path string) *viper.Viper {
 	once.Do(func() {
 		if Conf == nil {
-			Conf = ReadConfigFile(path, "iot-server", "yaml")
+			Conf = ReadConfigFile(path, "iot-worker", "yaml")
 		}
 	})
 	return Conf

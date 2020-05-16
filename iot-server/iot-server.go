@@ -7,11 +7,13 @@ package main
  * @Desc: Service of iot-iot-server's run file
  */
 import (
-	"github.com/sirupsen/logrus"
+	"github.com/prometheus/common/log"
 	"hui-iot/iot-server/api"
+	"hui-iot/iot-server/config"
 )
 
 func main() {
-	logrus.Info("iot-server started!")
-	api.GetServer().Run(":9000")
+	log.Info("iot-server start!")
+	port := config.Conf.GetString("server.port")
+	api.GetServer().Run(":" + port)
 }

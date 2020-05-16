@@ -5,16 +5,14 @@ import (
 	"fmt"
 	MQTT "github.com/eclipse/paho.mqtt.golang"
 	"github.com/thinkeridea/go-extend/exstrings"
-	"hui-iot/iot-driver/common"
 	"log"
 	"math/rand"
 	"strconv"
 	"sync"
-	"testing"
 	"time"
 )
 
-func TestMQTTPush(t *testing.T) {
+func main() {
 	//生成连接的客户端数
 	c := flag.Uint64("n", 3000, "client nums")
 	flag.Parse()
@@ -28,23 +26,6 @@ func TestMQTTPush(t *testing.T) {
 	wg.Wait()
 }
 
-func BenchmarkMQTTPush(b *testing.B) {
-	client := common.GetMQTTClient("tcp://127.0.0.1:1883", []byte("driver-BenchmarkMQTTPush"))
-	b.SetParallelism(1)
-	b.ReportAllocs()
-	b.RunParallel(func(pb *testing.PB) {
-		gatewayUID := strconv.Itoa(rand.Int())
-		topic := "/hiot/sys/smart_car_camera/?/dv/r/up"
-		topic = exstrings.Replace(topic, "?", gatewayUID, 1)
-		payload := "{temp:?}"
-		payload = exstrings.Replace(payload, "?", strconv.Itoa(rand.Intn(3)), 1)
-		for pb.Next() {
-			token := client.Publish(topic, 0, false, payload)
-			log.Printf("%t", token.Wait())
-		}
-	})
-}
-
 var f MQTT.MessageHandler = func(client MQTT.Client, msg MQTT.Message) {
 	fmt.Printf("TOPIC: %s\n", msg.Topic())
 	fmt.Printf("MSG: %s\n", msg.Payload())
@@ -53,7 +34,7 @@ var fail_nums int = 0
 
 func createTask(taskId int, wg *sync.WaitGroup) {
 	defer wg.Done()
-	opts := MQTT.NewClientOptions().AddBroker("tcp://127.0.0.1:1883").SetUsername("test").SetPassword("test")
+	opts := MQTT.NewClientOptions().AddBroker("tcp://192.168.20.101:1883").SetUsername("test").SetPassword("test")
 	opts.SetClientID(fmt.Sprintf("go-simple-client:%d-%d", taskId, time.Now().Unix()))
 	opts.SetDefaultPublishHandler(f)
 	opts.SetConnectTimeout(time.Duration(60) * time.Second)

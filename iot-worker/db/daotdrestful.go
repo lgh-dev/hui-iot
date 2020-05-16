@@ -4,6 +4,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"errors"
+	"hui-iot/iot-worker/config"
 
 	"io/ioutil"
 	"net/http"
@@ -28,8 +29,11 @@ type TDengineRestful struct {
 func NewTDengineRestful() *TDengineRestful {
 	once.Do(func() {
 		if td == nil {
-			//TODO 待修改为配置文件获取。
-			td = &TDengineRestful{Ip: "127.0.0.1", Port: "6020", UserName: "root", Password: "taosdata", DBname: "hui_iot"}
+			td = &TDengineRestful{Ip: config.Conf.GetString("db.TDengine.ip"),
+				Port:     config.Conf.GetString("db.TDengine.port"),
+				UserName: config.Conf.GetString("db.TDengine.username"),
+				Password: config.Conf.GetString("db.TDengine.password"),
+				DBname:   config.Conf.GetString("db.TDengine.dbname")}
 		}
 	})
 	return td
@@ -41,7 +45,7 @@ func getHTTPURI(td *TDengineRestful, uri string) string {
 
 func (td *TDengineRestful) CheckDBExists() bool {
 	checkDBSql := "CREATE DATABASE IF NOT EXISTS " + td.DBname
-	return execSQL(td, checkDBSql) != nil
+	return execSQL(td, checkDBSql) == nil
 }
 
 func execSQL(td *TDengineRestful, sql string) error {

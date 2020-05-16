@@ -127,7 +127,7 @@ temp-over-event.go
 设备影子
 ```
 /hiot/shadow/update/${YourProductKey}/${YourDeviceName}
-/shadow/get/${YourProductKey}/${YourDeviceName}
+/hiot/get/${YourProductKey}/${YourDeviceName}
 ```
 智能汽车设备信息例子
 ```

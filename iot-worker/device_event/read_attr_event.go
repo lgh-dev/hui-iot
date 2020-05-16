@@ -50,9 +50,9 @@ func ReadAttrEventHandler(c *iotevent.Context) *iotevent.Context {
 //VALUES ('2018-01-04 00:00:00.000',95);
 func insert(sql *string) {
 	//log.Printf("insert read attr sql:%s", *sql)
-	if err := DataDB.Insert(*sql); err != nil {
-		log.Printf("插入失敗:%s", err)
-	}
+	//if err := DataDB.Insert("INSERT INTO " +*sql); err != nil {
+	//	log.Printf("插入失敗:%s", err)
+	//}
 }
 
 var chanSQL = make(chan string, 10)

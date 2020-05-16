@@ -15,9 +15,7 @@ import (
 	. "hui-iot/iot-server/controller"
 	"hui-iot/iot-server/middleware"
 	"hui-iot/iot-server/valid"
-	"io"
 	"net/http"
-	"os"
 )
 
 var applicationApi ApplicationApi
@@ -27,9 +25,9 @@ var deviceApi DeviceApi
 var deviceModelApi DeviceModelApi
 
 func GetServer() *gin.Engine {
-	f, _ := os.Create("gin.log")
-	gin.DefaultWriter = io.MultiWriter(f)
-	gin.DefaultErrorWriter = io.MultiWriter(f)
+	//f, _ := os.Create("gin.log")
+	//gin.DefaultWriter = io.MultiWriter(f)
+	//gin.DefaultErrorWriter = io.MultiWriter(f)
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery(), middleware.AppAuth())
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
