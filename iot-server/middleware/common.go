@@ -17,7 +17,7 @@ func AppAuth() gin.HandlerFunc {
 
 		if accessTokenAll != "" && strings.HasPrefix(accessTokenAll, "Bearer") {
 			accessToken := accessTokenAll[7:]
-			log.Printf("accessToken succ:%s\n", accessToken)
+			//log.Printf("accessToken succ:%s\n", accessToken)
 			claims, err := service.ParseToken(accessToken)
 			if err != nil || claims == nil {
 				log.Printf("accessToken parse err %s", accessToken)

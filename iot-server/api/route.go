@@ -27,9 +27,14 @@ var deviceModelApi DeviceModelApi
 func GetServer() *gin.Engine {
 	//f, _ := os.Create("gin.log")
 	//gin.DefaultWriter = io.MultiWriter(f)
-	//gin.DefaultErrorWriter = io.MultiWriter(f)
+	//gin.DefaultErrorWriter
+	//= io.MultiWriter(f)
+	//设置生产模式，性能提升一倍。
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.New()
-	r.Use(gin.Logger(), gin.Recovery(), middleware.AppAuth())
+	//r.Use(gin.Logger(), gin.Recovery(), middleware.AppAuth())
+	//不打日志性能差6~8倍。
+	r.Use(gin.Recovery(), middleware.AppAuth())
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		v.RegisterValidation("checkDeviceNameOnly", valid.CheckDeviceNameOnly, false)
 	}

@@ -14,6 +14,7 @@ import (
 	"hui-iot/iot-server/config"
 	"hui-iot/iot-server/dto"
 	"hui-iot/iot-server/service"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -34,6 +35,7 @@ var once sync.Once
 func GenerateJwt() {
 	once.Do(func() {
 		jwt, _ = service.GenerateToken("iot-admin")
+		log.Printf("jwt:%s", jwt)
 	})
 }
 
@@ -55,7 +57,7 @@ func TestFindAllDeviceModels(t *testing.T) {
 
 func TestFindDeviceModelByIds(t *testing.T) {
 	var router = GetServer()
-	w := performRequest(router, "GET", "/api/v1/devicemodel/car")
+	w := performRequest(router, "GET", "/api/v1/devicemodel/smart_car")
 	assert.Equal(t, http.StatusOK, w.Code)
 	assert.True(t, strings.Contains(w.Body.String(), "ID"), "查询失败!")
 }
@@ -101,7 +103,7 @@ func BenchmarkFindDeviceModelByIds(b *testing.B) {
 	b.ReportAllocs()
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			performRequest(router, "GET", "/api/v1/devicemodel/car")
+			performRequest(router, "GET", "/api/v1/devicemodel/smart_car")
 		}
 	})
 }

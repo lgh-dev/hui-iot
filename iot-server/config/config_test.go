@@ -9,7 +9,3 @@ import (
 func TestReadConfigFile(t *testing.T) {
 	assert.NotNil(t, Conf.GetString("server.port"))
 }
-
-func TestReadConfigFile2(t *testing.T) {
-	ReadConfigFile(GetPath()+"/conf", "dm-smart_car", "yaml")
-}
