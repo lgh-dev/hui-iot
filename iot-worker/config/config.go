@@ -27,7 +27,8 @@ func init() {
 
 func InitAllConfig() {
 	confPath := GetPath() + "/conf"
-	InitConfig(confPath) //初始化基本配置
+	InitConfig(confPath)                         //初始化基本配置
+	InitDeviceModels(confPath + "/device_model") //初始化设备模型配置
 	WatchConfig()
 }
 

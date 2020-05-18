@@ -10,6 +10,10 @@ apply:
     secret: 111111
     enable: true
 
+# 应用属性,key:value结构。
+app-label:
+  area_id:
+
 db:
   mongo:
     ip: 127.0.0.1

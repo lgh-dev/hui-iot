@@ -2,7 +2,6 @@ package config
 
 import (
 	"gopkg.in/yaml.v2"
-	"hui-iot/iot-server/common"
 	"hui-iot/iot-server/domain"
 	"io/ioutil"
 	"log"
@@ -19,7 +18,7 @@ func InitAppConfigs(configPath string) (bool, map[string]domain.ApplyDefine) {
 				//	//读取配置文件目录。
 				yamlFiles, err := ioutil.ReadFile(appConfigName)
 				if err != nil {
-					common.Log.Error("Read config path ${root}/base/config/ err:{}", err.Error())
+					log.Printf("Read config path ${root}/conf/ err:%s", err.Error())
 					return false, nil
 				}
 				appDefine := readAppConfig(appConfigName, yamlFiles)

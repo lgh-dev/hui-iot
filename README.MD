@@ -193,6 +193,19 @@ temp-over-event.go
 ###　物联网设备的一些告警信息如何体现在五元组上？是只读属性么？
 答：只是设备的五元组。可以扩充事件。  
 
+### 待解决问题：
+ 1. tdengine的超级表标签只能6个？
+ 
+ 2. 自动建表性能是不是差点？
+ 
+ 3. 驱动程序是否需要查询设备信息？
+ 答：不需要。数据上报直接落库，指令下发由服务层将指令数据完整带下来。
+ 4. 驱动程序需要查询设备模型数据么？
+ 答：由于驱动和设备模型是多对一的关系，程序启动初始化应该就有。
+ 5. 应该是新增设备的时候，同时在tdengine中新增子表么？
+ 答：是的。`ALTER TABLE <table_name> SET TAG <tag_name>=<new_tag_value>`。
+ 6. 是否支持扩展多套应用属性？
+ 答：只支持扩展一套应用属性，支持多应用使用同一套应用属性。使用多套应用属性的话，请部署多套系统。
 
 ## 脚步记录
 
@@ -221,4 +234,10 @@ INSERT INTO hui_iot.read_0001_1000_temp USING hui_iot.iot_read_smart_car_camera 
 INSERT INTO hui_iot.read_0001_1000_wind_direction USING hui_iot.iot_sensor_smart_car_camera TAGS ('smart_car_camera','0001_1000', 'wind_direction') VALUES ('2018-01-01 00:00:00.000',44);
 INSERT INTO hui_iot.read_0001_1000_wind_direction USING hui_iot.iot_sensor_smart_car_camera TAGS ('smart_car_camera','0001_1000', 'wind_direction') VALUES ('2018-01-02 00:00:00.000',123);
 
+# 测试表
+
+CREATE TABLE test (ts timestamp, value double) TAGS(device_model binary(20),device_id binary(20), read_id binary(20), area_id binary(20), device_type binary(20), manufacture_id binary(20), supplie_id binary(20));
+CREATE TABLE test (ts timestamp, value double) TAGS(device_model binary(20),device_id binary(20), read_id binary(20), area_id binary(20), device_type binary(20), manufacture_id binary(20));
+
 ```
+

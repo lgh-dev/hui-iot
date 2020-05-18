@@ -3,12 +3,10 @@ appKey: iot-admin
 version: 0.0.1
 desc: iot界面插件
 author: admin
-# 业务属性 扩展设备字段。默认有deviceId外键。
-business-table:
+# 应用标签 扩展设备字段。默认有deviceId外键。
+app-label:
   name: iot_device_gateway
-  attr:
-    -
-      key: gatewayId
+  app-attr:
+    gatewayId:
       name: 网关ID
-      data-type: string
-      required: false
+      data_type: string
