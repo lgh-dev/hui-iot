@@ -34,7 +34,8 @@ var fail_nums int = 0
 
 func createTask(taskId int, wg *sync.WaitGroup) {
 	defer wg.Done()
-	opts := MQTT.NewClientOptions().AddBroker("tcp://192.168.20.101:1883").SetUsername("test").SetPassword("test")
+	//opts := MQTT.NewClientOptions().AddBroker("tcp://192.168.20.101:1883").SetUsername("test").SetPassword("test")
+	opts := MQTT.NewClientOptions().AddBroker("tcp://127.0.0.1:1883").SetUsername("test").SetPassword("test")
 	opts.SetClientID(fmt.Sprintf("go-simple-client:%d-%d", taskId, time.Now().Unix()))
 	opts.SetDefaultPublishHandler(f)
 	opts.SetConnectTimeout(time.Duration(60) * time.Second)

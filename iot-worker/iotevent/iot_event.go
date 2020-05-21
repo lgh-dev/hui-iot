@@ -86,7 +86,7 @@ func getMessageHandler(operation *Operation) mqtt.MessageHandler {
 		operation.Context.Topic = msg.Topic()
 		operation.Context.Payload = msg.Payload()
 		cx := operation.Context
-		cx = operation.EventHandler(cx)
+		operation.EventHandler(cx)
 	}
 	return messageHandler
 }

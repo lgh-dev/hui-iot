@@ -14,8 +14,21 @@ import (
 var (
 	sqlUrl = "/rest/sql"
 	td     *TDengineRestful
-	client = &http.Client{}
+	quene  = make(chan string, 1000)
 )
+
+func init() {
+	for i := 0; i < 10; i++ {
+		go doWork()
+	}
+}
+
+func doWork() {
+	for {
+		sql := <-quene
+		execSQL(td, sql)
+	}
+}
 
 //TDengine
 type TDengineRestful struct {
@@ -38,7 +51,6 @@ func NewTDengineRestful() *TDengineRestful {
 	})
 	return td
 }
-
 func getHTTPURI(td *TDengineRestful, uri string) string {
 	return "http://" + td.Ip + ":" + td.Port + uri
 }
@@ -56,7 +68,9 @@ func execSQL(td *TDengineRestful, sql string) error {
 	}
 	req.Header.Set("Authorization", "Basic "+base64.URLEncoding.EncodeToString([]byte(td.UserName+":"+td.Password)))
 	resp, err := client.Do(req)
-	defer resp.Body.Close()
+	if resp != nil {
+		defer resp.Body.Close()
+	}
 	if err != nil {
 		return err
 	}
@@ -75,7 +89,9 @@ func execSQL(td *TDengineRestful, sql string) error {
 }
 
 func (td *TDengineRestful) Insert(sql string) error {
-	return execSQL(td, sql)
+	quene <- sql
+	//return execSQL(td, sql)
+	return nil
 }
 
 func (td *TDengineRestful) Get(sql string) interface{} {

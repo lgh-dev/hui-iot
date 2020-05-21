@@ -215,6 +215,18 @@ temp-over-event.go
 go test -bench=BenchmarkNextId -benchmem  ./iot-server/service/
 ```
 
+## mac 修改最大文件数
+```
+sysctl -w kern.maxfiles=1048600
+sysctl -w kern.maxfilesperproc=1048576
+ulimit -n 1048576
+# 查看文件数
+ulimit -n
+# 完整参考命令
+ulimit -a
+```
+
+
 ## TDengine建表语句
 
 ```

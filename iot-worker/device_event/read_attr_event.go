@@ -48,23 +48,23 @@ func ReadAttrEventHandler(c *iotevent.Context) *iotevent.Context {
 //USING hui_iot.iot_read_smart_car_camera
 //TAGS ('smart_car_camera','0001_1000', 'temp')
 //VALUES ('2018-01-04 00:00:00.000',95);
-func insert(sql *string) {
+func insert(sql string) {
 	//log.Printf("insert read attr sql:%s", *sql)
-	//if err := DataDB.Insert("INSERT INTO " +*sql); err != nil {
-	//	log.Printf("插入失敗:%s", err)
-	//}
+	if err := DataDB.Insert(sql); err != nil {
+		log.Printf("插入失敗:%s", err)
+	}
 }
 
 var chanSQL = make(chan string, 10)
 
-func GenerateSQL(deviceModel string, gatewayUID string, readUkey string, value float64) *string {
-	sql := "hui_iot.read_{gatewayUID}_{readUkey} USING hui_iot.iot_read_{deviceModel} TAGS ('{deviceModel}','{gatewayUID}', '{readUkey}') VALUES ('{timestamp}',{value})\n"
+func GenerateSQL(deviceModel string, gatewayUID string, readUkey string, value float64) string {
+	sql := "INSERT INTO hui_iot.read_{gatewayUID}_{readUkey} USING hui_iot.iot_read_{deviceModel} TAGS ('{deviceModel}','{gatewayUID}', '{readUkey}') VALUES ('{timestamp}',{value})\n"
 	sql = exstrings.Replace(sql, "{gatewayUID}", gatewayUID, 2)
 	sql = exstrings.Replace(sql, "{deviceModel}", deviceModel, 2)
 	sql = exstrings.Replace(sql, "{readUkey}", readUkey, 2)
 	sql = exstrings.Replace(sql, "{timestamp}", time.Now().Format("2006-01-02 15:04:05.000"), 1)
 	sql = exstrings.Replace(sql, "{value}", strconv.FormatFloat(value, 'f', 9, 64), 1)
-	return &sql
+	return sql
 }
 func BatchInsert(sql string) {
 	insertSQL := "INSERT INTO "
@@ -78,7 +78,7 @@ func BatchInsert(sql string) {
 			batchSQL += <-chanSQL
 		}
 		batchSQL = insertSQL + batchSQL + ";"
-		insert(&batchSQL)
+		insert(batchSQL)
 	}()
 
 }
