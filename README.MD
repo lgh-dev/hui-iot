@@ -225,9 +225,19 @@ ulimit -n
 # 完整参考命令
 ulimit -a
 ```
+## 从docker容器中复制tdengine的动态链接库。
+```
+lghdeiMac:hui-iot lgh$ docker container cp -a 5a3aab61b0f5:/usr/lib/libtaos.so /Users/lgh/Documents
+lghdeiMac:hui-iot lgh$ docker container cp -a 5a3aab61b0f5:/usr/local/taos/include/taos.h /Users/lgh/Documents
+```
+## 运行docker命令。
+```
+# iot-worker
+docker build -t iot-worker .
+docker run -itd --name iot-worker -p 9999:9999 -p 1022:22 39549d59c7de /bin/bash
+```
 
-
-## TDengine建表语句
+## TDengine建表语句 
 
 ```
 # 状态超级表
