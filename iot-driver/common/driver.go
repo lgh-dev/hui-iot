@@ -75,11 +75,10 @@ func (driver *Driver) Run(mqttServerAddress string, clientId []byte) {
 			}
 			waitGroup.Add(1)
 			go func(operation *Operation) {
-				for {
-					i++
-					time.Sleep(time.Duration(3) * time.Second)
-					token := client.Subscribe(operation.Context.FromTopic, operation.Context.FromQos, messageHandler)
-					token.Wait()
+				token := client.Subscribe(operation.Context.FromTopic, operation.Context.FromQos, messageHandler)
+				token.Wait()
+				if token.Error() != nil {
+					log.Panicf("[Sub] mqtt connect error, taskId: %d, fail_nums: %d, error: %s \n", clientId, 1, token.Error())
 				}
 			}(operation)
 			for {

@@ -66,10 +66,10 @@ func (iotEvent *IotEvent) Run(mqttServerAddress string, clientId []byte) {
 		messageHandler := getMessageHandler(operation)
 		waitGroup.Add(1)
 		go func(operation *Operation) {
-			for {
-				time.Sleep(time.Duration(10) * time.Millisecond)
-				token := client.Subscribe(operation.Context.FromTopic, operation.Context.FromQos, messageHandler)
-				token.Wait()
+			token := client.Subscribe(operation.Context.FromTopic, operation.Context.FromQos, messageHandler)
+			token.Wait()
+			if token.Error() != nil {
+				log.Panicf("[Sub] mqtt connect error, taskId: %d, fail_nums: %d, error: %s \n", clientId, 1, token.Error())
 			}
 		}(operation)
 		for {
@@ -99,6 +99,7 @@ func getClient(mqttServerAddress string, clientId []byte) mqtt.Client {
 	clinetOptions.SetClientID(string(clientId))
 	//设置连接超时
 	clinetOptions.SetConnectTimeout(time.Duration(60) * time.Second)
+	clinetOptions.SetAutoReconnect(true)
 	//创建客户端连接
 	client := mqtt.NewClient(clinetOptions)
 	return client

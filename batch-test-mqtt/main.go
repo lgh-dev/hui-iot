@@ -12,9 +12,14 @@ import (
 	"time"
 )
 
+var (
+	clientNumber = uint64(10000) //客户端数量
+	interval     = 1             //秒
+)
+
 func main() {
 	//生成连接的客户端数
-	c := flag.Uint64("n", 3000, "client nums")
+	c := flag.Uint64("n", clientNumber, "client nums")
 	flag.Parse()
 	nums := int(*c)
 	wg := sync.WaitGroup{}
@@ -54,12 +59,13 @@ func createTask(taskId int, wg *sync.WaitGroup) {
 	gatewayUID := strconv.Itoa(taskId)
 	topic := "/hiot/sys/smart_car_camera/?/dv/r/up"
 	topic = exstrings.Replace(topic, "?", gatewayUID, 1)
-	payload := "{\"temp\":?}"
+	payload := "{\"temp\":?,\"msgId\":?}"
 	payload = exstrings.Replace(payload, "?", strconv.Itoa(rand.Intn(100)), 1)
+	payload = exstrings.Replace(payload, "?", strconv.Itoa(int(rand.Int31())), 1)
 	for {
 		i++
-		time.Sleep(time.Duration(1) * time.Second)
-		token := c.Publish(topic, 0, true, payload)
+		time.Sleep(time.Duration(interval) * time.Second)
+		token := c.Publish(topic, 0, false, payload)
 		token.Wait()
 	}
 

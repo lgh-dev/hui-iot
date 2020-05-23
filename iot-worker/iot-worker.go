@@ -4,10 +4,20 @@ import (
 	"hui-iot/iot-worker/config"
 	"hui-iot/iot-worker/device_event"
 	"hui-iot/iot-worker/iotevent"
+	"io"
 	"log"
+	"os"
 )
 
 func main() {
+	logFile, err := os.OpenFile("log.txt", os.O_CREATE|os.O_APPEND|os.O_RDWR, 0666)
+	if err != nil {
+		panic(err)
+	}
+	defer logFile.Close()
+	mw := io.MultiWriter(os.Stdout, logFile)
+	log.SetOutput(mw)
+
 	serviceAddr := config.Conf.GetString("mqtt.emqx.service_addr")
 	clientId := config.Conf.GetString("mqtt.emqx.client_id")
 	iotEvent := iotevent.IotEvent{}
