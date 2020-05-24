@@ -1,7 +1,11 @@
 FROM hub.c.163.com/netease_comb/centos:7
 MAINTAINER netease
 
+ENV HUI_IOT_HOME /usr/local/hui-iot
+
 ADD TDengine-client-1.6.5.9-Linux-x64.tar.gz /usr/local/
+# iot-worker
+ADD ./hui-iot /usr/local/hui-iot/
 
 RUN ln -s /usr/local/TDengine-client/driver/libtaos.so.1.6.5.9 /usr/lib/libtaos.so
 
@@ -26,3 +30,4 @@ RUN mkdir /var/run/sshd
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
+CMD ./usr/local/hui_iot/iot-worker_linux&

@@ -26,7 +26,7 @@ targetFile_start_mac="bin/start.sh"
  iot_worker_mainfile="iot-worker/iot-worker.go"
 
 # 输出编译包
-build_target_dir="target/hui-iot"
+build_target_dir="docker/hui-iot"
 
 goBuild() {
 # 编译window平台执行文件

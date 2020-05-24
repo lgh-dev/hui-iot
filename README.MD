@@ -234,7 +234,7 @@ lghdeiMac:hui-iot lgh$ docker container cp -a 5a3aab61b0f5:/usr/local/taos/inclu
 ```
 # iot-worker
 docker build -t iot-worker .
-docker run -itd --name iot-worker -p 9999:9999 -p 1022:22 39549d59c7de /bin/bash
+docker run -itd --name iot-worker -p 9999:9999 -p 1022:22 iot-worker /bin/bash
 ```
 
 ## TDengine建表语句 
