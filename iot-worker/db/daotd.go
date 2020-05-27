@@ -3,7 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	//_ "github.com/taosdata/TDengine/src/connector/go/src/taosSql"
+	_ "github.com/taosdata/driver-go/taosSql"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )
@@ -35,7 +35,7 @@ func NewTDengine() *DataDB {
 }
 
 func (td *TDengine) CheckDBExists() bool {
-	db, err := sql.Open(td.DriverName, td.DBuser+":"+td.DBpassword+"@/tcp("+td.Ip+":0"+")/")
+	db, err := sql.Open(td.DriverName, td.DBuser+":"+td.DBpassword+"@/tcp("+td.Ip+":0"+")"+td.DBname)
 	if err != nil {
 		fmt.Printf("Open database error: %s\n", err)
 		return false

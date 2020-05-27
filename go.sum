@@ -1,8 +1,6 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/CatBluePoor/moles v0.0.0-20191111053309-cf8ead003a13 h1:W9DFGAZuDYF9r+BMMqLLtrGiVJ11iNQtK/1D8fEccyc=
-github.com/CatBluePoor/moles v0.0.0-20191111053309-cf8ead003a13/go.mod h1:r1VRQNX5Jge9vf1GMqn0iTApYn2u7Arow2VdgS4eskE=
 github.com/KyleBanks/depth v1.2.1 h1:5h8fQADFrWtarTdtDudMmGsC7GPbOAu6RVB3ffsVFHc=
 github.com/KyleBanks/depth v1.2.1/go.mod h1:jzSb9d0L43HxTQfT+oSA1EEp2q+ne2uh6XgeJcm8brE=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
@@ -220,6 +218,9 @@ github.com/swaggo/gin-swagger v1.2.0/go.mod h1:qlH2+W7zXGZkczuL+r2nEBR2JTT+/lX05
 github.com/swaggo/swag v1.5.1/go.mod h1:1Bl9F/ZBpVWh22nY0zmYyASPO1lI/zIwRDrpZU+tv8Y=
 github.com/swaggo/swag v1.6.5 h1:2C+t+xyK6p1sujqncYO/VnMvPZcBJjNdKKyxbOdAW8o=
 github.com/swaggo/swag v1.6.5/go.mod h1:Y7ZLSS0d0DdxhWGVhQdu+Bu1QhaF5k0RD7FKdiAykeY=
+github.com/taosdata/TDengine v0.0.0-20200523100337-c733b76be470 h1:WZotLsw8Uud4GHZWK5y/zqUQ/OhRtODC+BbvBWzC1ac=
+github.com/taosdata/driver-go v0.0.0-20200311072652-8c58c512b6ac h1:uZplMwObJj8mfgI4ZvYPNHRn+fNz2leiMPqShsjtEEc=
+github.com/taosdata/driver-go v0.0.0-20200311072652-8c58c512b6ac/go.mod h1:TuMZDpnBrjNO07rneM2C5qMYFqIro4aupL2cUOGGo/I=
 github.com/thinkeridea/go-extend v1.1.1 h1:tziAAJ1Tove3VXzqtA0k0ZAP7+grafzFjRNSuG7nRbQ=
 github.com/thinkeridea/go-extend v1.1.1/go.mod h1:X/tseu0kBDuDMZYPIlQCQyfljB4CltMl1lQ3gwAs3c4=
 github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5/go.mod h1:ncp9v5uamzpCO7NfCPTXjqaC+bZgJeR0sMTm6dMHP7U=

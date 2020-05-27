@@ -250,6 +250,8 @@ SELECT * FROM hui_iot.iot_status_smart_car_camera ;
 
 # 传感值超级表
 CREATE TABLE iot_read_smart_car_camera (ts timestamp, value double) TAGS(device_model binary(20),device_id binary(20), read_id binary(20));
+SELECT * FROM hui_iot.iot_read_smart_car_camera ;
+
 
 # 插入值
 INSERT INTO hui_iot.read_0001_1000_temp USING hui_iot.iot_read_smart_car_camera TAGS ('smart_car_camera','0001_1000', 'temp') VALUES ('2018-01-04 00:00:00.000',95);
