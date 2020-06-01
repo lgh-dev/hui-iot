@@ -23,5 +23,6 @@ func main() {
 	iotEvent := iotevent.IotEvent{}
 	log.Printf("启动iot-worker服务成功，连接mqtt服务地址[%s]，客户端ID[%s]！\n", serviceAddr, clientId)
 	iotEvent.AddOperation(device_event.ReadAttrEventOperation).
+		//Run(serviceAddr, []byte(clientId))
 		Run(serviceAddr, []byte(clientId))
 }

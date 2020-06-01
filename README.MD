@@ -250,7 +250,7 @@ SELECT * FROM hui_iot.iot_status_smart_car_camera ;
 
 # 传感值超级表
 CREATE TABLE iot_read_smart_car_camera (ts timestamp, value double) TAGS(device_model binary(20),device_id binary(20), read_id binary(20));
-SELECT * FROM hui_iot.iot_read_smart_car_camera ;
+SELECT count(*) FROM hui_iot.iot_read_smart_car_camera ;
 
 
 # 插入值

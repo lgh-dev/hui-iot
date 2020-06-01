@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	clientNumber = uint64(10000) //客户端数量
+	clientNumber = uint64(20000) //客户端数量
 	interval     = 1             //秒
 )
 
@@ -59,9 +59,8 @@ func createTask(taskId int, wg *sync.WaitGroup) {
 	gatewayUID := strconv.Itoa(taskId)
 	topic := "/hiot/sys/smart_car_camera/?/dv/r/up"
 	topic = exstrings.Replace(topic, "?", gatewayUID, 1)
-	payload := "{\"temp\":?,\"msgId\":?}"
-	payload = exstrings.Replace(payload, "?", strconv.Itoa(rand.Intn(100)), 1)
-	payload = exstrings.Replace(payload, "?", strconv.Itoa(int(rand.Int31())), 1)
+	//payload := "{\"temp\":"+strconv.Itoa(rand.Intn(100))+",\"msgId\":"+strconv.Itoa(int(rand.Int31()))+"}"
+	payload := "{\"temp\":" + strconv.Itoa(rand.Intn(100)) + "}"
 	for {
 		i++
 		time.Sleep(time.Duration(interval) * time.Second)

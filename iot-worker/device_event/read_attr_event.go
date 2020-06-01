@@ -2,13 +2,11 @@ package device_event
 
 import (
 	jsoniter "github.com/json-iterator/go"
-	"github.com/thinkeridea/go-extend/exstrings"
-	"hui-iot/iot-worker/db"
 	"hui-iot/iot-worker/iotevent"
+	"hui-iot/iot-worker/listener"
 	"hui-iot/iot-worker/utils"
 	"log"
 	"math"
-	"strconv"
 	"time"
 )
 
@@ -19,73 +17,50 @@ var ReadAttrEventOperation = &iotevent.Operation{Context: &iotevent.Context{
 		FromTopic: "/hiot/sys/+/+/dv/r/up",
 		FromQos:   0,
 	},
-}, EventHandler: ReadAttrEventHandler}
+}, EventHandler: ReadAttrEventHandler, IsReceiveMessage: IsReceiveMessage}
 
-var DataDB = db.NewTDengineRestful()
-var num = 0
-var startTime = time.Now().UnixNano()
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
+
+var persistenceListener = listener.PersistenceListener{}
+
+//判断是否接收该消息
+func IsReceiveMessage(topic string, qos byte) bool {
+	if topic[len(topic)-8:] == "/dv/r/up" {
+		return true
+	}
+	return false
+}
 
 //topic:/hiot/sys/car/1111/dv/r/up
 //payload:{"temp":34}
 func ReadAttrEventHandler(c *iotevent.Context) *iotevent.Context {
-	num++
-	if num%1000 == 0 {
-		endTime := time.Now().UnixNano()
-		var speed = 1000 * int64(math.Pow10(9)) / (endTime - startTime)
-		startTime = endTime
-		log.Printf("累计消息数量：%d,消费速度：%d/s", num, speed)
-	}
+	PrintMessage()
 	deviceModel := utils.GetStrForTopic(c.Topic, 3)
 	gatewayUID := utils.GetStrForTopic(c.Topic, 4)
 	data := make(map[string]float64)
 	err := json.Unmarshal(c.Payload, &data)
-	if err != nil {
-		//log.Printf("解析json错误，只读数据格式：%s", c.Payload)
+	if !utils.CheckErrorLn("解析json错误，只读数据格式：%s", err) {
 		return c
 	}
-	for uKey, value := range data {
-		sql := GenerateSQL(deviceModel, gatewayUID, uKey, value)
-		insert(sql)
-	}
+	//持久化事件
+	eventDTO := listener.EventDTO{DeviceModel: &deviceModel, GatewayUID: &gatewayUID, EventType: listener.EventTypeRead, Event: &data}
+	persistenceListener.DoEvent(&eventDTO)
 	return c
 }
 
-//INSERT INTO hui_iot.read_0001_1000_temp
-//USING hui_iot.iot_read_smart_car_camera
-//TAGS ('smart_car_camera','0001_1000', 'temp')
-//VALUES ('2018-01-04 00:00:00.000',95);
-func insert(sql string) {
-	//log.Printf("insert read attr sql:%s", *sql)
-	//if err := DataDB.Insert(sql); err != nil {
-	//	log.Printf("插入失敗:%s", err)
-	//}
-}
+var num = 0
+var pow10 = int64(math.Pow10(9))
+var startTime = time.Now().UnixNano()
+var beforeTime = time.Now().UnixNano()
 
-var chanSQL = make(chan string, 10)
-
-func GenerateSQL(deviceModel string, gatewayUID string, readUkey string, value float64) string {
-	sql := "INSERT INTO hui_iot.read_{gatewayUID}_{readUkey} USING hui_iot.iot_read_{deviceModel} TAGS ('{deviceModel}','{gatewayUID}', '{readUkey}') VALUES ('{timestamp}',{value})\n"
-	sql = exstrings.Replace(sql, "{gatewayUID}", gatewayUID, 2)
-	sql = exstrings.Replace(sql, "{deviceModel}", deviceModel, 2)
-	sql = exstrings.Replace(sql, "{readUkey}", readUkey, 2)
-	sql = exstrings.Replace(sql, "{timestamp}", time.Now().Format("2006-01-02 15:04:05.000"), 1)
-	sql = exstrings.Replace(sql, "{value}", strconv.FormatFloat(value, 'f', 9, 64), 1)
-	return sql
-}
-func BatchInsert(sql string) {
-	insertSQL := "INSERT INTO "
-	go func(sql string) {
-		chanSQL <- sql
-	}(sql)
-
-	go func() {
-		var batchSQL string
-		for i := 0; i < 10; i++ {
-			batchSQL += <-chanSQL
-		}
-		batchSQL = insertSQL + batchSQL + ";"
-		insert(batchSQL)
-	}()
-
+//处理方法
+func PrintMessage() {
+	num++
+	if num%10000 == 0 {
+		endTime := time.Now().UnixNano()
+		var speed = 10000 * pow10 / (endTime - beforeTime)
+		var avgSpeed = int64(num) * pow10 / (endTime - startTime)
+		beforeTime = endTime
+		log.Printf("累计消息数量：%d,消费速度：%d/s,平均速度:%d/s", num, speed, avgSpeed)
+	}
 }
