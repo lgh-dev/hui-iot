@@ -118,11 +118,11 @@ type AuthDTO struct {
 func (deviceDTO *DeviceDTO) ToDevice() domain.Device {
 	device := domain.Device{}
 	device.ID = deviceDTO.ID
-	device.Name = deviceDTO.Name
 	device.Uid = deviceDTO.Uid
 	device.DeviceModelID = deviceDTO.DeviceModelID
-	device.GatewayID = deviceDTO.GatewayID
-	//@TODO 待完成
+	for s, dto := range deviceDTO.ConfigAttrMap {
+		device.ConfigAttrMap[s] = domain.KeyValue{UKey: dto.UKey, Value: dto.Value}
+	}
 	return device
 }
 
@@ -130,7 +130,6 @@ func AsDeviceDTO(device domain.Device) *DeviceDTO {
 	deviceDTO := DeviceDTO{}
 	deviceDTO.ID = device.ID
 	deviceDTO.Uid = device.Uid
-	deviceDTO.Name = device.Name
 	deviceDTO.CreateBy = device.CreateBy
 	deviceDTO.CreateTime = device.CreateTime
 	deviceDTO.UpdateBy = device.UpdateBy
@@ -138,7 +137,6 @@ func AsDeviceDTO(device domain.Device) *DeviceDTO {
 	//TODO
 	//deviceDTO.ConfigAttrMap=device.ConfigAttrMap
 	deviceDTO.IsDelete = device.IsDelete
-	deviceDTO.GatewayID = device.GatewayID
 	deviceDTO.DeviceModelID = device.DeviceModelID
 	return &deviceDTO
 }

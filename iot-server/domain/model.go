@@ -56,13 +56,13 @@ type EventDefine struct {
 type Device struct {
 	AbsEntity
 	Uid              string              `json:"uid"`              // 设备UID
-	Name             string              `json:"name"`             // 设备名称
-	GatewayID        string              `json:"gatewayID"`        // 网关ID
 	DeviceModelID    string              `json:"deviceModelID"`    // 设备模型ID-外键 设备模型ID-外键
 	OnlineStatus     string              `json:"OnlineStatus"`     // 联网状态 在线ONLINE、离线OFFLINE、未激活NONACTIVE
 	InvariantAttrMap map[string]KeyValue `json:"invariantAttrMap"` //固定属性，不变的属性。
 	ConfigAttrMap    map[string]KeyValue `json:"configAttrMap"`    //配置属性，修改后动态更新到设备端的属性，如心跳间隔。
 	SensorAttrMap    map[string]KeyValue `json:"sensorAttrMap"`    //传感属性，动态上报的属性。
+	CommandMap       map[string]string   `json:"CommandMap"`       //指令集合，该设备拥有设备模型定义的指令的子集。
+	EventMap         map[string]string   `json:"EventMap"`         //事件集合，该设备拥有设备模型定义的事件的子集。
 }
 
 // DeviceCommand 指令下发表
