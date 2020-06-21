@@ -72,8 +72,5 @@ func (deviceService *DeviceService) ExistsDeviceByName(name string) bool {
 	c := getCollection(session)
 	var device Device
 	c.Find(bson.D{{"name", name}, {"isDelete", false}}).One(&device)
-	if device.Name == "" {
-		return false
-	}
 	return true
 }
