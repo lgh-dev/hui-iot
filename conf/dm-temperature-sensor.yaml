@@ -1,0 +1,14 @@
+## 本配置文件定义了车辆的各方面的属性和功能函数。
+id: temperature-sensor
+version: 0.0.1
+auth: admin
+name: 温度传感器
+desc:
+
+# 传感属性定义
+read-attr:
+  - uKey: temp
+    name: 温度
+    data-type: int16
+    default-value:
+    unit: ℃

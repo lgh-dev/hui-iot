@@ -1,0 +1,23 @@
+# 服务相关配置
+server:
+  port: 9999
+  env: dev # dev,test,pre,pro
+
+# 应用加载
+apply:
+  - appKey: iot-admin
+    version: 0.0.1
+    secret: 111111
+    enable: true
+
+# 应用属性,key:value结构。
+app-label:
+  area_id:
+
+db:
+  mongo:
+    ip: 127.0.0.1
+    port: 27017
+    username:
+    password:
+    dbname: hui_iot

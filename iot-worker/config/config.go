@@ -8,6 +8,7 @@ import (
 	"hui-iot/iot-server/domain"
 	"io/ioutil"
 	"log"
+	"os"
 	"runtime"
 	"strings"
 	"sync"
@@ -29,11 +30,15 @@ func InitAllConfig() {
 	confPath := GetPath() + "/conf"
 	InitConfig(confPath)                         //初始化基本配置
 	InitDeviceModels(confPath + "/device_model") //初始化设备模型配置
-	InitAppConfigs(confPath + "/apply")          // 初始化应用配置
 	WatchConfig()
 }
 
 func GetPath() string {
+	path := os.Getenv("HUI_IOT_HOME")
+	if path != "" {
+		return path
+	}
+	log.Printf("HUI_IOT_HOME is %s\n", path)
 	//获取当前文件的路径 /Users/lgh/Documents/leavemsg/config/config.go
 	_, filename, _, _ := runtime.Caller(0)
 	//获取项目目录 /Users/lgh/Documents/conf-demo
@@ -45,7 +50,7 @@ func GetPath() string {
 func InitConfig(path string) *viper.Viper {
 	once.Do(func() {
 		if Conf == nil {
-			Conf = ReadConfigFile(path, "iot-server", "yaml")
+			Conf = ReadConfigFile(path, "iot-worker", "yaml")
 		}
 	})
 	return Conf

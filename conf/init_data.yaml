@@ -1,0 +1,331 @@
+industry:
+  - uKey: SmartCity
+    value: 智慧城市
+  - uKey: SmartPark
+    value: 智慧园区
+  - uKey: IndustrialInternet
+    value: 工业互联网
+  - uKey: SmartHome
+    value: 智能家居
+  - uKey: Others
+    value: 其他
+DeviceNodeType:
+  - uKey: DIRECTLY_CONNECTED_DEVICE
+    value: 直连设备
+  - uKey: GATEWAY
+    value: 网关设备
+  - uKey: GATEWAY_SUB_DEVICE
+    value: 网关子设备
+TimeType:
+  - uKey: yyyy-MM-dd HH:mm:ss
+    value: 年月日时分秒yyyy-MM-dd HH:mm:ss
+  - uKey: yyyy/MM/dd HH:mm:ss
+    value: 年月日时分秒yyyy/MM/dd HH:mm:ss
+  - uKey: yyyy-MM-dd
+    value: 年月日yyyy-MM-dd
+  - uKey: yyyy/MM/dd
+    value: 年月日yyyy/MM/dd
+  - uKey: yyyy-MM
+    value: 年月yyyy-MM
+  - uKey: yyyy/MM
+    value: 年月yyyy/MM
+  - uKey: yyyy
+    value: 年yyyy
+  - uKey: TimeStampSecond
+    value: 时间戳(秒)
+  - uKey: TimeStampMillisecond
+    value: 时间戳(毫秒)
+DataType:
+  - uKey: INTEGER
+    value: int32(整数型)
+  - uKey: BOOLEAN
+    value: bool布尔型
+  - uKey: FLOAT
+    value: float单精度浮点型
+  - uKey: DOUBLE
+    value: double双精度浮点型
+  - uKey: DATE
+    value: date时间型
+  - uKey: STRING
+    value: text字符串
+  - uKey: ENUM
+    value: enum枚举型
+  - uKey: ARRAY
+    value: array数组
+CommonEventClass:
+  - uKey: DeviceEventClass
+    value: 设备事件
+  - uKey: businessEventClass
+    value: 业务事件
+DeviceType:
+  - uKey: car
+    value: 智能汽车
+  - uKey: camera
+    value: 摄像头
+  - uKey: AdvertisingScreen
+    value: 广告牌
+  - uKey: ChargingPile
+    value: 充电桩
+  - uKey: TemperatureSensor
+    value: 温度传感器
+  - uKey: WaterLevelSensor
+    value: 水位传感器
+  - uKey: PositioningEquipment
+    value: 定位设备
+  - uKey: CommunicationBaseStation
+    value: 通讯基站
+  - uKey: WeatherStation
+    value: 气象站
+  - uKey: SingleLampController
+    value: 单灯控制器
+  - uKey: CentralizedController
+    value: 集中控制器
+  - uKey: SmartAccessControl
+    value: 智能门禁
+  - uKey: Others
+    value: 其他
+unit:
+  - uKey: dBm
+    value: 分贝毫瓦
+  - uKey: uS/cm
+    value: 微西每厘米
+  - uKey: N/C
+    value: 牛顿每库仑
+  - uKey: V/m
+    value: 伏特每米
+  - uKey: ml/min
+    value: 滴速
+  - uKey: mmHg
+    value: 血压
+  - uKey: mmol/L
+    value: 血糖
+  - uKey: mm/s
+    value: 毫米每秒
+  - uKey: turn/m
+    value: 转每分钟
+  - uKey: count
+    value: 次
+  - uKey: gear
+    value: 档
+  - uKey: stepCount
+    value: 步
+  - uKey: Nm3/h
+    value: 标准立方米每小时
+  - uKey: kV
+    value: 千伏
+  - uKey: KVA
+    value: 千伏安
+  - uKey: kvar
+    value: 千乏
+  - uKey: uw/cm2
+    value: 微瓦每平方厘米
+  - uKey: 只
+    value: 只
+  - uKey: "%RH"
+    value: 相对湿度
+  - uKey: m³/s
+    value: 立方米每秒
+  - uKey: kg/s
+    value: 公斤每秒
+  - uKey: r/min
+    value: 转每分钟
+  - uKey: t/h
+    value: 吨每小时
+  - uKey: KCL/h
+    value: 千卡每小时
+  - uKey: L/s
+    value: 升每秒
+  - uKey: Mpa
+    value: 兆帕
+  - uKey: m³/h
+    value: 立方米每小时
+  - uKey: kvarh
+    value: 千乏时
+  - uKey: KVar
+    value: 千乏
+  - uKey: μg/L
+    value: 微克每升
+  - uKey: kcal
+    value: 千卡路里
+  - uKey: GB
+    value: 吉字节
+  - uKey: MB
+    value: 兆字节
+  - uKey: KB
+    value: 千字节
+  - uKey: B
+    value: 字节
+  - uKey: μg/(d㎡·d)
+    value: 微克每平方分米每天
+  - uKey: ''
+    value: 无
+  - uKey: ppm
+    value: 百万分率
+  - uKey: pixel
+    value: 像素
+  - uKey: Lux
+    value: 照度
+  - uKey: grav
+    value: 重力加速度
+  - uKey: dB
+    value: 分贝
+  - uKey: "%"
+    value: 百分比
+  - uKey: lm
+    value: 流明
+  - uKey: bit
+    value: 比特
+  - uKey: g/mL
+    value: 克每毫升
+  - uKey: g/L
+    value: 克每升
+  - uKey: mg/L
+  - uKey: μg/m³
+    value: 微克每立方米
+  - uKey: mg/m³
+    value: 毫克每立方米
+  - uKey: g/m³
+    value: 克每立方米
+  - uKey: kg/m³
+    value: 千克每立方米
+  - uKey: nF
+    value: 纳法
+  - uKey: pF
+    value: 皮法
+  - uKey: μF
+    value: 微法
+  - uKey: F
+    value: 法拉
+  - uKey: Ω
+    value: 欧姆
+  - uKey: μA
+    value: 微安
+  - uKey: mA
+    value: 毫安
+  - uKey: kA
+    value: 千安
+  - uKey: A
+    value: 安培
+  - uKey: mV
+    value: 毫伏
+  - uKey: V
+    value: 伏特
+  - uKey: ms
+    value: 毫秒
+  - uKey: s
+    value: 秒
+  - uKey: min
+    value: 分钟
+  - uKey: h
+    value: 小时
+  - uKey: day
+    value: 日
+  - uKey: week
+    value: 周
+  - uKey: month
+    value: 月
+  - uKey: year
+    value: 年
+  - uKey: kn
+    value: 节
+  - uKey: km/h
+    value: 千米每小时
+  - uKey: m/s
+    value: 米每秒
+  - uKey: "″"
+    value: 秒
+  - uKey: "′"
+    value: 分
+  - uKey: "°"
+    value: 度
+  - uKey: rad
+    value: 弧度
+  - uKey: Hz
+    value: 赫兹
+  - uKey: μW
+    value: 微瓦
+  - uKey: mW
+    value: 毫瓦
+  - uKey: kW
+    value: 千瓦特
+  - uKey: W
+    value: 瓦特
+  - uKey: cal
+    value: 卡路里
+  - uKey: kW·h
+    value: 千瓦时
+  - uKey: Wh
+    value: 瓦时
+  - uKey: eV
+    value: 电子伏
+  - uKey: kJ
+    value: 千焦
+  - uKey: J
+    value: 焦耳
+  - uKey: "℉"
+    value: 华氏度
+  - uKey: K
+    value: 开尔文
+  - uKey: t
+    value: 吨
+  - uKey: "°C"
+    value: 摄氏度
+  - uKey: mPa
+    value: 毫帕
+  - uKey: hPa
+    value: 百帕
+  - uKey: kPa
+    value: 千帕
+  - uKey: Pa
+    value: 帕斯卡
+  - uKey: mg
+    value: 毫克
+  - uKey: g
+    value: 克
+  - uKey: kg
+    value: 千克
+  - uKey: N
+    value: 牛
+  - uKey: mL
+    value: 毫升
+  - uKey: L
+    value: 升
+  - uKey: mm³
+    value: 立方毫米
+  - uKey: cm³
+    value: 立方厘米
+  - uKey: km³
+    value: 立方千米
+  - uKey: m³
+    value: 立方米
+  - uKey: h㎡
+    value: 公顷
+  - uKey: c㎡
+    value: 平方厘米
+  - uKey: m㎡
+    value: 平方毫米
+  - uKey: k㎡
+    value: 平方千米
+  - uKey: "㎡"
+    value: 平方米
+  - uKey: nm
+    value: 纳米
+  - uKey: μm
+    value: 微米
+  - uKey: mm
+    value: 毫米
+  - uKey: cm
+    value: 厘米
+  - uKey: dm
+    value: 分米
+  - uKey: km
+    value: 千米
+  - uKey: m
+    value: 米
+Level:
+  - uKey: NOTIFICATION
+    value: 通知
+  - uKey: ALARM
+    value: 告警
+  - uKey: FAILURE
+    value: 故障
