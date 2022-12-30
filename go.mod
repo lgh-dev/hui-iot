@@ -6,19 +6,15 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/eclipse/paho.mqtt.golang v1.2.0
 	github.com/fsnotify/fsnotify v1.4.7
-	github.com/gin-gonic/gin v1.5.0
+	github.com/gin-gonic/gin v1.7.0
 	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
 	github.com/go-openapi/spec v0.19.6 // indirect
 	github.com/go-openapi/swag v0.19.7 // indirect
-	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/goiiot/libmqtt v0.9.5
-	github.com/golang/protobuf v1.3.3 // indirect
 	github.com/gopherjs/gopherjs v0.0.0-20181103185306-d547d1d9531e // indirect
 	github.com/json-iterator/go v1.1.9
-	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.1
 	github.com/mailru/easyjson v0.7.0 // indirect
-	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/panjf2000/ants/v2 v2.4.1
 	github.com/prometheus/common v0.4.0
 	github.com/sirupsen/logrus v1.4.2
